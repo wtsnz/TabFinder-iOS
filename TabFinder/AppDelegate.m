@@ -2,17 +2,25 @@
 //  AppDelegate.m
 //  TabFinder
 //
-//  Created by Luiz Gustavo Faria on 6/07/13.
+//  Created by Luiz Gustavo Faria on 12/06/13.
 //  Copyright (c) 2013 PDM Systems. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "Favorites.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    UISplitViewController *splitVC = (UISplitViewController *)self.window.rootViewController;
+    _navigationControllerIpad = splitVC.viewControllers.lastObject;
+    _mainViewControllerIpad = _navigationControllerIpad.viewControllers[0];
+    splitVC.delegate = _mainViewControllerIpad;
+    splitVC.presentsWithGesture = NO;
+    }
+    [Favorites convertOldFavorites];
     return YES;
 }
 							
@@ -40,7 +48,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end

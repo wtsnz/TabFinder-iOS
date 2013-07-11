@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Song" representedClassName="Song" syncable="YES">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="artistImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="dateOfCreation" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tab" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ugid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Song" positionX="0" positionY="0" width="128" height="195"/>
+    </elements>
+</model>

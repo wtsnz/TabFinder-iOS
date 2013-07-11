@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="K5l-gl-VEb">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="W6y-9U-7cw">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Xty-ns-t90" customClass="NavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wje-Ie-efh">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="RSY-YM-hvj" kind="relationship" relationship="rootViewController" id="ykx-rC-uyX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EBl-jH-lMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="120" y="207"/>
+        </scene>
+        <!--I Pad Main View Controller-->
+        <scene sceneID="RM7-W1-yNc">
+            <objects>
+                <viewController id="RSY-YM-hvj" customClass="iPadMainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hHp-eF-Btm">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCe-Iq-yji" customClass="CustomWebView">
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="RSY-YM-hvj" id="FU2-5C-Vvs"/>
+                                </connections>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-br-7TP">
+                                <items>
+                                    <barButtonItem id="OGN-It-BTw">
+                                        <connections>
+                                            <action selector="didPressVersionsButton:" destination="RSY-YM-hvj" id="8MS-OK-tcT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="FnK-n0-ays"/>
+                                    <barButtonItem style="plain" id="BKc-i7-w9r">
+                                        <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="gdA-n3-IRN">
+                                            <rect key="frame" x="483" y="10" width="274" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="didBeginChangingSlider:" destination="RSY-YM-hvj" eventType="touchDown" id="BEI-9F-1aV"/>
+                                                <action selector="didChangeAutoScroll:" destination="RSY-YM-hvj" eventType="valueChanged" id="4AZ-Q3-L6G"/>
+                                                <action selector="didEndEditingAutoScroll:" destination="RSY-YM-hvj" eventType="touchUpInside" id="HCO-Kj-zC3"/>
+                                                <action selector="didEndEditingAutoScroll:" destination="RSY-YM-hvj" eventType="touchUpOutside" id="mhP-tc-ZLd"/>
+                                            </connections>
+                                        </slider>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-zG-JYr" customClass="AutoScrollingPopupView">
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Auto Scrolling" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QY7-yv-JCO">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="5wr-Oh-5Hc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                        <color key="textColor" red="0.48644770409999999" green="0.48644770409999999" blue="0.48644770409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5.0x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9OL-bO-EwD">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="XoC-sC-4rt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="42"/>
+                                        <color key="textColor" red="0.92941182850000004" green="0.62352943419999995" blue="0.270588249" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="9OL-bO-EwD" firstAttribute="leading" secondItem="QY7-yv-JCO" secondAttribute="leading" type="default" id="2B7-My-H7f"/>
+                                    <constraint firstAttribute="trailing" secondItem="QY7-yv-JCO" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="48B-DL-rPA"/>
+                                    <constraint firstAttribute="width" constant="160" type="user" id="FHf-Ik-x4o"/>
+                                    <constraint firstAttribute="height" constant="63" type="user" id="QdU-LL-Hug"/>
+                                    <constraint firstItem="QY7-yv-JCO" firstAttribute="top" secondItem="u2d-zG-JYr" secondAttribute="top" type="default" id="dvS-1J-Q77"/>
+                                    <constraint firstItem="9OL-bO-EwD" firstAttribute="top" secondItem="u2d-zG-JYr" secondAttribute="top" constant="23" id="fxt-op-LPW"/>
+                                    <constraint firstAttribute="trailing" secondItem="9OL-bO-EwD" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="goF-yk-GyO"/>
+                                    <constraint firstItem="9OL-bO-EwD" firstAttribute="centerX" secondItem="u2d-zG-JYr" secondAttribute="centerX" type="default" id="vDP-OB-ekX"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ig1-JQ-clP">
+                                <color key="color" red="0.48644770409999999" green="0.48644770409999999" blue="0.48644770409999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ig1-JQ-clP" firstAttribute="centerX" secondItem="RNB-br-7TP" secondAttribute="centerX" type="default" id="0YH-F0-VBe"/>
+                            <constraint firstItem="DCe-Iq-yji" firstAttribute="leading" secondItem="hHp-eF-Btm" secondAttribute="leading" type="default" id="5JA-Wf-iqR"/>
+                            <constraint firstAttribute="centerX" secondItem="Ig1-JQ-clP" secondAttribute="centerX" type="user" id="C89-MX-nAW"/>
+                            <constraint firstAttribute="trailing" secondItem="u2d-zG-JYr" secondAttribute="trailing" constant="77" type="user" id="Ep3-6q-Qig"/>
+                            <constraint firstAttribute="bottom" secondItem="u2d-zG-JYr" secondAttribute="bottom" constant="84" type="user" id="GXk-2K-3bC"/>
+                            <constraint firstItem="Ig1-JQ-clP" firstAttribute="centerY" secondItem="DCe-Iq-yji" secondAttribute="centerY" type="default" id="Kj5-OA-gQc"/>
+                            <constraint firstItem="DCe-Iq-yji" firstAttribute="top" secondItem="hHp-eF-Btm" secondAttribute="top" type="default" id="YJ3-rG-qxh"/>
+                            <constraint firstItem="DCe-Iq-yji" firstAttribute="trailing" secondItem="hHp-eF-Btm" secondAttribute="trailing" type="default" id="iYb-g3-eoY"/>
+                            <constraint firstItem="RNB-br-7TP" firstAttribute="leading" secondItem="hHp-eF-Btm" secondAttribute="leading" type="default" id="unF-dE-syA"/>
+                            <constraint firstItem="RNB-br-7TP" firstAttribute="bottom" secondItem="hHp-eF-Btm" secondAttribute="bottom" type="default" id="w0m-Ok-Oxb"/>
+                            <constraint firstAttribute="centerY" secondItem="Ig1-JQ-clP" secondAttribute="centerY" type="user" id="yux-YR-5Vb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3N2-e6-dwe">
+                        <barButtonItem key="rightBarButtonItem" image="estrelinha_cinzinha.png" id="1yy-Dh-XOO">
+                            <connections>
+                                <action selector="didPressFavoritesButton:" destination="RSY-YM-hvj" id="ASt-gT-hHl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="autoScrollSlider" destination="gdA-n3-IRN" id="JLD-B6-otJ"/>
+                        <outlet property="autoScrollingPopupView" destination="u2d-zG-JYr" id="KAd-HU-8Te"/>
+                        <outlet property="autoScrollingSpeedLabel" destination="9OL-bO-EwD" id="SFG-HM-8jY"/>
+                        <outlet property="bottomToolbar" destination="RNB-br-7TP" id="MS8-ae-yic"/>
+                        <outlet property="favoritesButtonItem" destination="1yy-Dh-XOO" id="aFX-lF-UZD"/>
+                        <outlet property="loadingIndicatorView" destination="Ig1-JQ-clP" id="1vP-Pi-kWn"/>
+                        <outlet property="versionsButton" destination="OGN-It-BTw" id="B5v-59-zAv"/>
+                        <outlet property="webView" destination="DCe-Iq-yji" id="SQD-1Q-0Rg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j9Y-iC-0Nf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="990" y="207"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gFd-5y-QJp">
+            <objects>
+                <navigationController id="oeS-YR-6su" customClass="NavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="hOC-qv-zGe">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bh0-0J-qLr" kind="relationship" relationship="rootViewController" id="mt1-ar-AfV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mse-uH-PGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="120" y="-949"/>
+        </scene>
+        <!--Search View Controller - Search-->
+        <scene sceneID="s2R-Cz-Iz2">
+            <objects>
+                <tableViewController storyboardIdentifier="SearchViewController" id="bh0-0J-qLr" customClass="SearchViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="IlL-cn-g9f">
+                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="1F5-IT-25L">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="bh0-0J-qLr" id="G8n-mq-oZ1"/>
+                            </connections>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="bh0-0J-qLr" id="fJo-Nh-TcL"/>
+                            <outlet property="delegate" destination="bh0-0J-qLr" id="zPL-Ow-n6O"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Search" id="ZJo-54-ftp">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="bbc-0s-Dhd">
+                            <view key="customView" contentMode="scaleToFill" id="a9Q-Md-cIc">
+                                <rect key="frame" x="7" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="goV-Nh-VAw">
+                                        <color key="color" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="goV-Nh-VAw" firstAttribute="leading" secondItem="a9Q-Md-cIc" secondAttribute="leading" constant="12" id="8e0-j8-ZV2"/>
+                                    <constraint firstItem="goV-Nh-VAw" firstAttribute="top" secondItem="a9Q-Md-cIc" secondAttribute="top" constant="7" id="fQd-JR-s8S"/>
+                                </constraints>
+                            </view>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="dCB-5B-KzC">
+                            <connections>
+                                <segue destination="evs-Uj-Ql7" kind="push" id="E34-UI-f3M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="goV-Nh-VAw" id="o6c-ls-edE"/>
+                        <outlet property="searchBar" destination="1F5-IT-25L" id="wJf-aD-TsB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TLI-e6-AXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1209" y="-1713"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="vDq-yV-7sU">
+            <objects>
+                <splitViewController id="K5l-gl-VEb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <connections>
+                        <segue destination="oeS-YR-6su" kind="relationship" relationship="masterViewController" id="9YZ-FR-x4B"/>
+                        <segue destination="Xty-ns-t90" kind="relationship" relationship="detailViewController" id="Mdc-vr-dQQ"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L9W-Rt-gCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-862" y="-480"/>
+        </scene>
+        <!--Favorites View Controller - Favorites-->
+        <scene sceneID="Zbm-Ob-e9l">
+            <objects>
+                <tableViewController storyboardIdentifier="FavoritesViewController" id="evs-Uj-Ql7" customClass="FavoritesViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="65S-tI-2zb">
+                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search your favorites" id="zCF-73-aSE">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="evs-Uj-Ql7" id="sU0-dl-0k1"/>
+                            </connections>
+                        </searchBar>
+                        <connections>
+                            <outlet property="dataSource" destination="evs-Uj-Ql7" id="KEF-zL-Yh7"/>
+                            <outlet property="delegate" destination="evs-Uj-Ql7" id="Wje-Vt-ChB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Favorites" id="pGU-vY-BmW"/>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="TH5-bM-gxW" id="3iT-gB-nhj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sqX-ZE-Ok7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="TH5-bM-gxW">
+                    <connections>
+                        <outlet property="delegate" destination="evs-Uj-Ql7" id="III-Mq-97I"/>
+                        <outlet property="searchBar" destination="zCF-73-aSE" id="1ea-y4-dAe"/>
+                        <outlet property="searchContentsController" destination="evs-Uj-Ql7" id="see-HJ-QOL"/>
+                        <outlet property="searchResultsDataSource" destination="evs-Uj-Ql7" id="mgC-vT-t3a"/>
+                        <outlet property="searchResultsDelegate" destination="evs-Uj-Ql7" id="2ZA-Sf-uOI"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1664" y="-1713"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="estrelinha_cinzinha.png" width="20" height="20"/>
+    </resources>
+    <classes>
+        <class className="AutoScrollingPopupView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AutoScrollingPopupView.h"/>
+        </class>
+        <class className="CustomWebView" superclassName="UIWebView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomWebView.h"/>
+        </class>
+        <class className="FavoritesViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FavoritesViewController.h"/>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="didBeginChangingSlider:"/>
+                <relationship kind="action" name="didChangeAutoScroll:"/>
+                <relationship kind="action" name="didEndEditingAutoScroll:"/>
+                <relationship kind="action" name="didPressFavoritesButton:"/>
+                <relationship kind="action" name="didPressVersionsButton:"/>
+                <relationship kind="outlet" name="autoScrollSlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="autoScrollingPopupView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="autoScrollingSpeedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="bottomToolbar" candidateClass="UIToolbar"/>
+                <relationship kind="outlet" name="favoritesButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="loadingIndicatorView" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolBarBottomSpaceToContainer" candidateClass="NSLayoutConstraint"/>
+                <relationship kind="outlet" name="versionsButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="NavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavigationController.h"/>
+        </class>
+        <class className="SearchViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="iPadMainViewController" superclassName="MainViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iPadMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="didPressFavoritesButton:"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
