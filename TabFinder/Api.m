@@ -52,7 +52,7 @@
     [request setHTTPBody:[[postRequestBody stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] dataUsingEncoding:NSUTF8StringEncoding]];
 
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://tabfinder.herokuapp.com"]];
-    [request setTimeoutInterval:8];
+    [request setTimeoutInterval:60];
     //set up operation
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
@@ -78,7 +78,7 @@
 static NSMutableDictionary *_artistPhotos;
 
 +(void)configureImageViewForCell:(SongCell *)cell {
-    NSString *artist = cell.artistLabel.text;
+    NSString *artist = cell.artistName;
     UIImageView *imageView = cell.artistImageView;
     if (!_artistPhotos) _artistPhotos = [NSMutableDictionary dictionary];
     if (_artistPhotos[artist]) {

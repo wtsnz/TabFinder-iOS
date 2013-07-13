@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+@property (strong, nonatomic) NSString *artistName;
+
 -(void)configureWithInternetSong:(NSDictionary *)song;
 -(void)configureWithFavoriteSong:(Song *)song;
 

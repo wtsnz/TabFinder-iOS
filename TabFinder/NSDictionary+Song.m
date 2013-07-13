@@ -28,7 +28,7 @@
 
 -(NSURL *)url {
 //    return [NSURL URLWithString:[@"http://192.168.1.91:3000/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:[@"http://10.211.101.33:3000/show/" stringByAppendingString:self[@"id"]]];
+//    return [NSURL URLWithString:[@"http://192.168.1.135:3000/show/" stringByAppendingString:self[@"id"]]];
     return [NSURL URLWithString:[@"http://tabfinder.herokuapp.com/show/" stringByAppendingString:self[@"id"]]];
 //    return [NSURL URLWithString:self[@"url"]];
 }
@@ -62,7 +62,7 @@
 -(NSDictionary *)bestVersion {
     NSDictionary *bestVersion = self.versions[0];
     for (NSDictionary *version in self.versions) {
-        if (version.rating  > bestVersion.rating) {
+        if (version.rating.floatValue * version.votes.integerValue > bestVersion.rating.floatValue * bestVersion.votes.integerValue) {
             bestVersion = version;
         }
     }

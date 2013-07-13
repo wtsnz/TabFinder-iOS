@@ -13,11 +13,11 @@
 
 +(void)showFavoritesAlertForSong:(Song *)song inView:(UIView *)view {
     FavoritesAlertView *alertView = [[FavoritesAlertView alloc] init];
-    alertView.messageLabel.text =  song.isFavorite.boolValue ? @"Added to your favorites:" : @"Removed from your favorites:";
+    alertView.messageLabel.text =  song.isFavorite.boolValue ? @"Added to favorites" : @"Removed from favorites:";
     SongCell *cell = [[SongCell alloc] init];
     [cell configureWithFavoriteSong:song];
     [cell setAccessoryType:UITableViewCellAccessoryNone];
-    cell.center = CGPointMake(cell.center.x, cell.center.y + 30);
+    cell.center = CGPointMake(cell.center.x, cell.center.y + 25);
     [alertView addSubview:cell];
     alertView.center = CGPointMake(view.frame.size.width - alertView.frame.size.width/2 - 10, alertView.frame.size.height/2 + 10);
     [view addSubview:alertView];

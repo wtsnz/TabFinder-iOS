@@ -18,7 +18,8 @@
 @property NSMutableArray *searchResultsDictionaryKeys;
 @property NSInteger totalSearchPages;
 @property NSInteger currentSearchPage;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+@property BOOL noResultsFound;
 
 @end
 
@@ -30,9 +31,14 @@
     [_searchBar makeItFlat];
     [self resetSearchResults];
     [self.navigationItem.rightBarButtonItem removeTitleShadow];
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [_loadingIndicator setHidesWhenStopped:YES];
+    [_searchBar addSubview:_loadingIndicator];
+    _loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
 }
 
 -(void)resetSearchResults {
+    _noResultsFound = NO;
     _currentSearchPage = 0;
     _totalSearchPages = 0;
     _searchResults = [NSMutableDictionary dictionary];
@@ -41,6 +47,7 @@
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [_searchBar makeItFlat]; //layout fix
+    _loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -71,9 +78,11 @@
         _totalSearchPages = [[parsedResponse objectForKey:@"pages"] integerValue];
         id resultsObject = [parsedResponse objectForKey:@"result"];
         if ([[parsedResponse objectForKey:@"total"] integerValue] == 0) {
+            if (_currentSearchPage == 1) _noResultsFound = YES;
             [self.tableView reloadData];
             return;
         }
+        _noResultsFound = NO;
         NSMutableArray *allSongs;
         if ([resultsObject respondsToSelector:@selector(objectAtIndex:)]) {
             allSongs = [parsedResponse objectForKey:@"result"];
@@ -105,11 +114,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (_noResultsFound) return 1;
     return _searchResults.allKeys.count + (_currentSearchPage < _totalSearchPages);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (_noResultsFound) {
+        UITableViewCell *cell = [[NSBundle mainBundle] loadNibNamed:@"NoResultsCell" owner:nil options:nil].lastObject;
+        return cell;
+    }
     if (_searchResults.allKeys.count == indexPath.row) {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

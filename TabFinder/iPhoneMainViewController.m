@@ -32,7 +32,7 @@
     if (scrollView.isDragging) {
         for (UIView *view in self.view.subviews) {
             if ([view isMemberOfClass:[ChordsContainerView class]]) {
-                [(ChordsContainerView *)view closeButtonPressed:nil];
+                [(ChordsContainerView *)view closeButtonPressed:self];
             }
         }
     }
@@ -75,6 +75,7 @@
                 numberOfViews++;
             }
         }
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 

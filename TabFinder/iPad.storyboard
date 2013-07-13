@@ -150,7 +150,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="788"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="1F5-IT-25L">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Tap to search" id="1F5-IT-25L">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -164,22 +164,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Search" id="ZJo-54-ftp">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="bbc-0s-Dhd">
-                            <view key="customView" contentMode="scaleToFill" id="a9Q-Md-cIc">
-                                <rect key="frame" x="7" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="goV-Nh-VAw">
-                                        <color key="color" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="deviceRGB"/>
-                                    </activityIndicatorView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="goV-Nh-VAw" firstAttribute="leading" secondItem="a9Q-Md-cIc" secondAttribute="leading" constant="12" id="8e0-j8-ZV2"/>
-                                    <constraint firstItem="goV-Nh-VAw" firstAttribute="top" secondItem="a9Q-Md-cIc" secondAttribute="top" constant="7" id="fQd-JR-s8S"/>
-                                </constraints>
-                            </view>
-                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <barButtonItem key="leftBarButtonItem" title="History" id="J1z-VX-WPR">
+                            <connections>
+                                <segue destination="wxX-ak-uoC" kind="push" id="MXV-Wb-n7N"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Favorites" id="dCB-5B-KzC">
                             <connections>
@@ -188,7 +176,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="loadingIndicator" destination="goV-Nh-VAw" id="o6c-ls-edE"/>
                         <outlet property="searchBar" destination="1F5-IT-25L" id="wJf-aD-TsB"/>
                     </connections>
                 </tableViewController>
@@ -218,7 +205,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="788"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search your favorites" id="zCF-73-aSE">
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Find in favorites" id="zCF-73-aSE">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
@@ -250,6 +237,37 @@
             </objects>
             <point key="canvasLocation" x="1664" y="-1713"/>
         </scene>
+        <!--History View Controller - History-->
+        <scene sceneID="dd0-cF-wnW">
+            <objects>
+                <tableViewController storyboardIdentifier="" id="wxX-ak-uoC" customClass="HistoryViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="NVN-oc-9VM">
+                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="wxX-ak-uoC" id="yhi-Hf-LYF"/>
+                            <outlet property="delegate" destination="wxX-ak-uoC" id="COH-0H-R8e"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="History" id="yUU-uC-eT7"/>
+                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="TH5-bM-gxW" id="lYQ-zw-2to"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gD4-c8-1uz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="nDw-KU-ybX">
+                    <connections>
+                        <outlet property="delegate" destination="wxX-ak-uoC" id="wim-8h-fYS"/>
+                        <outlet property="searchContentsController" destination="wxX-ak-uoC" id="0C2-jb-Uqg"/>
+                        <outlet property="searchResultsDataSource" destination="wxX-ak-uoC" id="OxO-g6-Yua"/>
+                        <outlet property="searchResultsDelegate" destination="wxX-ak-uoC" id="xHi-C2-eij"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="756" y="-1693"/>
+        </scene>
     </scenes>
     <resources>
         <image name="estrelinha_cinzinha.png" width="20" height="20"/>
@@ -263,6 +281,9 @@
         </class>
         <class className="FavoritesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FavoritesViewController.h"/>
+        </class>
+        <class className="HistoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/HistoryViewController.h"/>
         </class>
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>

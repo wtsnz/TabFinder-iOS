@@ -24,6 +24,7 @@
     song.ugid = version[@"id"];
     song.type2 = version.type2;
     song.isFavorite = @(NO);
+    song.dateOfCreation = [NSDate date];
     if ([Api artistPhotoForArtist:song.artist]) {
         song.artistImage = UIImagePNGRepresentation([Api artistPhotoForArtist:song.artist]);
     }
@@ -41,6 +42,15 @@
     [CoreDataHelper.get saveContext];
 }
 
++(Song *)findByUgid:(NSString *)ugid {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.ugid == %@",ugid]];
+    NSError *error;
+    return [[CoreDataHelper.get.managedObjectContext executeFetchRequest:fetchRequest error:&error] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]].lastObject;
+}
+
 +(NSArray *)favorites {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
@@ -48,6 +58,14 @@
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.isFavorite == %@",@(YES)]];
     NSError *error;
     return [[CoreDataHelper.get.managedObjectContext executeFetchRequest:fetchRequest error:&error] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+}
+
++(NSArray *)history {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    return [[CoreDataHelper.get.managedObjectContext executeFetchRequest:fetchRequest error:&error] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateOfCreation" ascending:NO]]];
 }
 
 +(void)convertOldFavorites {

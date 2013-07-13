@@ -13,9 +13,11 @@
 @interface Favorites : NSObject
 
 +(Song *)addToDatabase:(NSDictionary *)version withContent:(NSString *)tab;
++(Song *)findByUgid:(NSString *)ugid;
 +(void)addToFavorites:(Song *)song;
 +(void)removeFromFavorites:(Song *)song;
 +(NSArray *)favorites;
 +(void)convertOldFavorites;
++(NSArray *)history;
 
 @end

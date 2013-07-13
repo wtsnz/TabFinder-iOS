@@ -50,6 +50,7 @@
     _webView.scrollView.userInteractionEnabled = YES;
     _autoScrollSlider.userInteractionEnabled = YES;
     self.navigationItem.rightBarButtonItem.enabled = YES;
+    _versionsButton.enabled = _versionsSheet != nil;
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -135,6 +136,13 @@
     _webView = nil;
 }
 
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    for (UIScrollView *scroll in [_webView subviews]) {
+        if ([scroll respondsToSelector:@selector(setZoomScale:)])
+            [scroll setZoomScale:UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ? _webView.frame.size.height/_webView.frame.size.width : 1 animated:NO];
+    }
+}
+
 //////// internet tab
 
 -(void)loadInternetSong {
@@ -154,9 +162,14 @@
 -(void)changeVersion:(NSInteger)versionIndex {
     _currentVersionIndex = versionIndex;
     NSDictionary *version = _internetSong.versions[_currentVersionIndex];
-    self.versionsButton.title = [version.shortVersionTitle stringByAppendingFormat:@" (%i more)",_internetSong.versions.count-1];
+    self.versionsButton.title = version.shortVersionTitle;
     _versionsSheet = [_internetSong versionsActionSheetWithCurrentVersionIndex:_currentVersionIndex];
     _versionsSheet.delegate = self;
+    if ([Favorites findByUgid:version[@"id"]]) {
+        _currentSong = [Favorites findByUgid:version[@"id"]];
+        [self presentCurrentSong];
+        return;
+    }
     [_loadingIndicatorView startAnimating];
     [Api fetchTabContentForVersion:version success:^(NSString *html) {
         _currentSong = [Favorites addToDatabase:version withContent:html];
