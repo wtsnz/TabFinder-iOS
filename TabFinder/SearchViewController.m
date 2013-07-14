@@ -18,7 +18,6 @@
 @property NSMutableArray *searchResultsDictionaryKeys;
 @property NSInteger totalSearchPages;
 @property NSInteger currentSearchPage;
-@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property BOOL noResultsFound;
 
 @end
@@ -31,10 +30,6 @@
     [_searchBar makeItFlat];
     [self resetSearchResults];
     [self.navigationItem.rightBarButtonItem removeTitleShadow];
-    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [_loadingIndicator setHidesWhenStopped:YES];
-    [_searchBar addSubview:_loadingIndicator];
-    _loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
 }
 
 -(void)resetSearchResults {
@@ -47,7 +42,6 @@
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [_searchBar makeItFlat]; //layout fix
-    _loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -67,10 +61,13 @@
 }
 
 -(void)requestData {
-    [_loadingIndicator startAnimating];
+    UIActivityIndicatorView *loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
+    [_searchBar addSubview:loadingIndicator];
+    [loadingIndicator startAnimating];
     _currentSearchPage++;
     [Api tabSearch:_searchBar.text page:_currentSearchPage success:^(id parsedResponse) {
-        [_loadingIndicator stopAnimating];
+        [loadingIndicator removeFromSuperview];
         if (_currentSearchPage == 1){
             [_searchResults removeAllObjects];
             [_searchResultsDictionaryKeys removeAllObjects];
@@ -102,7 +99,9 @@
             [existingSong.versions addObject:song];
         }
         [self.tableView reloadData];
-    } failure:nil];
+    } failure:^{
+        [loadingIndicator removeFromSuperview];
+    }];
 }
 
 #pragma mark - Table view data source

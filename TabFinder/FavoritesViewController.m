@@ -38,6 +38,7 @@ static FavoritesViewController *_currentInstance;
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self.navigationItem.rightBarButtonItem removeTitleShadow];
     self.tableView.sectionIndexColor = [UIColor defaultColor];
+    self.tableView.sectionIndexMinimumDisplayRowCount = 20;
 }
 
 +(FavoritesViewController *)currentInstance {
@@ -46,10 +47,6 @@ static FavoritesViewController *_currentInstance;
 
 -(BOOL)showsSectionHeaders {
     return _favorites.count > 15;
-}
-
--(BOOL)showsSectionIndexTitles {
-    return _sortedSections.count > 13;
 }
 
 -(BOOL)showsSearchBar {
@@ -73,11 +70,7 @@ static FavoritesViewController *_currentInstance;
             [array addObject:song];
         }
     }
-    if ([self showsSearchBar]) {
-        [self.tableView setContentOffset:CGPointMake(0, 44)];
-    } else {
-        self.tableView.tableHeaderView = nil;
-    }
+    self.tableView.tableHeaderView = [self showsSearchBar] ? self.searchDisplayController.searchBar : nil;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -87,7 +80,7 @@ static FavoritesViewController *_currentInstance;
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     if (tableView == self.tableView)
-        return [self showsSectionIndexTitles] ? _sortedSections : nil;
+        return _sortedSections;
     else return nil;
 }
 
@@ -162,10 +155,10 @@ static FavoritesViewController *_currentInstance;
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Song *song = [self songForTableView:tableView atIndexPath:indexPath];
-        BOOL showsSectionHeaders = [self showsSectionHeaders];
+        NSInteger numberOfSections = [self numberOfSectionsInTableView:tableView];
         [Favorites removeFromFavorites:song];
         [self reloadFavorites];
-        if (![self showsSectionHeaders] && showsSectionHeaders) {
+        if ([self numberOfSectionsInTableView:tableView] != numberOfSections) {
             [self.tableView reloadData];
         } else {
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

@@ -97,7 +97,6 @@
 		25D234EE178CF51800D31114 /* SongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234ED178CF51800D31114 /* SongCell.xib */; };
 		25D234F4178D08E700D31114 /* ChordsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F3178D08E700D31114 /* ChordsContainerView.xib */; };
 		25D234F6178D198B00D31114 /* drag.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F5178D198B00D31114 /* drag.png */; };
-		25D234FA178D3CD200D31114 /* iPadMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D234F9178D3CD100D31114 /* iPadMasterViewController.m */; };
 		25D234FC178D728200D31114 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234FB178D728200D31114 /* Default.png */; };
 		25D234FE178D72B400D31114 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234FD178D72B400D31114 /* Default@2x.png */; };
 		25D23500178D72D500D31114 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234FF178D72D500D31114 /* Default-568h@2x.png */; };
@@ -262,8 +261,6 @@
 		25D234ED178CF51800D31114 /* SongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongCell.xib; sourceTree = "<group>"; };
 		25D234F3178D08E700D31114 /* ChordsContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordsContainerView.xib; sourceTree = "<group>"; };
 		25D234F5178D198B00D31114 /* drag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drag.png; sourceTree = "<group>"; };
-		25D234F8178D3CD100D31114 /* iPadMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadMasterViewController.h; sourceTree = "<group>"; };
-		25D234F9178D3CD100D31114 /* iPadMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iPadMasterViewController.m; sourceTree = "<group>"; };
 		25D234FB178D728200D31114 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		25D234FD178D72B400D31114 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		25D234FF178D72D500D31114 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -434,8 +431,6 @@
 				251CE0511787FE1200433748 /* MainStoryboard.storyboard */,
 				251A3D94178804AD00B5275D /* af */,
 				251CE0401787FE1200433748 /* Supporting Files */,
-				25D234F8178D3CD100D31114 /* iPadMasterViewController.h */,
-				25D234F9178D3CD100D31114 /* iPadMasterViewController.m */,
 			);
 			path = TabFinder;
 			sourceTree = "<group>";
@@ -725,7 +720,6 @@
 				251A3DDB1788070B00B5275D /* NavigationController.m in Sources */,
 				25A1EA6E178B80DA0051AB53 /* UISearchBar+FlatUI.m in Sources */,
 				2520A8E4178CD0DF0029FA35 /* CustomWebView.m in Sources */,
-				25D234FA178D3CD200D31114 /* iPadMasterViewController.m in Sources */,
 				25FDCE1F178D7648002DB7F7 /* OldFavorites.m in Sources */,
 				25FDCE20178D7648002DB7F7 /* OldArtist.m in Sources */,
 				25FDCE21178D7648002DB7F7 /* OldSong.m in Sources */,
