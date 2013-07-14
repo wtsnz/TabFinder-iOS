@@ -14,7 +14,7 @@
 @end
 
 @implementation SongCell
-
+/*
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -37,10 +37,9 @@
         [self.contentView addConstraint:contentViewConstraint];
     }
 }
-
+*/
 -(id)init {
-    self = [[NSBundle mainBundle] loadNibNamed:@"SongCell" owner:self options:nil].lastObject;
-    self.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1] cornerRadius:0]];
+    self = [[NSBundle mainBundle] loadNibNamed:@"SongCell7" owner:self options:nil].lastObject;
     return self;
 }
 
@@ -52,8 +51,8 @@
 }
 
 -(void)configureArtistLabelWithArtist:(NSString *)artist versionInfo:(NSString *)versionInfo {
-    NSMutableAttributedString *artistName = [[NSMutableAttributedString alloc] initWithString:artist attributes:@{NSForegroundColorAttributeName: [UIColor colorFromHexCode:@"999999"], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13]}];
-    NSAttributedString *version = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@",versionInfo] attributes:@{NSForegroundColorAttributeName:[UIColor defaultColor],NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:11]}];
+    NSMutableAttributedString *artistName = [[NSMutableAttributedString alloc] initWithString:artist attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:0.5 alpha:1], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13]}];
+    NSAttributedString *version = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@",versionInfo] attributes:@{NSForegroundColorAttributeName:self.tintColor,NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:11]}];
     [artistName appendAttributedString:version];
     [_artistLabel setAttributedText:artistName];
 }

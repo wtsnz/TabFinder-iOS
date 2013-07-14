@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>31204198-4DD1-4DB1-B354-E7DBE5576F43</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TabFinder</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>28E281DE-4429-477E-AF6E-E694686E607C</key>
+		<string>https://github.com/lgfaria/TabFinder--iOS-6-.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TabFinder.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>28E281DE-4429-477E-AF6E-E694686E607C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lgfaria/TabFinder--iOS-6-.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>28E281DE-4429-477E-AF6E-E694686E607C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>28E281DE-4429-477E-AF6E-E694686E607C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TabFinder</string>
+		</dict>
+	</array>
+</dict>
+</plist>

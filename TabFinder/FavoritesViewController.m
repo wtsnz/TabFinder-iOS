@@ -32,12 +32,10 @@ static FavoritesViewController *_currentInstance;
 {
     [super viewDidLoad];
     _currentInstance = self;
-    [self.searchDisplayController.searchBar makeItFlat];
     _sortedSections = [NSMutableArray array];
     _sectionedFavorites = [NSMutableDictionary dictionary];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem removeTitleShadow];
-    self.tableView.sectionIndexColor = [UIColor defaultColor];
+    self.tableView.sectionIndexColor = [self.view tintColor];
 }
 
 +(FavoritesViewController *)currentInstance {
@@ -105,7 +103,7 @@ static FavoritesViewController *_currentInstance;
         UIView *header = [[UIView alloc] init];
         UILabel *label = [[UILabel alloc] init];
         label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
-        label.textColor = [UIColor defaultColor];
+        label.textColor = [self.view tintColor];
         label.text = [self tableView:tableView titleForHeaderInSection:section];
         label.backgroundColor = [UIColor clearColor];
         header.backgroundColor = tableView.backgroundColor;

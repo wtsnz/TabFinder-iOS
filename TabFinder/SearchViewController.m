@@ -28,9 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_searchBar makeItFlat];
     [self resetSearchResults];
-    [self.navigationItem.rightBarButtonItem removeTitleShadow];
     _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [_loadingIndicator setHidesWhenStopped:YES];
     [_searchBar addSubview:_loadingIndicator];
@@ -43,11 +41,6 @@
     _totalSearchPages = 0;
     _searchResults = [NSMutableDictionary dictionary];
     _searchResultsDictionaryKeys = [NSMutableArray array];
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [_searchBar makeItFlat]; //layout fix
-    _loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

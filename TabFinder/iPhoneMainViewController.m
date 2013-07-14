@@ -56,9 +56,11 @@
     if (velocity.y > 0.7 && self.toolBarBottomSpaceToContainer.constant == 0) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         self.toolBarBottomSpaceToContainer.constant = 44;
+        _statusBarBackgroundView.hidden = NO;
     } else if (velocity.y < -0.7 && self.toolBarBottomSpaceToContainer.constant == 44) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
         self.toolBarBottomSpaceToContainer.constant = 0;
+        _statusBarBackgroundView.hidden = YES;
     }
     [self.view setNeedsUpdateConstraints];
     [UIView animateWithDuration:0.35f animations:^{

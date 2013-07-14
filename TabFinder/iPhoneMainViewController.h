@@ -10,4 +10,6 @@
 
 @interface iPhoneMainViewController : MainViewController
 
+@property (weak, nonatomic) IBOutlet UIView *statusBarBackgroundView;
+
 @end

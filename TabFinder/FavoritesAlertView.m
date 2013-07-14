@@ -8,6 +8,7 @@
 
 #import "FavoritesAlertView.h"
 #import "SongCell.h"
+#import "UIView+Shadow.h"
 
 @implementation FavoritesAlertView
 
@@ -19,7 +20,7 @@
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     cell.center = CGPointMake(cell.center.x, cell.center.y + 25);
     [alertView addSubview:cell];
-    alertView.center = CGPointMake(view.frame.size.width - alertView.frame.size.width/2 - 10, alertView.frame.size.height/2 + 10);
+    alertView.center = CGPointMake(view.frame.size.width - alertView.frame.size.width/2 - 10, alertView.frame.size.height/2 + 74);
     [view addSubview:alertView];
     [UIView animateWithDuration:0.3 delay:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         alertView.alpha = 0;
@@ -31,7 +32,7 @@
 -(id)init {
     self = [[NSBundle mainBundle] loadNibNamed:@"FavoritesAlertView" owner:nil options:nil].lastObject;
     [self addShadows];
-    _messageLabel.textColor = [UIColor defaultColor];
+    _messageLabel.textColor = self.tintColor;
     return self;
 }
 

@@ -9,6 +9,7 @@
 #import "ChordsContainerView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ChordView.h"
+#import "UIView+Shadow.h"
 
 @interface ChordsContainerView ()
 
@@ -31,7 +32,6 @@
     _chordLabel.text = name;
     _pageControl.numberOfPages = _chords.count;
     _pageControl.currentPage = 0;
-    [_closeButton setTitleColor:[UIColor defaultColor] forState:UIControlStateNormal];
     UIPanGestureRecognizer* panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
     [self addGestureRecognizer:panGestureRecognizer];
     return self;

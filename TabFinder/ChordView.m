@@ -26,15 +26,15 @@ static const float FRET_0_Y = 10;
     if ([finger isEqualToString:@"capo"]) {
         UIView *capoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 5)];
         capoView.layer.cornerRadius = 2.5;
-        capoView.backgroundColor = [UIColor defaultColor];
+        capoView.backgroundColor = self.tintColor;
         return capoView;
     }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     BOOL isFinger = !([finger isEqualToString:@"x"] || [finger isEqualToString:@"0"]);
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setFont:[UIFont fontWithName:@"HelveticaNeue-Regular" size:isFinger ? 13 : 8]];
-    [label setBackgroundColor:isFinger ? [UIColor defaultColor] : [UIColor clearColor]];
-    [label setTextColor:isFinger ? [UIColor whiteColor] : [UIColor defaultColor]];
+    [label setBackgroundColor:isFinger ? self.tintColor : [UIColor clearColor]];
+    [label setTextColor:isFinger ? [UIColor whiteColor] : self.tintColor];
     [label setText:[finger isEqualToString:@"0"] ? @"o" : finger];
     [label.layer setCornerRadius:10];
     [label.layer setMasksToBounds:YES];

@@ -10,7 +10,6 @@
 #import <CoreImage/CoreImage.h>
 #import "ChordView.h"
 #import "Favorites.h"
-#import "UIToolbar+FlatUI.h"
 #import "ChordsContainerView.h"
 #import <MessageUI/MessageUI.h>
 #import "AppDelegate.h"
@@ -27,11 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _autoScrollingSpeedLabel.textColor = [UIColor defaultColor];
     _autoScrollingPopupView.alpha = 0;
-    [_versionsButton configureFlatButtonWithColor:[UIColor whiteColor] highlightedColor:[UIColor whiteColor] cornerRadius:0];
-    [_bottomToolbar configureFlatToolbarWithColor:[UIColor whiteColor]];
-    [_autoScrollSlider configureFlatSliderWithTrackColor:[UIColor colorWithWhite:0.9 alpha:1] progressColor:[UIColor defaultColor] thumbColorNormal:[UIColor defaultColor] thumbColorHighlighted:[UIColor defaultColor]];
     [self autoScroll];
     _autoScrollSlider.value = 0;
     _autoScrollSlider.userInteractionEnabled = NO;
@@ -51,6 +46,7 @@
     _autoScrollSlider.userInteractionEnabled = YES;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     _versionsButton.enabled = _versionsSheet != nil;
+    [self configureFavoritesButton];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -114,7 +110,7 @@
 }
 
 - (void)configureFavoritesButton {
-    [_favoritesButtonItem setImage:[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"estrelinha" : @"estrelinha_cinzinha"]];
+    [self.navigationItem.rightBarButtonItem setTintColor:_currentSong.isFavorite ? self.view.tintColor : [UIColor colorWithWhite:0.6 alpha:1]];
 }
 
 - (IBAction)didPressFavoritesButton:(id)sender {
@@ -188,7 +184,6 @@
 
 -(void)presentCurrentSong {
     [_webView loadHTMLString:_currentSong.tab baseURL:[NSURL URLWithString:_currentSong.version.integerValue == 0 ? nil : @"http://tabfinder.herokuapp.com"]];
-    [self configureFavoritesButton];
 }
 
 @end
