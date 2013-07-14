@@ -18,7 +18,6 @@
 @property NSMutableArray *searchResultsDictionaryKeys;
 @property NSInteger totalSearchPages;
 @property NSInteger currentSearchPage;
-@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property BOOL noResultsFound;
 
 @end
@@ -29,10 +28,6 @@
 {
     [super viewDidLoad];
     [self resetSearchResults];
-    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [_loadingIndicator setHidesWhenStopped:YES];
-    [_searchBar addSubview:_loadingIndicator];
-    _loadingIndicator.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
 }
 
 -(void)resetSearchResults {
@@ -60,10 +55,13 @@
 }
 
 -(void)requestData {
-    [_loadingIndicator startAnimating];
+    UIActivityIndicatorView *loading =[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loading.center = CGPointMake(_searchBar.frame.size.width - 50, _searchBar.frame.size.height/2);
+    [_searchBar addSubview:loading];
+    [loading startAnimating];
     _currentSearchPage++;
     [Api tabSearch:_searchBar.text page:_currentSearchPage success:^(id parsedResponse) {
-        [_loadingIndicator stopAnimating];
+        [loading removeFromSuperview];
         if (_currentSearchPage == 1){
             [_searchResults removeAllObjects];
             [_searchResultsDictionaryKeys removeAllObjects];
@@ -95,7 +93,9 @@
             [existingSong.versions addObject:song];
         }
         [self.tableView reloadData];
-    } failure:nil];
+    } failure:^{
+        [loading removeFromSuperview];
+    }];
 }
 
 #pragma mark - Table view data source

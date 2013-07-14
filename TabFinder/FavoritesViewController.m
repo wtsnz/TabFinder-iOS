@@ -36,6 +36,10 @@ static FavoritesViewController *_currentInstance;
     _sectionedFavorites = [NSMutableDictionary dictionary];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.tableView.sectionIndexColor = [self.view tintColor];
+    self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
+    self.searchDisplayController.searchBar.tintColor = [self.view tintColor];
+    self.searchDisplayController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    self.tableView.sectionIndexMinimumDisplayRowCount = 40;
 }
 
 +(FavoritesViewController *)currentInstance {
@@ -44,10 +48,6 @@ static FavoritesViewController *_currentInstance;
 
 -(BOOL)showsSectionHeaders {
     return _favorites.count > 15;
-}
-
--(BOOL)showsSectionIndexTitles {
-    return _sortedSections.count > 13;
 }
 
 -(BOOL)showsSearchBar {
@@ -72,6 +72,7 @@ static FavoritesViewController *_currentInstance;
         }
     }
     if ([self showsSearchBar]) {
+        [self.tableView setTableHeaderView:self.searchDisplayController.searchBar];
         [self.tableView setContentOffset:CGPointMake(0, 44)];
     } else {
         self.tableView.tableHeaderView = nil;
@@ -85,7 +86,7 @@ static FavoritesViewController *_currentInstance;
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
     if (tableView == self.tableView)
-        return [self showsSectionIndexTitles] ? _sortedSections : nil;
+        return _sortedSections;
     else return nil;
 }
 
@@ -160,10 +161,10 @@ static FavoritesViewController *_currentInstance;
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Song *song = [self songForTableView:tableView atIndexPath:indexPath];
-        BOOL showsSectionHeaders = [self showsSectionHeaders];
+        NSInteger numberOfSections = [self numberOfSectionsInTableView:tableView];
         [Favorites removeFromFavorites:song];
         [self reloadFavorites];
-        if (![self showsSectionHeaders] && showsSectionHeaders) {
+        if ([self numberOfSectionsInTableView:tableView] != numberOfSections) {
             [self.tableView reloadData];
         } else {
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

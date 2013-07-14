@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4457.6" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="K5l-gl-VEb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4471.1" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="K5l-gl-VEb">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3682.6"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3697.3"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="W6y-9U-7cw">
             <objects>
-                <navigationController definesPresentationContext="YES" id="Xty-ns-t90" customClass="NavigationController" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" id="Xty-ns-t90" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wje-Ie-efh">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -23,20 +22,24 @@
         <!--I Pad Main View Controller-->
         <scene sceneID="RM7-W1-yNc">
             <objects>
-                <viewController id="RSY-YM-hvj" customClass="iPadMainViewController" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="RSY-YM-hvj" customClass="iPadMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k5z-au-6Gb"/>
+                        <viewControllerLayoutGuide type="bottom" id="pFF-w7-OfU"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hHp-eF-Btm">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DCe-Iq-yji" customClass="CustomWebView">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="961"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1025"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="RSY-YM-hvj" id="FU2-5C-Vvs"/>
                                 </connections>
                             </webView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RNB-br-7TP">
-                                <rect key="frame" x="0.0" y="916" width="769" height="44"/>
+                                <rect key="frame" x="0.0" y="980" width="769" height="44"/>
                                 <items>
                                     <barButtonItem id="OGN-It-BTw">
                                         <connections>
@@ -46,7 +49,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FnK-n0-ays"/>
                                     <barButtonItem style="plain" id="BKc-i7-w9r">
                                         <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="gdA-n3-IRN">
-                                            <rect key="frame" x="479" y="8" width="274" height="29"/>
+                                            <rect key="frame" x="481" y="8" width="274" height="29"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="didBeginChangingSlider:" destination="RSY-YM-hvj" eventType="touchDown" id="BEI-9F-1aV"/>
@@ -59,7 +62,7 @@
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2d-zG-JYr" customClass="AutoScrollingPopupView">
-                                <rect key="frame" x="531" y="813" width="160" height="63"/>
+                                <rect key="frame" x="531" y="877" width="160" height="63"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Auto Scrolling" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QY7-yv-JCO">
                                         <rect key="frame" x="20" y="0.0" width="120" height="21"/>
@@ -76,7 +79,7 @@
                                             <constraint firstAttribute="height" constant="31" id="XoC-sC-4rt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="42"/>
-                                        <color key="textColor" red="0.92941182850000004" green="0.62352943419999995" blue="0.270588249" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" red="0.32549020649999999" green="0.61176472900000001" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -93,7 +96,7 @@
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ig1-JQ-clP">
-                                <rect key="frame" x="366" y="462" width="37" height="37"/>
+                                <rect key="frame" x="366" y="494" width="37" height="37"/>
                                 <color key="color" red="0.48644770409999999" green="0.48644770409999999" blue="0.48644770409999999" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -112,9 +115,8 @@
                             <constraint firstAttribute="centerY" secondItem="Ig1-JQ-clP" secondAttribute="centerY" id="yux-YR-5Vb"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="3N2-e6-dwe">
-                        <barButtonItem key="rightBarButtonItem" image="estrelinha_cinzinha.png" id="1yy-Dh-XOO">
+                        <barButtonItem key="rightBarButtonItem" image="estrelinha" id="1yy-Dh-XOO">
                             <connections>
                                 <action selector="didPressFavoritesButton:" destination="RSY-YM-hvj" id="ASt-gT-hHl"/>
                             </connections>
@@ -135,28 +137,12 @@
             </objects>
             <point key="canvasLocation" x="990" y="207"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="gFd-5y-QJp">
-            <objects>
-                <navigationController id="oeS-YR-6su" customClass="NavigationController" sceneMemberID="viewController">
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="hOC-qv-zGe">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="bh0-0J-qLr" kind="relationship" relationship="rootViewController" id="mt1-ar-AfV"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mse-uH-PGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="120" y="-949"/>
-        </scene>
         <!--Search View Controller - Search-->
         <scene sceneID="s2R-Cz-Iz2">
             <objects>
-                <tableViewController storyboardIdentifier="SearchViewController" id="bh0-0J-qLr" customClass="SearchViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SearchViewController" extendedLayoutIncludesOpaqueBars="YES" id="bh0-0J-qLr" customClass="SearchViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="IlL-cn-g9f">
-                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Tap to search" id="1F5-IT-25L">
@@ -172,26 +158,14 @@
                             <outlet property="delegate" destination="bh0-0J-qLr" id="zPL-Ow-n6O"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Search" id="ZJo-54-ftp">
-                        <barButtonItem key="leftBarButtonItem" title="History" id="J1z-VX-WPR">
-                            <connections>
-                                <segue destination="wxX-ak-uoC" kind="push" id="MXV-Wb-n7N"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Favorites" id="dCB-5B-KzC">
-                            <connections>
-                                <segue destination="evs-Uj-Ql7" kind="push" id="E34-UI-f3M"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Search" id="ZJo-54-ftp"/>
                     <connections>
                         <outlet property="searchBar" destination="1F5-IT-25L" id="wJf-aD-TsB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TLI-e6-AXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1209" y="-1713"/>
+            <point key="canvasLocation" x="709" y="-3065"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="vDq-yV-7sU">
@@ -200,8 +174,8 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <connections>
-                        <segue destination="oeS-YR-6su" kind="relationship" relationship="masterViewController" id="9YZ-FR-x4B"/>
                         <segue destination="Xty-ns-t90" kind="relationship" relationship="detailViewController" id="Mdc-vr-dQQ"/>
+                        <segue destination="UPU-LH-vjC" kind="relationship" relationship="masterViewController" id="KDf-Rh-3lz"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L9W-Rt-gCF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -211,9 +185,9 @@
         <!--Favorites View Controller - Favorites-->
         <scene sceneID="Zbm-Ob-e9l">
             <objects>
-                <tableViewController storyboardIdentifier="FavoritesViewController" id="evs-Uj-Ql7" customClass="FavoritesViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FavoritesViewController" extendedLayoutIncludesOpaqueBars="YES" id="evs-Uj-Ql7" customClass="FavoritesViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="65S-tI-2zb">
-                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Find in favorites" id="zCF-73-aSE">
@@ -229,7 +203,6 @@
                             <outlet property="delegate" destination="evs-Uj-Ql7" id="Wje-Vt-ChB"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Favorites" id="pGU-vY-BmW"/>
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -247,14 +220,66 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1664" y="-1713"/>
+            <point key="canvasLocation" x="544" y="-1833"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="XLJ-QY-EQs">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="UPU-LH-vjC" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jAb-26-Af4">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Vo1-lw-5ch" kind="relationship" relationship="viewControllers" id="UCK-j6-NG4"/>
+                        <segue destination="Pxo-Bt-Lal" kind="relationship" relationship="viewControllers" id="l5n-IZ-ryO"/>
+                        <segue destination="2AZ-xS-A0X" kind="relationship" relationship="viewControllers" id="vuJ-NS-MBy"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7GR-CP-pNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-659" y="-1848"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7c5-RB-CHY">
+            <objects>
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" id="Vo1-lw-5ch" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="yob-My-O0a"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cZd-I5-RcI">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="bh0-0J-qLr" kind="relationship" relationship="rootViewController" id="yYx-6O-EDr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dPc-Cc-Eac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3" y="-3073"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="isE-SA-UeP">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Pxo-Bt-Lal" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="history" id="rF5-g7-Rza"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9n3-3f-X63">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wxX-ak-uoC" kind="relationship" relationship="rootViewController" id="bUX-tB-cAK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="so1-5S-d4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-175" y="-4064"/>
         </scene>
         <!--History View Controller - History-->
         <scene sceneID="dd0-cF-wnW">
             <objects>
-                <tableViewController id="wxX-ak-uoC" customClass="HistoryViewController" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="wxX-ak-uoC" customClass="HistoryViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="NVN-oc-9VM">
-                        <rect key="frame" x="0.0" y="64" width="320" height="788"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -262,7 +287,6 @@
                             <outlet property="delegate" destination="wxX-ak-uoC" id="COH-0H-R8e"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="History" id="yUU-uC-eT7"/>
                     <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -279,14 +303,31 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="756" y="-1693"/>
+            <point key="canvasLocation" x="676" y="-4165"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3QV-xZ-Ywp">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="2AZ-xS-A0X" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="yla-4I-gLE"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iQa-VC-HCK">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="evs-Uj-Ql7" kind="relationship" relationship="rootViewController" id="DCq-Ow-Wu6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2tH-eg-unk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-53" y="-1865"/>
         </scene>
     </scenes>
     <resources>
-        <image name="estrelinha_cinzinha.png" width="20" height="20"/>
+        <image name="estrelinha" width="20" height="20"/>
     </resources>
+    <color key="tintColor" red="0.32549020649999999" green="0.61176472900000001" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="lightContent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>

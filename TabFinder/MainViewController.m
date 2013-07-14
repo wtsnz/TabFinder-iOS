@@ -110,7 +110,7 @@
 }
 
 - (void)configureFavoritesButton {
-    [self.navigationItem.rightBarButtonItem setTintColor:_currentSong.isFavorite ? self.view.tintColor : [UIColor colorWithWhite:0.6 alpha:1]];
+    [_favoritesButtonItem setImage:[[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"estrelinha" : @"estrelinha_cinzinha"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 }
 
 - (IBAction)didPressFavoritesButton:(id)sender {

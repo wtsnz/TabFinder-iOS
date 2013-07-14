@@ -220,10 +220,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Song Title" id="5no-jU-DiU">
-                        <barButtonItem key="rightBarButtonItem" image="estrelinha" style="plain" id="tsP-4Y-1ky">
-                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <barButtonItem key="rightBarButtonItem" image="estrelinha_cinzinha" style="plain" id="qcx-YP-A7z">
                             <connections>
-                                <action selector="didPressFavoritesButton:" destination="Vor-l4-9El" id="Lc5-aF-qlN"/>
+                                <action selector="didPressFavoritesButton:" destination="Vor-l4-9El" id="2bU-8M-IUH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -233,7 +232,7 @@
                         <outlet property="autoScrollingPopupView" destination="euV-sh-GDI" id="IzE-0r-aUQ"/>
                         <outlet property="autoScrollingSpeedLabel" destination="0Od-4A-t23" id="IFi-eB-clZ"/>
                         <outlet property="bottomToolbar" destination="sgK-QX-BcD" id="NMO-jI-lrZ"/>
-                        <outlet property="favoritesButtonItem" destination="tsP-4Y-1ky" id="jqY-JZ-4oG"/>
+                        <outlet property="favoritesButtonItem" destination="qcx-YP-A7z" id="ek3-ih-oOc"/>
                         <outlet property="loadingIndicatorView" destination="9ma-LV-bNM" id="dyA-ho-f6O"/>
                         <outlet property="statusBarBackgroundView" destination="2ho-1e-68e" id="hMt-eg-xWL"/>
                         <outlet property="toolBarBottomSpaceToContainer" destination="HoE-tf-atO" id="uAY-ex-Yei"/>
@@ -307,7 +306,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="estrelinha" width="20" height="20"/>
+        <image name="estrelinha_cinzinha" width="20" height="20"/>
     </resources>
     <color key="tintColor" red="0.32549020649999999" green="0.61176472900000001" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

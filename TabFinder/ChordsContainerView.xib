@@ -35,12 +35,12 @@
                     <color key="pageIndicatorTintColor" red="0.85724250639999999" green="0.85724250639999999" blue="0.85724250639999999" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="currentPageIndicatorTintColor" red="0.56182238520000005" green="0.56182238520000005" blue="0.56182238520000005" alpha="1" colorSpace="calibratedRGB"/>
                 </pageControl>
-                <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" image="drag.png" translatesAutoresizingMaskIntoConstraints="NO" id="152">
-                    <rect key="frame" x="9" y="164" width="15" height="15"/>
+                <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" image="drag" translatesAutoresizingMaskIntoConstraints="NO" id="152">
+                    <rect key="frame" x="4" y="169" width="12" height="12"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="15" id="161"/>
-                        <constraint firstAttribute="height" constant="15" id="163"/>
+                        <constraint firstAttribute="width" constant="12" id="iCG-Yv-diG"/>
+                        <constraint firstAttribute="height" constant="12" id="ynr-cE-sE6"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24">
@@ -76,8 +76,8 @@
                 <constraint firstItem="15" firstAttribute="centerX" secondItem="13" secondAttribute="centerX" id="310"/>
                 <constraint firstItem="24" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="141" id="337"/>
                 <constraint firstItem="24" firstAttribute="top" secondItem="3" secondAttribute="top" constant="-4" id="339"/>
-                <constraint firstItem="152" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="9" id="344"/>
-                <constraint firstAttribute="bottom" secondItem="152" secondAttribute="bottom" constant="6" id="345"/>
+                <constraint firstItem="152" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="4" id="344"/>
+                <constraint firstAttribute="bottom" secondItem="152" secondAttribute="bottom" constant="4" id="345"/>
                 <constraint firstItem="15" firstAttribute="top" secondItem="3" secondAttribute="top" constant="15" id="363"/>
             </constraints>
             <connections>
@@ -90,6 +90,6 @@
         </view>
     </objects>
     <resources>
-        <image name="drag.png" width="48" height="48"/>
+        <image name="drag" width="48" height="48"/>
     </resources>
 </document>
