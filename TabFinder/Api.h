@@ -17,5 +17,6 @@
 
 +(void)configureImageViewForCell:(SongCell *)cell;
 +(UIImage *)artistPhotoForArtist:(NSString *)artist;
++(void)downloadArtistImageOnBackgroundForSong:(Song *)song;
 
 @end

@@ -11,7 +11,6 @@
 #import "SongCell.h"
 #import "Song.h"
 #import "MainViewController.h"
-#import "TableViewHelper.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 
@@ -71,6 +70,11 @@ static FavoritesViewController *_currentInstance;
         }
     }
     self.tableView.tableHeaderView = [self showsSearchBar] ? self.searchDisplayController.searchBar : nil;
+    [self performSelectorInBackground:@selector(performImageCheck) withObject:nil];
+}
+
+-(void)performImageCheck {
+    [Favorites performImageCheck];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

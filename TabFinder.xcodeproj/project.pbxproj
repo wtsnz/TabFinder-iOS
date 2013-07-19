@@ -65,7 +65,6 @@
 		251CE09E1787FE9300433748 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251CE0901787FE9300433748 /* SearchViewController.m */; };
 		251CE09F1787FE9300433748 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 251CE0921787FE9300433748 /* Song.m */; };
 		251CE0A71787FEA000433748 /* TabFinder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 251CE0A11787FEA000433748 /* TabFinder.xcdatamodeld */; };
-		251CE0A81787FEA000433748 /* TableViewHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 251CE0A41787FEA000433748 /* TableViewHelper.m */; };
 		251CE0A91787FEA000433748 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 251CE0A61787FEA000433748 /* XMLReader.m */; };
 		2520A8D7178BDB240029FA35 /* ChordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2520A8D6178BDB240029FA35 /* ChordView.xib */; };
 		2520A8DA178BDB7B0029FA35 /* fretboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2520A8D8178BDB7B0029FA35 /* fretboard.png */; };
@@ -223,8 +222,6 @@
 		251CE0911787FE9300433748 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		251CE0921787FE9300433748 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
 		251CE0A21787FEA000433748 /* TabFinder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TabFinder.xcdatamodel; sourceTree = "<group>"; };
-		251CE0A31787FEA000433748 /* TableViewHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewHelper.h; sourceTree = "<group>"; };
-		251CE0A41787FEA000433748 /* TableViewHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewHelper.m; sourceTree = "<group>"; };
 		251CE0A51787FEA000433748 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		251CE0A61787FEA000433748 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		2520A8D6178BDB240029FA35 /* ChordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordView.xib; sourceTree = "<group>"; };
@@ -530,8 +527,6 @@
 				251CE0851787FE9300433748 /* FavoritesViewController.m */,
 				251CE08F1787FE9300433748 /* SearchViewController.h */,
 				251CE0901787FE9300433748 /* SearchViewController.m */,
-				251CE0A31787FEA000433748 /* TableViewHelper.h */,
-				251CE0A41787FEA000433748 /* TableViewHelper.m */,
 				25EAB72E178EC81E00964ACB /* NoResultsCell.xib */,
 				25EAB77A178FDC8D00964ACB /* HistoryViewController.h */,
 				25EAB77B178FDC8D00964ACB /* HistoryViewController.m */,
@@ -686,7 +681,6 @@
 				251CE09E1787FE9300433748 /* SearchViewController.m in Sources */,
 				251CE09F1787FE9300433748 /* Song.m in Sources */,
 				251CE0A71787FEA000433748 /* TabFinder.xcdatamodeld in Sources */,
-				251CE0A81787FEA000433748 /* TableViewHelper.m in Sources */,
 				251CE0A91787FEA000433748 /* XMLReader.m in Sources */,
 				251A3D8B178804A700B5275D /* AFHTTPClient.m in Sources */,
 				251A3D8C178804A700B5275D /* AFHTTPRequestOperation.m in Sources */,

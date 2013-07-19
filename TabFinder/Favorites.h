@@ -19,5 +19,7 @@
 +(NSArray *)favorites;
 +(void)convertOldFavorites;
 +(NSArray *)history;
++(void)performImageCheck;
++(NSDictionary *)historyDictionary;
 
 @end

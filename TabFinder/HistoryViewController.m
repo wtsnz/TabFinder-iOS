@@ -12,10 +12,12 @@
 #import "MainViewController.h"
 #import "AppDelegate.h"
 #import "Favorites.h"
+#import "CoreDataHelper.h"
 
 @interface HistoryViewController ()
 
-@property NSArray *history;
+@property NSDictionary *history;
+@property NSArray *historyDictKeys;
 
 @end
 
@@ -24,19 +26,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _history = [Favorites history];
+    _history = [Favorites historyDictionary];
+    _historyDictKeys = [_history.allKeys sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
+    [self performSelectorInBackground:@selector(performImageCheck) withObject:nil];
+}
+
+-(void)performImageCheck {
+    [Favorites performImageCheck];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return _history.allKeys.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _history.count;
+    NSArray *songs = _history[_historyDictKeys[section]];
+    return songs.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -44,8 +53,30 @@
     static NSString *CellIdentifier = @"SongCell";
     SongCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) cell = [[SongCell alloc] init];
-    [cell configureWithFavoriteSong:_history[indexPath.row]];
+    NSArray *songs = _history[_historyDictKeys[indexPath.section]];
+    [cell configureWithFavoriteSong:songs[indexPath.row]];
     return cell;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSString *sectionName = _historyDictKeys[section];
+    return [sectionName substringFromIndex:1];
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+        UIView *header = [[UIView alloc] init];
+        UILabel *label = [[UILabel alloc] init];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
+        label.textColor = [UIColor defaultColor];
+        label.text = [self tableView:tableView titleForHeaderInSection:section];
+        label.backgroundColor = [UIColor clearColor];
+        header.backgroundColor = tableView.backgroundColor;
+        header.alpha = 0.95;
+        [label sizeToFit];
+        [header addSubview:label];
+        [header sizeToFit];
+        label.center = CGPointMake(label.center.x + 10, label.center.y + 5);
+        return header;
 }
 
 #pragma mark - Table view delegate
@@ -55,7 +86,8 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         MainViewController *mainVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad;
-        mainVC.currentSong = _history[indexPath.row];
+        NSArray *songs = _history[_historyDictKeys[indexPath.section]];
+        mainVC.currentSong = songs[indexPath.row];
         [mainVC loadFavoritesSong];
     }
     else {
@@ -65,7 +97,9 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MainViewController *vc = segue.destinationViewController;
-    vc.currentSong = _history[self.tableView.indexPathForSelectedRow.row];
+    NSArray *songs = _history[_historyDictKeys[self.tableView.indexPathForSelectedRow.section]];
+    Song *song = songs[self.tableView.indexPathForSelectedRow.row];
+    vc.currentSong = song;
 }
 
 

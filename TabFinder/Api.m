@@ -10,7 +10,7 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 #import "XMLReader.h"
-
+#import "CoreDataHelper.h"
 
 @implementation Api
 
@@ -123,7 +123,50 @@ static NSMutableDictionary *_artistPhotos;
 }
 
 +(UIImage *)artistPhotoForArtist:(NSString *)artist {
+    if (!_artistPhotos) _artistPhotos = [NSMutableDictionary dictionary];
     return _artistPhotos[artist];
+}
+
++(void)downloadArtistImageOnBackgroundForSong:(Song *)song {
+    NSString *artist = song.artist;
+    UIImageView *imageView = [[UIImageView alloc] init];
+    UIImage *unknown_artist = [UIImage imageNamed:@"unknown_artist"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://ws.audioscrobbler.com/2.0"]];
+    NSString *beatlesSafe = [artist isEqualToString:@"Beatles"] ? @"the beatles" : artist;
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:[[NSString stringWithFormat:@"?method=artist.getinfo&artist=%@&api_key=e4b978b3a47b0ffa063df03eea94fb1b&format=json",beatlesSafe] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil];
+    [request setTimeoutInterval:8];
+    //set up operation
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+    //setup callbacks
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSError *error;
+        NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
+        if (error) {
+            NSLog(@"%@",error.localizedDescription);
+        } else {
+            NSDictionary *dict = [parsedResponse valueForKeyPath:@"artist"];
+            NSArray *images = [dict valueForKeyPath:@"image"];
+            NSString *photoURL = [[images objectAtIndex:2] valueForKeyPath:@"#text"];
+            if (photoURL != nil && photoURL.length > 10) {
+                NSURL *finalUrl = [NSURL URLWithString:photoURL];
+                [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:finalUrl] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                    [_artistPhotos setObject:UIImagePNGRepresentation(image).length > 0 ? image : unknown_artist forKey:artist];
+                    song.artistImage = UIImagePNGRepresentation([self artistPhotoForArtist:artist]);
+                    [CoreDataHelper.get saveContext];
+                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                    [_artistPhotos setObject:unknown_artist forKey:artist];
+                    song.artistImage = UIImagePNGRepresentation([self artistPhotoForArtist:artist]);
+                    [CoreDataHelper.get saveContext];
+                }];
+            } else {
+                [_artistPhotos setObject:unknown_artist forKey:artist];
+                song.artistImage = UIImagePNGRepresentation([self artistPhotoForArtist:artist]);
+                [CoreDataHelper.get saveContext];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) { }];
+    [operation start];
 }
 
 -(void)requestWithURL:(NSString *)relativeURL method:(NSString *)method args:(NSDictionary *)args successCallback:(void(^)(id parsedResponse))successCallback failure:(void(^)())failureCallback {
