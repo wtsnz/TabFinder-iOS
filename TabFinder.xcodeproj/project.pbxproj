@@ -77,6 +77,15 @@
 		25212572178D734500B83E46 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 25212571178D734500B83E46 /* Default-Portrait@2x~ipad.png */; };
 		25212574178D73B000B83E46 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 25212573178D73B000B83E46 /* Default-Landscape~ipad.png */; };
 		25212576178D73BA00B83E46 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 25212575178D73BA00B83E46 /* Default-Landscape@2x~ipad.png */; };
+		254266CF17A1CF29001D2560 /* Dedos.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266C317A1CF29001D2560 /* Dedos.m */; };
+		254266D017A1CF29001D2560 /* Chord.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266C517A1CF29001D2560 /* Chord.m */; };
+		254266D117A1CF29001D2560 /* chord.html in Resources */ = {isa = PBXBuildFile; fileRef = 254266C617A1CF29001D2560 /* chord.html */; };
+		254266D217A1CF29001D2560 /* ChordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266C817A1CF29001D2560 /* ChordRequest.m */; };
+		254266D317A1CF29001D2560 /* ChordsPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266CA17A1CF29001D2560 /* ChordsPresentationViewController.m */; };
+		254266D417A1CF29001D2560 /* ChordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266CC17A1CF29001D2560 /* ChordsTableViewController.m */; };
+		254266D517A1CF29001D2560 /* ChordTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266CE17A1CF29001D2560 /* ChordTO.m */; };
+		254266D817A1D731001D2560 /* ChordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266D717A1D731001D2560 /* ChordCell.m */; };
+		254266DB17A1D96F001D2560 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266DA17A1D96F001D2560 /* TabBarController.m */; };
 		255677BF178E6BC50030B3E1 /* estrelinha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 255677BE178E6BC50030B3E1 /* estrelinha@2x.png */; };
 		255677C1178E6C0A0030B3E1 /* estrelinha.png in Resources */ = {isa = PBXBuildFile; fileRef = 255677C0178E6C0A0030B3E1 /* estrelinha.png */; };
 		255677C3178E6C630030B3E1 /* estrelinha_cinzinha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 255677C2178E6C630030B3E1 /* estrelinha_cinzinha@2x.png */; };
@@ -88,10 +97,16 @@
 		255BB665178E0A8200DDB024 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 255BB664178E0A8200DDB024 /* 114.png */; };
 		255BB667178E0A8900DDB024 /* 72.png in Resources */ = {isa = PBXBuildFile; fileRef = 255BB666178E0A8900DDB024 /* 72.png */; };
 		255BB669178E0A8F00DDB024 /* 144.png in Resources */ = {isa = PBXBuildFile; fileRef = 255BB668178E0A8F00DDB024 /* 144.png */; };
+		257B937C179F7BF700D9D3E7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257B937B179F7BF700D9D3E7 /* Social.framework */; };
+		257B937E179F818000D9D3E7 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937D179F818000D9D3E7 /* share@2x.png */; };
+		257B9380179F81BB00D9D3E7 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937F179F81BB00D9D3E7 /* share.png */; };
 		25A1EA6B178B6A390051AB53 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6A178B6A390051AB53 /* searchbar.png */; };
 		25A1EA6E178B80DA0051AB53 /* UISearchBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1EA6D178B80DA0051AB53 /* UISearchBar+FlatUI.m */; };
 		25A1EA70178BA1B80051AB53 /* unknown_artist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */; };
 		25A1EA72178BA1E20051AB53 /* unknown_artist.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA71178BA1E10051AB53 /* unknown_artist.png */; };
+		25A9410E179F931B00C0E790 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A9410D179F931B00C0E790 /* StoreKit.framework */; };
+		25A94113179F933B00C0E790 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A94110179F933B00C0E790 /* iRate.m */; };
+		25A94114179F933C00C0E790 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25A94112179F933B00C0E790 /* iRate.bundle */; };
 		25D234EC178CF48B00D31114 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D234EB178CF48B00D31114 /* iPad.storyboard */; };
 		25D234EE178CF51800D31114 /* SongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234ED178CF51800D31114 /* SongCell.xib */; };
 		25D234F4178D08E700D31114 /* ChordsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F3178D08E700D31114 /* ChordsContainerView.xib */; };
@@ -190,9 +205,6 @@
 		251CE0431787FE1200433748 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		251CE0451787FE1200433748 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		251CE0471787FE1200433748 /* TabFinder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TabFinder-Prefix.pch"; sourceTree = "<group>"; };
-		251CE04B1787FE1200433748 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		251CE04D1787FE1200433748 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		251CE04F1787FE1200433748 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		251CE0521787FE1200433748 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		251CE06A1787FE8100433748 /* Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Api.h; sourceTree = "<group>"; };
 		251CE06B1787FE8100433748 /* Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Api.m; sourceTree = "<group>"; };
@@ -236,6 +248,23 @@
 		25212571178D734500B83E46 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		25212573178D73B000B83E46 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		25212575178D73BA00B83E46 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		254266C217A1CF29001D2560 /* Dedos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dedos.h; sourceTree = "<group>"; };
+		254266C317A1CF29001D2560 /* Dedos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dedos.m; sourceTree = "<group>"; };
+		254266C417A1CF29001D2560 /* Chord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chord.h; sourceTree = "<group>"; };
+		254266C517A1CF29001D2560 /* Chord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chord.m; sourceTree = "<group>"; };
+		254266C617A1CF29001D2560 /* chord.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = chord.html; sourceTree = "<group>"; };
+		254266C717A1CF29001D2560 /* ChordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordRequest.h; sourceTree = "<group>"; };
+		254266C817A1CF29001D2560 /* ChordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordRequest.m; sourceTree = "<group>"; };
+		254266C917A1CF29001D2560 /* ChordsPresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordsPresentationViewController.h; sourceTree = "<group>"; };
+		254266CA17A1CF29001D2560 /* ChordsPresentationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordsPresentationViewController.m; sourceTree = "<group>"; };
+		254266CB17A1CF29001D2560 /* ChordsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordsTableViewController.h; sourceTree = "<group>"; };
+		254266CC17A1CF29001D2560 /* ChordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordsTableViewController.m; sourceTree = "<group>"; };
+		254266CD17A1CF29001D2560 /* ChordTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordTO.h; sourceTree = "<group>"; };
+		254266CE17A1CF29001D2560 /* ChordTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordTO.m; sourceTree = "<group>"; };
+		254266D617A1D731001D2560 /* ChordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordCell.h; sourceTree = "<group>"; };
+		254266D717A1D731001D2560 /* ChordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordCell.m; sourceTree = "<group>"; };
+		254266D917A1D96F001D2560 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		254266DA17A1D96F001D2560 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		255677BE178E6BC50030B3E1 /* estrelinha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "estrelinha@2x.png"; sourceTree = "<group>"; };
 		255677C0178E6C0A0030B3E1 /* estrelinha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = estrelinha.png; sourceTree = "<group>"; };
 		255677C2178E6C630030B3E1 /* estrelinha_cinzinha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "estrelinha_cinzinha@2x.png"; sourceTree = "<group>"; };
@@ -249,11 +278,18 @@
 		255BB664178E0A8200DDB024 /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		255BB666178E0A8900DDB024 /* 72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 72.png; sourceTree = "<group>"; };
 		255BB668178E0A8F00DDB024 /* 144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 144.png; sourceTree = "<group>"; };
+		257B937B179F7BF700D9D3E7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		257B937D179F818000D9D3E7 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		257B937F179F81BB00D9D3E7 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		25A1EA6A178B6A390051AB53 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		25A1EA6C178B80DA0051AB53 /* UISearchBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+FlatUI.h"; sourceTree = "<group>"; };
 		25A1EA6D178B80DA0051AB53 /* UISearchBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+FlatUI.m"; sourceTree = "<group>"; };
 		25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unknown_artist@2x.png"; sourceTree = "<group>"; };
 		25A1EA71178BA1E10051AB53 /* unknown_artist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_artist.png; sourceTree = "<group>"; };
+		25A9410D179F931B00C0E790 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		25A94110179F933B00C0E790 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
+		25A94111179F933B00C0E790 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		25A94112179F933B00C0E790 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		25D234EB178CF48B00D31114 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		25D234ED178CF51800D31114 /* SongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongCell.xib; sourceTree = "<group>"; };
 		25D234F3178D08E700D31114 /* ChordsContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordsContainerView.xib; sourceTree = "<group>"; };
@@ -282,6 +318,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25A9410E179F931B00C0E790 /* StoreKit.framework in Frameworks */,
+				257B937C179F7BF700D9D3E7 /* Social.framework in Frameworks */,
 				25FDCE24178D7D2D002DB7F7 /* MessageUI.framework in Frameworks */,
 				251A3DDD1788078300B5275D /* CoreText.framework in Frameworks */,
 				251A3D991788053300B5275D /* QuartzCore.framework in Frameworks */,
@@ -372,6 +410,8 @@
 		251CE02D1787FE1200433748 = {
 			isa = PBXGroup;
 			children = (
+				25A9410D179F931B00C0E790 /* StoreKit.framework */,
+				257B937B179F7BF700D9D3E7 /* Social.framework */,
 				255BB668178E0A8F00DDB024 /* 144.png */,
 				255BB666178E0A8900DDB024 /* 72.png */,
 				255BB664178E0A8200DDB024 /* 114.png */,
@@ -414,19 +454,17 @@
 		251CE03F1787FE1200433748 /* TabFinder */ = {
 			isa = PBXGroup;
 			children = (
+				254266C117A1CF19001D2560 /* Chords Dictionary */,
 				255677C6178E6E230030B3E1 /* Main VC */,
 				25D234F7178D3AF100D31114 /* Custom */,
 				25D234F2178CF93A00D31114 /* TVCs */,
 				25D234F1178CF92400D31114 /* Model */,
-				25D234F0178CF91700D31114 /* Chords */,
 				25D234EF178CF90B00D31114 /* images */,
-				251A3DA0178806BB00B5275D /* FlatUIKit */,
 				251A3D9D1788059800B5275D /* AppDelegate.h */,
 				251A3D9E1788059800B5275D /* AppDelegate.m */,
 				251CE0A11787FEA000433748 /* TabFinder.xcdatamodeld */,
 				25D234EB178CF48B00D31114 /* iPad.storyboard */,
 				251CE0511787FE1200433748 /* MainStoryboard.storyboard */,
-				251A3D94178804AD00B5275D /* af */,
 				251CE0401787FE1200433748 /* Supporting Files */,
 			);
 			path = TabFinder;
@@ -435,20 +473,43 @@
 		251CE0401787FE1200433748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				25A9410F179F932D00C0E790 /* iRate */,
+				251A3DA0178806BB00B5275D /* FlatUIKit */,
+				251A3D94178804AD00B5275D /* af */,
 				251CE0411787FE1200433748 /* TabFinder-Info.plist */,
 				251CE0421787FE1200433748 /* InfoPlist.strings */,
 				251CE0451787FE1200433748 /* main.m */,
 				251CE0471787FE1200433748 /* TabFinder-Prefix.pch */,
-				251CE04B1787FE1200433748 /* Default.png */,
-				251CE04D1787FE1200433748 /* Default@2x.png */,
-				251CE04F1787FE1200433748 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		254266C117A1CF19001D2560 /* Chords Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				254266C217A1CF29001D2560 /* Dedos.h */,
+				254266C317A1CF29001D2560 /* Dedos.m */,
+				254266C417A1CF29001D2560 /* Chord.h */,
+				254266C517A1CF29001D2560 /* Chord.m */,
+				254266C617A1CF29001D2560 /* chord.html */,
+				254266C717A1CF29001D2560 /* ChordRequest.h */,
+				254266C817A1CF29001D2560 /* ChordRequest.m */,
+				254266C917A1CF29001D2560 /* ChordsPresentationViewController.h */,
+				254266CA17A1CF29001D2560 /* ChordsPresentationViewController.m */,
+				254266CB17A1CF29001D2560 /* ChordsTableViewController.h */,
+				254266CC17A1CF29001D2560 /* ChordsTableViewController.m */,
+				254266CD17A1CF29001D2560 /* ChordTO.h */,
+				254266CE17A1CF29001D2560 /* ChordTO.m */,
+				254266D617A1D731001D2560 /* ChordCell.h */,
+				254266D717A1D731001D2560 /* ChordCell.m */,
+			);
+			name = "Chords Dictionary";
 			sourceTree = "<group>";
 		};
 		255677C6178E6E230030B3E1 /* Main VC */ = {
 			isa = PBXGroup;
 			children = (
+				25D234F0178CF91700D31114 /* Chords */,
 				251CE0871787FE9300433748 /* MainViewController.h */,
 				251CE0881787FE9300433748 /* MainViewController.m */,
 				255677C7178E6E600030B3E1 /* iPadMainViewController.h */,
@@ -459,9 +520,21 @@
 			name = "Main VC";
 			sourceTree = "<group>";
 		};
+		25A9410F179F932D00C0E790 /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				25A94110179F933B00C0E790 /* iRate.m */,
+				25A94111179F933B00C0E790 /* iRate.h */,
+				25A94112179F933B00C0E790 /* iRate.bundle */,
+			);
+			name = iRate;
+			sourceTree = "<group>";
+		};
 		25D234EF178CF90B00D31114 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				257B937F179F81BB00D9D3E7 /* share.png */,
+				257B937D179F818000D9D3E7 /* share@2x.png */,
 				25EAB773178FDB1100964ACB /* history_icon.png */,
 				25EAB774178FDB1100964ACB /* history_icon@2x.png */,
 				255677C4178E6C870030B3E1 /* estrelinha_cinzinha.png */,
@@ -549,6 +622,8 @@
 				251130D5178E2B1800827921 /* FavoritesAlertView.xib */,
 				251130D7178E2CA100827921 /* FavoritesAlertView.h */,
 				251130D8178E2CA100827921 /* FavoritesAlertView.m */,
+				254266D917A1D96F001D2560 /* TabBarController.h */,
+				254266DA17A1D96F001D2560 /* TabBarController.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -655,6 +730,10 @@
 				25EAB72F178EC81E00964ACB /* NoResultsCell.xib in Resources */,
 				25EAB775178FDB1100964ACB /* history_icon.png in Resources */,
 				25EAB776178FDB1100964ACB /* history_icon@2x.png in Resources */,
+				257B937E179F818000D9D3E7 /* share@2x.png in Resources */,
+				257B9380179F81BB00D9D3E7 /* share.png in Resources */,
+				25A94114179F933C00C0E790 /* iRate.bundle in Resources */,
+				254266D117A1CF29001D2560 /* chord.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +803,15 @@
 				255677CC178E6EB50030B3E1 /* iPhoneMainViewController.m in Sources */,
 				255677CF178E89320030B3E1 /* DataModel.xcdatamodeld in Sources */,
 				25EAB77C178FDC8D00964ACB /* HistoryViewController.m in Sources */,
+				25A94113179F933B00C0E790 /* iRate.m in Sources */,
+				254266CF17A1CF29001D2560 /* Dedos.m in Sources */,
+				254266D017A1CF29001D2560 /* Chord.m in Sources */,
+				254266D217A1CF29001D2560 /* ChordRequest.m in Sources */,
+				254266D317A1CF29001D2560 /* ChordsPresentationViewController.m in Sources */,
+				254266D417A1CF29001D2560 /* ChordsTableViewController.m in Sources */,
+				254266D517A1CF29001D2560 /* ChordTO.m in Sources */,
+				254266D817A1D731001D2560 /* ChordCell.m in Sources */,
+				254266DB17A1D96F001D2560 /* TabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

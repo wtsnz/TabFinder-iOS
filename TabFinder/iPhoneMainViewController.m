@@ -7,6 +7,7 @@
 //
 
 #import "iPhoneMainViewController.h"
+#import "Favorites.h"
 
 @interface iPhoneMainViewController ()
 
@@ -77,6 +78,5 @@
         }
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
-
 
 @end

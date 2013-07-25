@@ -26,6 +26,10 @@
 @property (weak, nonatomic) IBOutlet UIView *autoScrollingPopupView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *versionsButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favoritesButtonItem;
+@property (weak, nonatomic) IBOutlet UIButton *actionButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButtonItem;
+
+- (IBAction)didPressActionButton:(id)sender;
 
 @property UIActionSheet *optionsSheet;
 

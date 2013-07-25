@@ -43,7 +43,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="FnK-n0-ays"/>
                                     <barButtonItem style="plain" id="BKc-i7-w9r">
                                         <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="gdA-n3-IRN">
-                                            <rect key="frame" x="483" y="10" width="274" height="24"/>
+                                            <rect key="frame" x="247" y="10" width="274" height="24"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="didBeginChangingSlider:" destination="RSY-YM-hvj" eventType="touchDown" id="BEI-9F-1aV"/>
@@ -52,6 +52,26 @@
                                                 <action selector="didEndEditingAutoScroll:" destination="RSY-YM-hvj" eventType="touchUpOutside" id="mhP-tc-ZLd"/>
                                             </connections>
                                         </slider>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Szs-BU-1OX"/>
+                                    <barButtonItem style="plain" id="fHZ-WH-7B5">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pXx-id-lOX">
+                                            <rect key="frame" x="736" y="12" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" image="share.png">
+                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="didPressActionButton:" destination="RSY-YM-hvj" eventType="touchUpInside" id="2tK-V9-lcY"/>
+                                            </connections>
+                                        </button>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -70,7 +90,7 @@
                                             <constraint firstAttribute="height" constant="31" id="XoC-sC-4rt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="42"/>
-                                        <color key="textColor" red="0.92941182850000004" green="0.62352943419999995" blue="0.270588249" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" red="0.32549020649999999" green="0.61176472900000001" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -92,12 +112,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ig1-JQ-clP" firstAttribute="centerX" secondItem="RNB-br-7TP" secondAttribute="centerX" type="default" id="0YH-F0-VBe"/>
+                            <constraint firstAttribute="centerX" secondItem="u2d-zG-JYr" secondAttribute="centerX" type="user" id="0ht-eK-b3e"/>
                             <constraint firstItem="DCe-Iq-yji" firstAttribute="leading" secondItem="hHp-eF-Btm" secondAttribute="leading" type="default" id="5JA-Wf-iqR"/>
                             <constraint firstAttribute="centerX" secondItem="Ig1-JQ-clP" secondAttribute="centerX" type="user" id="C89-MX-nAW"/>
-                            <constraint firstAttribute="trailing" secondItem="u2d-zG-JYr" secondAttribute="trailing" constant="77" type="user" id="Ep3-6q-Qig"/>
                             <constraint firstAttribute="bottom" secondItem="u2d-zG-JYr" secondAttribute="bottom" constant="84" type="user" id="GXk-2K-3bC"/>
                             <constraint firstItem="Ig1-JQ-clP" firstAttribute="centerY" secondItem="DCe-Iq-yji" secondAttribute="centerY" type="default" id="Kj5-OA-gQc"/>
+                            <constraint firstItem="u2d-zG-JYr" firstAttribute="centerX" secondItem="RNB-br-7TP" secondAttribute="centerX" type="default" id="SC9-Ut-RB3"/>
                             <constraint firstItem="DCe-Iq-yji" firstAttribute="top" secondItem="hHp-eF-Btm" secondAttribute="top" type="default" id="YJ3-rG-qxh"/>
                             <constraint firstItem="DCe-Iq-yji" firstAttribute="trailing" secondItem="hHp-eF-Btm" secondAttribute="trailing" type="default" id="iYb-g3-eoY"/>
                             <constraint firstItem="RNB-br-7TP" firstAttribute="leading" secondItem="hHp-eF-Btm" secondAttribute="leading" type="default" id="unF-dE-syA"/>
@@ -113,6 +133,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="pXx-id-lOX" id="WS9-Yq-YWt"/>
+                        <outlet property="actionButtonItem" destination="fHZ-WH-7B5" id="reZ-Ce-nl4"/>
                         <outlet property="autoScrollSlider" destination="gdA-n3-IRN" id="JLD-B6-otJ"/>
                         <outlet property="autoScrollingPopupView" destination="u2d-zG-JYr" id="KAd-HU-8Te"/>
                         <outlet property="autoScrollingSpeedLabel" destination="9OL-bO-EwD" id="SFG-HM-8jY"/>
@@ -271,6 +293,7 @@
     </scenes>
     <resources>
         <image name="estrelinha_cinzinha.png" width="20" height="20"/>
+        <image name="share.png" width="20" height="20"/>
     </resources>
     <classes>
         <class className="AutoScrollingPopupView" superclassName="UIView">
@@ -291,8 +314,11 @@
                 <relationship kind="action" name="didBeginChangingSlider:"/>
                 <relationship kind="action" name="didChangeAutoScroll:"/>
                 <relationship kind="action" name="didEndEditingAutoScroll:"/>
+                <relationship kind="action" name="didPressActionButton:"/>
                 <relationship kind="action" name="didPressFavoritesButton:"/>
                 <relationship kind="action" name="didPressVersionsButton:"/>
+                <relationship kind="outlet" name="actionButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="actionButtonItem" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="autoScrollSlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="autoScrollingPopupView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="autoScrollingSpeedLabel" candidateClass="UILabel"/>
@@ -313,7 +339,6 @@
         <class className="SearchViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchViewController.h"/>
             <relationships>
-                <relationship kind="outlet" name="loadingIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
             </relationships>
         </class>

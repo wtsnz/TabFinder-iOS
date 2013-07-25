@@ -19,7 +19,7 @@
 +(void)tabSearch:(NSString *)title page:(NSInteger)page success:(void (^)(id))successCallback failure:(void (^)())failureCallback {
     NSString *searchTerm = [title stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     NSString *url = [NSString stringWithFormat:@"search.php?search_type=title&value=%@&iphone=1&page=%i",searchTerm,page];
-    url = [url stringByAppendingString:@"&type%5B%5D=200&type%5B%5D=300"];
+//    url = [url stringByAppendingString:@"&type%5B%5D=200&type%5B%5D=300"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:BASEURL];
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:url parameters:nil];
     [request setTimeoutInterval:8];

@@ -20,6 +20,7 @@
 @property NSArray *filteredFavorites;
 @property NSMutableDictionary *sectionedFavorites;
 @property NSMutableArray *sortedSections;
+@property Song *selectedSong;
 
 @end
 
@@ -182,10 +183,11 @@ static FavoritesViewController *_currentInstance;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _selectedSong = [self songForTableView:tableView atIndexPath:indexPath];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         MainViewController *mainVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad;
-        mainVC.currentSong = [self songForTableView:tableView atIndexPath:indexPath];
+        mainVC.currentSong = _selectedSong;
         [mainVC loadFavoritesSong];
     }
     else {
@@ -195,7 +197,7 @@ static FavoritesViewController *_currentInstance;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MainViewController *vc = segue.destinationViewController;
-    vc.currentSong = self.searchDisplayController.isActive ? [self songForTableView:self.searchDisplayController.searchResultsTableView atIndexPath:self.searchDisplayController.searchResultsTableView.indexPathForSelectedRow] : [self songForTableView:self.tableView atIndexPath:self.tableView.indexPathForSelectedRow];
+    vc.currentSong = _selectedSong;
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString

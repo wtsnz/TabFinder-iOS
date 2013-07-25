@@ -12,11 +12,12 @@
 #import "Favorites.h"
 #import "UIToolbar+FlatUI.h"
 #import "ChordsContainerView.h"
-#import <MessageUI/MessageUI.h>
 #import "AppDelegate.h"
 #import "Api.h"
+#import <Social/Social.h>
+#import "iRate.h"
 
-@interface MainViewController () <MFMailComposeViewControllerDelegate>
+@interface MainViewController ()
 
 @property NSDictionary *chords;
 
@@ -35,6 +36,7 @@
     [self autoScroll];
     _autoScrollSlider.value = 0;
     _autoScrollSlider.userInteractionEnabled = NO;
+    _actionButton.enabled = NO;
     _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
 }
 
@@ -43,6 +45,7 @@
     [_loadingIndicatorView startAnimating];
     _autoScrollSlider.userInteractionEnabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
+    _actionButton.enabled = NO;
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -51,6 +54,8 @@
     _autoScrollSlider.userInteractionEnabled = YES;
     self.navigationItem.rightBarButtonItem.enabled = YES;
     _versionsButton.enabled = _versionsSheet != nil;
+    _actionButton.enabled = YES;
+    [[iRate sharedInstance] logEvent:NO];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -183,12 +188,50 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.cancelButtonIndex) return;
-    [self changeVersion:buttonIndex < _currentVersionIndex ? buttonIndex : buttonIndex + 1];
+    if (actionSheet == _versionsSheet) {
+        [self changeVersion:buttonIndex < _currentVersionIndex ? buttonIndex : buttonIndex + 1];
+        return;
+    }
+    [self shareThisTab:[actionSheet buttonTitleAtIndex:buttonIndex]];
 }
 
 -(void)presentCurrentSong {
     [_webView loadHTMLString:_currentSong.tab baseURL:[NSURL URLWithString:_currentSong.version.integerValue == 0 ? nil : @"http://tabfinder.herokuapp.com"]];
     [self configureFavoritesButton];
+}
+
+- (IBAction)didPressActionButton:(id)sender {
+    [[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook",@"Twitter",@"Email", nil] showFromBarButtonItem:_actionButtonItem animated:YES];
+}
+
+-(void)shareThisTab:(NSString *)via {
+    if ([via isEqualToString:@"Facebook"]) {
+        [self shareUsing:SLServiceTypeFacebook];
+    }
+    if ([via isEqualToString:@"Twitter"]) {
+        [self shareUsing:SLServiceTypeTwitter];
+    }
+    if ([via isEqualToString:@"Email"]) {
+        NSString *email = [@"mailto:?subject=" stringByAppendingFormat:@"%@ for song: %@ (by %@)",[_currentSong.type capitalizedString],_currentSong.name, _currentSong.artist];
+        email = [email stringByAppendingString:[@"&body=" stringByAppendingFormat:@"http://tabfinder.herokuapp.com/share/%@",_currentSong.ugid]];
+        email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+    }
+}
+
+-(void)shareUsing:(NSString *)serviceType {
+    NSString *message;
+    message= [[NSString alloc] initWithFormat:@"Learn how to play \"%@\" by %@ using TabFinder: http://tabfinder.herokuapp.com/share/%@",_currentSong.name,_currentSong.artist,_currentSong.ugid];
+    if([SLComposeViewController isAvailableForServiceType:serviceType]) {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:serviceType];
+        [controller setInitialText:message];
+        [self presentViewController:controller animated:YES completion:Nil];
+        
+        SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+            [controller dismissViewControllerAnimated:YES completion:Nil];
+        };
+        controller.completionHandler = myBlock;
+    }
 }
 
 @end
