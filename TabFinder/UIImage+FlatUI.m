@@ -29,7 +29,6 @@ CGFloat edgeSizeFromCornerRadius(CGFloat cornerRadius) {
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return [image resizableImageWithCapInsets:UIEdgeInsetsMake(cornerRadius, cornerRadius, cornerRadius, cornerRadius)];
-
 }
 
 + (UIImage *)imageWithColor:(UIColor *)color

@@ -26,8 +26,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _history = [NSDictionary dictionary];
+    _historyDictKeys = [NSArray array];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self loadHistory];
+}
+
+-(void)loadHistory {
     _history = [Favorites historyDictionary];
     _historyDictKeys = [_history.allKeys sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
+    [self.tableView reloadData];
     [self performSelectorInBackground:@selector(performImageCheck) withObject:nil];
 }
 

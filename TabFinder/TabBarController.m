@@ -18,12 +18,14 @@
 {
     [super viewDidLoad];
     [self.tabBar configureFlatTabBarWithColor:[UIColor whiteColor] selectedColor:[UIColor whiteColor]];
+    [self.tabBar setSelectedImageTintColor:[UIColor clearColor]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor defaultColor], UITextAttributeFont: [UIFont fontWithName:@"HelveticaNeue-Light" size:11]} forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeTextColor: [UIColor colorWithWhite:0.4 alpha:1], UITextAttributeFont: [UIFont fontWithName:@"HelveticaNeue-Light" size:11]} forState:UIControlStateNormal];
     for (UITabBarItem *item in self.tabBar.items) {
-        [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:0.1 alpha:1]} forState:UIControlStateNormal];
-        [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:0.1 alpha:1]} forState:UIControlStateSelected];
+        NSString *active = [NSString stringWithFormat:@"tabitem_%i_active",[self.tabBar.items indexOfObject:item]];
+        NSString *inactive = [NSString stringWithFormat:@"tabitem_%i_inactive",[self.tabBar.items indexOfObject:item]];
+        [item setFinishedSelectedImage:[UIImage imageNamed:active] withFinishedUnselectedImage:[UIImage imageNamed:inactive]];
     }
-    //[[UITabBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:0.1 alpha:1]}];
-//    [[UITabBarItem appearance] ;
 }
 
 @end

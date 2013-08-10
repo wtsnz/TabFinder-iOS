@@ -15,7 +15,7 @@
                         selectedColor:(UIColor *)selectedColor {
     
     self.backgroundImage = [UIImage imageWithColor:color cornerRadius:0];
-    self.selectionIndicatorImage = [UIImage imageWithColor:selectedColor cornerRadius:6.0];
+    self.selectionIndicatorImage = [[UIImage alloc] init];
     
 }
 

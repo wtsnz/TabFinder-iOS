@@ -46,7 +46,7 @@
 }
 
 -(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc {
-    barButtonItem.title = @"Search";
+    barButtonItem.title = @"Menu";
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     _popoverReference = pc;
 }

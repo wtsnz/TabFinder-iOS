@@ -30,6 +30,10 @@
     [self.tableView addGestureRecognizer:_tapTheScreenToBeginEditing];
 }
 
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [_searchBar makeItFlat];
+}
+
 - (void)viewDidUnload
 {
     [self setSearchBar:nil];

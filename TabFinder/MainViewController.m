@@ -187,6 +187,7 @@
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (actionSheet == _shareSheet) _shareSheet = nil;
     if (buttonIndex == actionSheet.cancelButtonIndex) return;
     if (actionSheet == _versionsSheet) {
         [self changeVersion:buttonIndex < _currentVersionIndex ? buttonIndex : buttonIndex + 1];
@@ -201,7 +202,13 @@
 }
 
 - (IBAction)didPressActionButton:(id)sender {
-    [[[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook",@"Twitter",@"Email", nil] showFromBarButtonItem:_actionButtonItem animated:YES];
+    if (_shareSheet) {
+        [_shareSheet dismissWithClickedButtonIndex:_shareSheet.cancelButtonIndex animated:YES];
+        _shareSheet = nil;
+        return;
+    }
+    _shareSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook",@"Twitter",@"Email", nil];
+    [_shareSheet showFromBarButtonItem:_actionButtonItem animated:YES];
 }
 
 -(void)shareThisTab:(NSString *)via {

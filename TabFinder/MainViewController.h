@@ -31,8 +31,6 @@
 
 - (IBAction)didPressActionButton:(id)sender;
 
-@property UIActionSheet *optionsSheet;
-
 - (IBAction)didPressVersionsButton:(id)sender;
 - (IBAction)didPressFavoritesButton:(id)sender;
 
@@ -42,6 +40,7 @@
 //internet song attributes
 @property NSInteger currentVersionIndex;
 @property UIActionSheet *versionsSheet;
+@property UIActionSheet *shareSheet;
 @property NSDictionary *internetSong;
 
 @property Song *currentSong;
