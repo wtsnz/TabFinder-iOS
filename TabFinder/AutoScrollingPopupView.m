@@ -7,6 +7,7 @@
 //
 
 #import "AutoScrollingPopupView.h"
+#import "UIView+Popup.h"
 
 @implementation AutoScrollingPopupView
 

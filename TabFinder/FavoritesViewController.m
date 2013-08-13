@@ -32,13 +32,13 @@ static FavoritesViewController *_currentInstance;
 {
     [super viewDidLoad];
     _currentInstance = self;
-    [self.searchDisplayController.searchBar makeItFlat];
     _sortedSections = [NSMutableArray array];
     _sectionedFavorites = [NSMutableDictionary dictionary];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem.rightBarButtonItem removeTitleShadow];
-    self.tableView.sectionIndexColor = [UIColor defaultColor];
+    self.tableView.sectionIndexColor = [self.view tintColor];
     self.tableView.sectionIndexMinimumDisplayRowCount = 20;
+    [self.searchDisplayController.searchBar setBarStyle:UIBarStyleBlack];
+    [self.searchDisplayController.searchBar setSearchBarStyle:UISearchBarStyleMinimal];
 }
 
 +(FavoritesViewController *)currentInstance {
@@ -102,11 +102,11 @@ static FavoritesViewController *_currentInstance;
     if ([self showsSectionHeaders]) {
         UIView *header = [[UIView alloc] init];
         UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
-        label.textColor = [UIColor defaultColor];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+        label.textColor = [UIColor lightGrayColor];
         label.text = [self tableView:tableView titleForHeaderInSection:section];
         label.backgroundColor = [UIColor clearColor];
-        header.backgroundColor = tableView.backgroundColor;
+        header.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1];
         header.alpha = 0.95;
         [label sizeToFit];
         [header addSubview:label];

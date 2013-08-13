@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		251130D6178E2B1800827921 /* FavoritesAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251130D5178E2B1800827921 /* FavoritesAlertView.xib */; };
 		251130D9178E2CA100827921 /* FavoritesAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251130D8178E2CA100827921 /* FavoritesAlertView.m */; };
-		251130DC178E550A00827921 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 251130DB178E550900827921 /* UIView+Shadow.m */; };
+		2511C02517B85132007CC078 /* SongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2511C02417B85132007CC078 /* SongCell.xib */; };
+		2511C02817B86703007CC078 /* SongTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2511C02717B86703007CC078 /* SongTableView.m */; };
+		2511C02B17B879B3007CC078 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2511C02A17B879B3007CC078 /* AMBlurView.m */; };
 		251A3D8B178804A700B5275D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3D78178804A700B5275D /* AFHTTPClient.m */; };
 		251A3D8C178804A700B5275D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3D79178804A700B5275D /* AFHTTPRequestOperation.m */; };
 		251A3D8D178804A700B5275D /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3D7A178804A700B5275D /* AFNetworkActivityIndicatorManager.m */; };
@@ -23,25 +25,6 @@
 		251A3D991788053300B5275D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251A3D981788053300B5275D /* QuartzCore.framework */; };
 		251A3D9C1788056000B5275D /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3D9B1788056000B5275D /* SwipeView.m */; };
 		251A3D9F1788059800B5275D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3D9E1788059800B5275D /* AppDelegate.m */; };
-		251A3DC6178806C900B5275D /* FUIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DA3178806C900B5275D /* FUIAlertView.m */; };
-		251A3DC7178806C900B5275D /* FUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DA5178806C900B5275D /* FUIButton.m */; };
-		251A3DC8178806C900B5275D /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DA7178806C900B5275D /* FUICellBackgroundView.m */; };
-		251A3DC9178806C900B5275D /* FUIPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DA9178806C900B5275D /* FUIPopoverBackgroundView.m */; };
-		251A3DCA178806C900B5275D /* FUISegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DAB178806C900B5275D /* FUISegmentedControl.m */; };
-		251A3DCB178806C900B5275D /* FUISwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DAD178806C900B5275D /* FUISwitch.m */; };
-		251A3DCC178806C900B5275D /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DAF178806C900B5275D /* UIBarButtonItem+FlatUI.m */; };
-		251A3DCD178806C900B5275D /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DB1178806C900B5275D /* UIColor+FlatUI.m */; };
-		251A3DCE178806C900B5275D /* UIFont+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DB3178806C900B5275D /* UIFont+FlatUI.m */; };
-		251A3DCF178806C900B5275D /* UIImage+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DB5178806C900B5275D /* UIImage+FlatUI.m */; };
-		251A3DD0178806C900B5275D /* UINavigationBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DB7178806C900B5275D /* UINavigationBar+FlatUI.m */; };
-		251A3DD1178806C900B5275D /* UIPopoverController+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DB9178806C900B5275D /* UIPopoverController+FlatUI.m */; };
-		251A3DD2178806C900B5275D /* UIProgressView+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DBB178806C900B5275D /* UIProgressView+FlatUI.m */; };
-		251A3DD3178806C900B5275D /* UISlider+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DBD178806C900B5275D /* UISlider+FlatUI.m */; };
-		251A3DD4178806C900B5275D /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DBF178806C900B5275D /* UIStepper+FlatUI.m */; };
-		251A3DD5178806C900B5275D /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DC1178806C900B5275D /* UITabBar+FlatUI.m */; };
-		251A3DD6178806C900B5275D /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DC3178806C900B5275D /* UITableViewCell+FlatUI.m */; };
-		251A3DD7178806C900B5275D /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DC5178806C900B5275D /* UIToolbar+FlatUI.m */; };
-		251A3DDB1788070B00B5275D /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 251A3DDA1788070B00B5275D /* NavigationController.m */; };
 		251A3DDD1788078300B5275D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251A3DDC1788078300B5275D /* CoreText.framework */; };
 		251A3DE117880EE900B5275D /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 251A3DE017880EE900B5275D /* searchbar@2x.png */; };
 		251CE03A1787FE1200433748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251CE0391787FE1200433748 /* UIKit.framework */; };
@@ -84,8 +67,6 @@
 		254266D317A1CF29001D2560 /* ChordsPresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266CA17A1CF29001D2560 /* ChordsPresentationViewController.m */; };
 		254266D417A1CF29001D2560 /* ChordsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266CC17A1CF29001D2560 /* ChordsTableViewController.m */; };
 		254266D517A1CF29001D2560 /* ChordTO.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266CE17A1CF29001D2560 /* ChordTO.m */; };
-		254266D817A1D731001D2560 /* ChordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266D717A1D731001D2560 /* ChordCell.m */; };
-		254266DB17A1D96F001D2560 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 254266DA17A1D96F001D2560 /* TabBarController.m */; };
 		255677BF178E6BC50030B3E1 /* estrelinha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 255677BE178E6BC50030B3E1 /* estrelinha@2x.png */; };
 		255677C1178E6C0A0030B3E1 /* estrelinha.png in Resources */ = {isa = PBXBuildFile; fileRef = 255677C0178E6C0A0030B3E1 /* estrelinha.png */; };
 		255677C3178E6C630030B3E1 /* estrelinha_cinzinha@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 255677C2178E6C630030B3E1 /* estrelinha_cinzinha@2x.png */; };
@@ -101,14 +82,13 @@
 		257B937E179F818000D9D3E7 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937D179F818000D9D3E7 /* share@2x.png */; };
 		257B9380179F81BB00D9D3E7 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937F179F81BB00D9D3E7 /* share.png */; };
 		25A1EA6B178B6A390051AB53 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6A178B6A390051AB53 /* searchbar.png */; };
-		25A1EA6E178B80DA0051AB53 /* UISearchBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A1EA6D178B80DA0051AB53 /* UISearchBar+FlatUI.m */; };
 		25A1EA70178BA1B80051AB53 /* unknown_artist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */; };
 		25A1EA72178BA1E20051AB53 /* unknown_artist.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA71178BA1E10051AB53 /* unknown_artist.png */; };
 		25A9410E179F931B00C0E790 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A9410D179F931B00C0E790 /* StoreKit.framework */; };
 		25A94113179F933B00C0E790 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A94110179F933B00C0E790 /* iRate.m */; };
 		25A94114179F933C00C0E790 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25A94112179F933B00C0E790 /* iRate.bundle */; };
+		25AEE8DC17B63CA7004C6459 /* UIView+Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AEE8DB17B63CA7004C6459 /* UIView+Popup.m */; };
 		25D234EC178CF48B00D31114 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D234EB178CF48B00D31114 /* iPad.storyboard */; };
-		25D234EE178CF51800D31114 /* SongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234ED178CF51800D31114 /* SongCell.xib */; };
 		25D234F4178D08E700D31114 /* ChordsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F3178D08E700D31114 /* ChordsContainerView.xib */; };
 		25D234F6178D198B00D31114 /* drag.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F5178D198B00D31114 /* drag.png */; };
 		25D234FC178D728200D31114 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234FB178D728200D31114 /* Default.png */; };
@@ -118,14 +98,8 @@
 		25EAB775178FDB1100964ACB /* history_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EAB773178FDB1100964ACB /* history_icon.png */; };
 		25EAB776178FDB1100964ACB /* history_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EAB774178FDB1100964ACB /* history_icon@2x.png */; };
 		25EAB77C178FDC8D00964ACB /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EAB77B178FDC8D00964ACB /* HistoryViewController.m */; };
-		25FC90C417A1E851005E566A /* tabitem_3_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90C217A1E851005E566A /* tabitem_3_active@2x.png */; };
-		25FC90C517A1E851005E566A /* tabitem_3_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90C317A1E851005E566A /* tabitem_3_inactive@2x.png */; };
-		25FC90CE17A1E925005E566A /* tabitem_2_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90C817A1E925005E566A /* tabitem_2_active@2x.png */; };
-		25FC90CF17A1E925005E566A /* tabitem_2_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90C917A1E925005E566A /* tabitem_2_inactive@2x.png */; };
-		25FC90D017A1E925005E566A /* tabitem_0_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90CA17A1E925005E566A /* tabitem_0_active@2x.png */; };
-		25FC90D117A1E925005E566A /* tabitem_0_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90CB17A1E925005E566A /* tabitem_0_inactive@2x.png */; };
-		25FC90D517A1EED8005E566A /* tabitem_1_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90D317A1EED8005E566A /* tabitem_1_active@2x.png */; };
-		25FC90D617A1EED8005E566A /* tabitem_1_inactive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25FC90D417A1EED8005E566A /* tabitem_1_inactive@2x.png */; };
+		25EDC22317B7A55A0031399B /* chords_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EDC22117B7A55A0031399B /* chords_icon@2x.png */; };
+		25EDC22417B7A55A0031399B /* chords_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EDC22217B7A55A0031399B /* chords_icon.png */; };
 		25FDCE1F178D7648002DB7F7 /* OldFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCE17178D7648002DB7F7 /* OldFavorites.m */; };
 		25FDCE20178D7648002DB7F7 /* OldArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCE1A178D7648002DB7F7 /* OldArtist.m */; };
 		25FDCE21178D7648002DB7F7 /* OldSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 25FDCE1B178D7648002DB7F7 /* OldSong.m */; };
@@ -137,8 +111,11 @@
 		251130D5178E2B1800827921 /* FavoritesAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesAlertView.xib; sourceTree = "<group>"; };
 		251130D7178E2CA100827921 /* FavoritesAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesAlertView.h; sourceTree = "<group>"; };
 		251130D8178E2CA100827921 /* FavoritesAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesAlertView.m; sourceTree = "<group>"; };
-		251130DA178E550900827921 /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shadow.h"; sourceTree = "<group>"; };
-		251130DB178E550900827921 /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shadow.m"; sourceTree = "<group>"; };
+		2511C02417B85132007CC078 /* SongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongCell.xib; sourceTree = "<group>"; };
+		2511C02617B86703007CC078 /* SongTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTableView.h; sourceTree = "<group>"; };
+		2511C02717B86703007CC078 /* SongTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTableView.m; sourceTree = "<group>"; };
+		2511C02917B879B3007CC078 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
+		2511C02A17B879B3007CC078 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
 		251A3D78178804A700B5275D /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		251A3D79178804A700B5275D /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		251A3D7A178804A700B5275D /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
@@ -164,45 +141,6 @@
 		251A3D9B1788056000B5275D /* SwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeView.m; sourceTree = "<group>"; };
 		251A3D9D1788059800B5275D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		251A3D9E1788059800B5275D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		251A3DA1178806C900B5275D /* FlatUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatUIKit.h; sourceTree = "<group>"; };
-		251A3DA2178806C900B5275D /* FUIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIAlertView.h; sourceTree = "<group>"; };
-		251A3DA3178806C900B5275D /* FUIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIAlertView.m; sourceTree = "<group>"; };
-		251A3DA4178806C900B5275D /* FUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIButton.h; sourceTree = "<group>"; };
-		251A3DA5178806C900B5275D /* FUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIButton.m; sourceTree = "<group>"; };
-		251A3DA6178806C900B5275D /* FUICellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICellBackgroundView.h; sourceTree = "<group>"; };
-		251A3DA7178806C900B5275D /* FUICellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICellBackgroundView.m; sourceTree = "<group>"; };
-		251A3DA8178806C900B5275D /* FUIPopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUIPopoverBackgroundView.h; sourceTree = "<group>"; };
-		251A3DA9178806C900B5275D /* FUIPopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUIPopoverBackgroundView.m; sourceTree = "<group>"; };
-		251A3DAA178806C900B5275D /* FUISegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISegmentedControl.h; sourceTree = "<group>"; };
-		251A3DAB178806C900B5275D /* FUISegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISegmentedControl.m; sourceTree = "<group>"; };
-		251A3DAC178806C900B5275D /* FUISwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUISwitch.h; sourceTree = "<group>"; };
-		251A3DAD178806C900B5275D /* FUISwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUISwitch.m; sourceTree = "<group>"; };
-		251A3DAE178806C900B5275D /* UIBarButtonItem+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DAF178806C900B5275D /* UIBarButtonItem+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DB0178806C900B5275D /* UIColor+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DB1178806C900B5275D /* UIColor+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DB2178806C900B5275D /* UIFont+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DB3178806C900B5275D /* UIFont+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DB4178806C900B5275D /* UIImage+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DB5178806C900B5275D /* UIImage+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DB6178806C900B5275D /* UINavigationBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DB7178806C900B5275D /* UINavigationBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DB8178806C900B5275D /* UIPopoverController+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPopoverController+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DB9178806C900B5275D /* UIPopoverController+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPopoverController+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DBA178806C900B5275D /* UIProgressView+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DBB178806C900B5275D /* UIProgressView+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DBC178806C900B5275D /* UISlider+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DBD178806C900B5275D /* UISlider+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DBE178806C900B5275D /* UIStepper+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStepper+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DBF178806C900B5275D /* UIStepper+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIStepper+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DC0178806C900B5275D /* UITabBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DC1178806C900B5275D /* UITabBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DC2178806C900B5275D /* UITableViewCell+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DC3178806C900B5275D /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DC4178806C900B5275D /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
-		251A3DC5178806C900B5275D /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
-		251A3DD91788070B00B5275D /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
-		251A3DDA1788070B00B5275D /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		251A3DDC1788078300B5275D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		251A3DE017880EE900B5275D /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
 		251CE0361787FE1200433748 /* TabFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,10 +207,6 @@
 		254266CC17A1CF29001D2560 /* ChordsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordsTableViewController.m; sourceTree = "<group>"; };
 		254266CD17A1CF29001D2560 /* ChordTO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordTO.h; sourceTree = "<group>"; };
 		254266CE17A1CF29001D2560 /* ChordTO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordTO.m; sourceTree = "<group>"; };
-		254266D617A1D731001D2560 /* ChordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordCell.h; sourceTree = "<group>"; };
-		254266D717A1D731001D2560 /* ChordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordCell.m; sourceTree = "<group>"; };
-		254266D917A1D96F001D2560 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
-		254266DA17A1D96F001D2560 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		255677BE178E6BC50030B3E1 /* estrelinha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "estrelinha@2x.png"; sourceTree = "<group>"; };
 		255677C0178E6C0A0030B3E1 /* estrelinha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = estrelinha.png; sourceTree = "<group>"; };
 		255677C2178E6C630030B3E1 /* estrelinha_cinzinha@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "estrelinha_cinzinha@2x.png"; sourceTree = "<group>"; };
@@ -290,16 +224,15 @@
 		257B937D179F818000D9D3E7 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		257B937F179F81BB00D9D3E7 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		25A1EA6A178B6A390051AB53 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
-		25A1EA6C178B80DA0051AB53 /* UISearchBar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISearchBar+FlatUI.h"; sourceTree = "<group>"; };
-		25A1EA6D178B80DA0051AB53 /* UISearchBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISearchBar+FlatUI.m"; sourceTree = "<group>"; };
 		25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unknown_artist@2x.png"; sourceTree = "<group>"; };
 		25A1EA71178BA1E10051AB53 /* unknown_artist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_artist.png; sourceTree = "<group>"; };
 		25A9410D179F931B00C0E790 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		25A94110179F933B00C0E790 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		25A94111179F933B00C0E790 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		25A94112179F933B00C0E790 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
+		25AEE8DA17B63CA7004C6459 /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
+		25AEE8DB17B63CA7004C6459 /* UIView+Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Popup.m"; sourceTree = "<group>"; };
 		25D234EB178CF48B00D31114 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
-		25D234ED178CF51800D31114 /* SongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongCell.xib; sourceTree = "<group>"; };
 		25D234F3178D08E700D31114 /* ChordsContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordsContainerView.xib; sourceTree = "<group>"; };
 		25D234F5178D198B00D31114 /* drag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drag.png; sourceTree = "<group>"; };
 		25D234FB178D728200D31114 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -310,14 +243,8 @@
 		25EAB774178FDB1100964ACB /* history_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "history_icon@2x.png"; sourceTree = "<group>"; };
 		25EAB77A178FDC8D00964ACB /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
 		25EAB77B178FDC8D00964ACB /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
-		25FC90C217A1E851005E566A /* tabitem_3_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_3_active@2x.png"; sourceTree = "<group>"; };
-		25FC90C317A1E851005E566A /* tabitem_3_inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_3_inactive@2x.png"; sourceTree = "<group>"; };
-		25FC90C817A1E925005E566A /* tabitem_2_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_2_active@2x.png"; sourceTree = "<group>"; };
-		25FC90C917A1E925005E566A /* tabitem_2_inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_2_inactive@2x.png"; sourceTree = "<group>"; };
-		25FC90CA17A1E925005E566A /* tabitem_0_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_0_active@2x.png"; sourceTree = "<group>"; };
-		25FC90CB17A1E925005E566A /* tabitem_0_inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_0_inactive@2x.png"; sourceTree = "<group>"; };
-		25FC90D317A1EED8005E566A /* tabitem_1_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_1_active@2x.png"; sourceTree = "<group>"; };
-		25FC90D417A1EED8005E566A /* tabitem_1_inactive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabitem_1_inactive@2x.png"; sourceTree = "<group>"; };
+		25EDC22117B7A55A0031399B /* chords_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chords_icon@2x.png"; sourceTree = "<group>"; };
+		25EDC22217B7A55A0031399B /* chords_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chords_icon.png; sourceTree = "<group>"; };
 		25FDCE17178D7648002DB7F7 /* OldFavorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OldFavorites.m; path = "old data model/OldFavorites.m"; sourceTree = "<group>"; };
 		25FDCE18178D7648002DB7F7 /* OldFavorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OldFavorites.h; path = "old data model/OldFavorites.h"; sourceTree = "<group>"; };
 		25FDCE19178D7648002DB7F7 /* OldArtist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OldArtist.h; path = "old data model/OldArtist.h"; sourceTree = "<group>"; };
@@ -373,54 +300,6 @@
 				251A3D8A178804A700B5275D /* UIImageView+AFNetworking.h */,
 			);
 			name = af;
-			sourceTree = "<group>";
-		};
-		251A3DA0178806BB00B5275D /* FlatUIKit */ = {
-			isa = PBXGroup;
-			children = (
-				251A3DA1178806C900B5275D /* FlatUIKit.h */,
-				251A3DA2178806C900B5275D /* FUIAlertView.h */,
-				251A3DA3178806C900B5275D /* FUIAlertView.m */,
-				251A3DA4178806C900B5275D /* FUIButton.h */,
-				251A3DA5178806C900B5275D /* FUIButton.m */,
-				251A3DA6178806C900B5275D /* FUICellBackgroundView.h */,
-				251A3DA7178806C900B5275D /* FUICellBackgroundView.m */,
-				251A3DA8178806C900B5275D /* FUIPopoverBackgroundView.h */,
-				251A3DA9178806C900B5275D /* FUIPopoverBackgroundView.m */,
-				251A3DAA178806C900B5275D /* FUISegmentedControl.h */,
-				251A3DAB178806C900B5275D /* FUISegmentedControl.m */,
-				251A3DAC178806C900B5275D /* FUISwitch.h */,
-				251A3DAD178806C900B5275D /* FUISwitch.m */,
-				251A3DAE178806C900B5275D /* UIBarButtonItem+FlatUI.h */,
-				251A3DAF178806C900B5275D /* UIBarButtonItem+FlatUI.m */,
-				251A3DB0178806C900B5275D /* UIColor+FlatUI.h */,
-				251A3DB1178806C900B5275D /* UIColor+FlatUI.m */,
-				251A3DB2178806C900B5275D /* UIFont+FlatUI.h */,
-				251A3DB3178806C900B5275D /* UIFont+FlatUI.m */,
-				251A3DB4178806C900B5275D /* UIImage+FlatUI.h */,
-				251A3DB5178806C900B5275D /* UIImage+FlatUI.m */,
-				251A3DB6178806C900B5275D /* UINavigationBar+FlatUI.h */,
-				251A3DB7178806C900B5275D /* UINavigationBar+FlatUI.m */,
-				251A3DB8178806C900B5275D /* UIPopoverController+FlatUI.h */,
-				251A3DB9178806C900B5275D /* UIPopoverController+FlatUI.m */,
-				251A3DBA178806C900B5275D /* UIProgressView+FlatUI.h */,
-				251A3DBB178806C900B5275D /* UIProgressView+FlatUI.m */,
-				251A3DBC178806C900B5275D /* UISlider+FlatUI.h */,
-				251A3DBD178806C900B5275D /* UISlider+FlatUI.m */,
-				251A3DBE178806C900B5275D /* UIStepper+FlatUI.h */,
-				251A3DBF178806C900B5275D /* UIStepper+FlatUI.m */,
-				251A3DC0178806C900B5275D /* UITabBar+FlatUI.h */,
-				251A3DC1178806C900B5275D /* UITabBar+FlatUI.m */,
-				251A3DC2178806C900B5275D /* UITableViewCell+FlatUI.h */,
-				251A3DC3178806C900B5275D /* UITableViewCell+FlatUI.m */,
-				251A3DC4178806C900B5275D /* UIToolbar+FlatUI.h */,
-				251A3DC5178806C900B5275D /* UIToolbar+FlatUI.m */,
-				25A1EA6C178B80DA0051AB53 /* UISearchBar+FlatUI.h */,
-				25A1EA6D178B80DA0051AB53 /* UISearchBar+FlatUI.m */,
-				251130DA178E550900827921 /* UIView+Shadow.h */,
-				251130DB178E550900827921 /* UIView+Shadow.m */,
-			);
-			name = FlatUIKit;
 			sourceTree = "<group>";
 		};
 		251CE02D1787FE1200433748 = {
@@ -489,13 +368,16 @@
 		251CE0401787FE1200433748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2511C02917B879B3007CC078 /* AMBlurView.h */,
+				2511C02A17B879B3007CC078 /* AMBlurView.m */,
 				25A9410F179F932D00C0E790 /* iRate */,
-				251A3DA0178806BB00B5275D /* FlatUIKit */,
 				251A3D94178804AD00B5275D /* af */,
 				251CE0411787FE1200433748 /* TabFinder-Info.plist */,
 				251CE0421787FE1200433748 /* InfoPlist.strings */,
 				251CE0451787FE1200433748 /* main.m */,
 				251CE0471787FE1200433748 /* TabFinder-Prefix.pch */,
+				25AEE8DA17B63CA7004C6459 /* UIView+Popup.h */,
+				25AEE8DB17B63CA7004C6459 /* UIView+Popup.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -516,8 +398,6 @@
 				254266CC17A1CF29001D2560 /* ChordsTableViewController.m */,
 				254266CD17A1CF29001D2560 /* ChordTO.h */,
 				254266CE17A1CF29001D2560 /* ChordTO.m */,
-				254266D617A1D731001D2560 /* ChordCell.h */,
-				254266D717A1D731001D2560 /* ChordCell.m */,
 			);
 			name = "Chords Dictionary";
 			sourceTree = "<group>";
@@ -549,7 +429,8 @@
 		25D234EF178CF90B00D31114 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				25FC90D217A1E928005E566A /* tab bar items */,
+				25EDC22117B7A55A0031399B /* chords_icon@2x.png */,
+				25EDC22217B7A55A0031399B /* chords_icon.png */,
 				257B937F179F81BB00D9D3E7 /* share.png */,
 				257B937D179F818000D9D3E7 /* share@2x.png */,
 				25EAB773178FDB1100964ACB /* history_icon.png */,
@@ -599,7 +480,7 @@
 				251CE0821787FE9300433748 /* Favorites.xcdatamodeld */,
 				251CE08D1787FE9300433748 /* SongCell.h */,
 				251CE08E1787FE9300433748 /* SongCell.m */,
-				25D234ED178CF51800D31114 /* SongCell.xib */,
+				2511C02417B85132007CC078 /* SongCell.xib */,
 				251CE0911787FE9300433748 /* Song.h */,
 				251CE0921787FE9300433748 /* Song.m */,
 				251CE06A1787FE8100433748 /* Api.h */,
@@ -631,33 +512,16 @@
 				251CE06F1787FE8100433748 /* AutoScrollingPopupView.m */,
 				251A3D9A1788056000B5275D /* SwipeView.h */,
 				251A3D9B1788056000B5275D /* SwipeView.m */,
-				251A3DD91788070B00B5275D /* NavigationController.h */,
-				251A3DDA1788070B00B5275D /* NavigationController.m */,
 				2520A8E2178CD0DF0029FA35 /* CustomWebView.h */,
 				2520A8E3178CD0DF0029FA35 /* CustomWebView.m */,
 				2520A8DE178BF1110029FA35 /* BackButton.xib */,
 				251130D5178E2B1800827921 /* FavoritesAlertView.xib */,
 				251130D7178E2CA100827921 /* FavoritesAlertView.h */,
 				251130D8178E2CA100827921 /* FavoritesAlertView.m */,
-				254266D917A1D96F001D2560 /* TabBarController.h */,
-				254266DA17A1D96F001D2560 /* TabBarController.m */,
+				2511C02617B86703007CC078 /* SongTableView.h */,
+				2511C02717B86703007CC078 /* SongTableView.m */,
 			);
 			name = Custom;
-			sourceTree = "<group>";
-		};
-		25FC90D217A1E928005E566A /* tab bar items */ = {
-			isa = PBXGroup;
-			children = (
-				25FC90D317A1EED8005E566A /* tabitem_1_active@2x.png */,
-				25FC90D417A1EED8005E566A /* tabitem_1_inactive@2x.png */,
-				25FC90C817A1E925005E566A /* tabitem_2_active@2x.png */,
-				25FC90C917A1E925005E566A /* tabitem_2_inactive@2x.png */,
-				25FC90CA17A1E925005E566A /* tabitem_0_active@2x.png */,
-				25FC90CB17A1E925005E566A /* tabitem_0_inactive@2x.png */,
-				25FC90C217A1E851005E566A /* tabitem_3_active@2x.png */,
-				25FC90C317A1E851005E566A /* tabitem_3_inactive@2x.png */,
-			);
-			name = "tab bar items";
 			sourceTree = "<group>";
 		};
 		25FDCE16178D75F4002DB7F7 /* old data model */ = {
@@ -737,18 +601,20 @@
 				2520A8DA178BDB7B0029FA35 /* fretboard.png in Resources */,
 				2520A8DB178BDB7B0029FA35 /* fretboard@2x.png in Resources */,
 				2520A8DD178BDF210029FA35 /* left_arrow@2x.png in Resources */,
+				25EDC22317B7A55A0031399B /* chords_icon@2x.png in Resources */,
 				2520A8DF178BF1110029FA35 /* BackButton.xib in Resources */,
 				2520A8E1178BF1520029FA35 /* left_arrow.png in Resources */,
 				25D234EC178CF48B00D31114 /* iPad.storyboard in Resources */,
-				25D234EE178CF51800D31114 /* SongCell.xib in Resources */,
 				25D234F4178D08E700D31114 /* ChordsContainerView.xib in Resources */,
 				25D234F6178D198B00D31114 /* drag.png in Resources */,
 				25D234FC178D728200D31114 /* Default.png in Resources */,
 				25D234FE178D72B400D31114 /* Default@2x.png in Resources */,
 				25D23500178D72D500D31114 /* Default-568h@2x.png in Resources */,
+				2511C02517B85132007CC078 /* SongCell.xib in Resources */,
 				25212570178D733300B83E46 /* Default-Portrait~ipad.png in Resources */,
 				25212572178D734500B83E46 /* Default-Portrait@2x~ipad.png in Resources */,
 				25212574178D73B000B83E46 /* Default-Landscape~ipad.png in Resources */,
+				25EDC22417B7A55A0031399B /* chords_icon.png in Resources */,
 				25212576178D73BA00B83E46 /* Default-Landscape@2x~ipad.png in Resources */,
 				255BB663178E0A7C00DDB024 /* 57.png in Resources */,
 				255BB665178E0A8200DDB024 /* 114.png in Resources */,
@@ -766,14 +632,6 @@
 				257B9380179F81BB00D9D3E7 /* share.png in Resources */,
 				25A94114179F933C00C0E790 /* iRate.bundle in Resources */,
 				254266D117A1CF29001D2560 /* chord.html in Resources */,
-				25FC90C417A1E851005E566A /* tabitem_3_active@2x.png in Resources */,
-				25FC90C517A1E851005E566A /* tabitem_3_inactive@2x.png in Resources */,
-				25FC90CE17A1E925005E566A /* tabitem_2_active@2x.png in Resources */,
-				25FC90CF17A1E925005E566A /* tabitem_2_inactive@2x.png in Resources */,
-				25FC90D017A1E925005E566A /* tabitem_0_active@2x.png in Resources */,
-				25FC90D117A1E925005E566A /* tabitem_0_inactive@2x.png in Resources */,
-				25FC90D517A1EED8005E566A /* tabitem_1_active@2x.png in Resources */,
-				25FC90D617A1EED8005E566A /* tabitem_1_inactive@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +645,7 @@
 				251CE0461787FE1200433748 /* main.m in Sources */,
 				251CE0771787FE8100433748 /* Api.m in Sources */,
 				251CE0791787FE8100433748 /* AutoScrollingPopupView.m in Sources */,
+				2511C02817B86703007CC078 /* SongTableView.m in Sources */,
 				251CE07A1787FE8100433748 /* ChordsContainerView.m in Sources */,
 				251CE07B1787FE8100433748 /* ChordView.m in Sources */,
 				251CE07D1787FE8100433748 /* CoreDataHelper.m in Sources */,
@@ -795,6 +654,7 @@
 				251CE0981787FE9300433748 /* FavoritesViewController.m in Sources */,
 				251CE09A1787FE9300433748 /* MainViewController.m in Sources */,
 				251CE09B1787FE9300433748 /* NSDictionary+Chord.m in Sources */,
+				25AEE8DC17B63CA7004C6459 /* UIView+Popup.m in Sources */,
 				251CE09C1787FE9300433748 /* NSDictionary+Song.m in Sources */,
 				251CE09D1787FE9300433748 /* SongCell.m in Sources */,
 				251CE09E1787FE9300433748 /* SearchViewController.m in Sources */,
@@ -812,34 +672,14 @@
 				251A3D93178804A700B5275D /* AFXMLRequestOperation.m in Sources */,
 				251A3D9C1788056000B5275D /* SwipeView.m in Sources */,
 				251A3D9F1788059800B5275D /* AppDelegate.m in Sources */,
-				251A3DC6178806C900B5275D /* FUIAlertView.m in Sources */,
-				251A3DC7178806C900B5275D /* FUIButton.m in Sources */,
-				251A3DC8178806C900B5275D /* FUICellBackgroundView.m in Sources */,
-				251A3DC9178806C900B5275D /* FUIPopoverBackgroundView.m in Sources */,
-				251A3DCA178806C900B5275D /* FUISegmentedControl.m in Sources */,
-				251A3DCB178806C900B5275D /* FUISwitch.m in Sources */,
-				251A3DCC178806C900B5275D /* UIBarButtonItem+FlatUI.m in Sources */,
-				251A3DCD178806C900B5275D /* UIColor+FlatUI.m in Sources */,
-				251A3DCE178806C900B5275D /* UIFont+FlatUI.m in Sources */,
-				251A3DCF178806C900B5275D /* UIImage+FlatUI.m in Sources */,
-				251A3DD0178806C900B5275D /* UINavigationBar+FlatUI.m in Sources */,
-				251A3DD1178806C900B5275D /* UIPopoverController+FlatUI.m in Sources */,
-				251A3DD2178806C900B5275D /* UIProgressView+FlatUI.m in Sources */,
-				251A3DD3178806C900B5275D /* UISlider+FlatUI.m in Sources */,
-				251A3DD4178806C900B5275D /* UIStepper+FlatUI.m in Sources */,
-				251A3DD5178806C900B5275D /* UITabBar+FlatUI.m in Sources */,
-				251A3DD6178806C900B5275D /* UITableViewCell+FlatUI.m in Sources */,
-				251A3DD7178806C900B5275D /* UIToolbar+FlatUI.m in Sources */,
-				251A3DDB1788070B00B5275D /* NavigationController.m in Sources */,
-				25A1EA6E178B80DA0051AB53 /* UISearchBar+FlatUI.m in Sources */,
 				2520A8E4178CD0DF0029FA35 /* CustomWebView.m in Sources */,
 				25FDCE1F178D7648002DB7F7 /* OldFavorites.m in Sources */,
 				25FDCE20178D7648002DB7F7 /* OldArtist.m in Sources */,
 				25FDCE21178D7648002DB7F7 /* OldSong.m in Sources */,
 				25FDCE22178D7648002DB7F7 /* OldCoreDataHelper.m in Sources */,
 				251130D9178E2CA100827921 /* FavoritesAlertView.m in Sources */,
-				251130DC178E550A00827921 /* UIView+Shadow.m in Sources */,
 				255677C9178E6E600030B3E1 /* iPadMainViewController.m in Sources */,
+				2511C02B17B879B3007CC078 /* AMBlurView.m in Sources */,
 				255677CC178E6EB50030B3E1 /* iPhoneMainViewController.m in Sources */,
 				255677CF178E89320030B3E1 /* DataModel.xcdatamodeld in Sources */,
 				25EAB77C178FDC8D00964ACB /* HistoryViewController.m in Sources */,
@@ -850,8 +690,6 @@
 				254266D317A1CF29001D2560 /* ChordsPresentationViewController.m in Sources */,
 				254266D417A1CF29001D2560 /* ChordsTableViewController.m in Sources */,
 				254266D517A1CF29001D2560 /* ChordTO.m in Sources */,
-				254266D817A1D731001D2560 /* ChordCell.m in Sources */,
-				254266DB17A1D96F001D2560 /* TabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

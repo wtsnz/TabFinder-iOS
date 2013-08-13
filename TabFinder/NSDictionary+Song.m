@@ -27,11 +27,7 @@
 }
 
 -(NSURL *)url {
-//    return [NSURL URLWithString:[@"http://192.168.1.91:3000/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:[@"http://192.168.1.135:3000/show/" stringByAppendingString:self[@"id"]]];
-    return [NSURL URLWithString:[@"http://tabfinder.herokuapp.com/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:[@"http://localhost:3000/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:self[@"url"]];
+    return [NSURL URLWithString:[@"/show/" stringByAppendingString:self[@"id"]] relativeToURL:BASE_URL];
 }
 
 -(NSString *)versionNumber {

@@ -10,7 +10,6 @@
 #import <CoreImage/CoreImage.h>
 #import "ChordView.h"
 #import "Favorites.h"
-#import "UIToolbar+FlatUI.h"
 #import "ChordsContainerView.h"
 #import "AppDelegate.h"
 #import "Api.h"
@@ -28,11 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _autoScrollingSpeedLabel.textColor = [UIColor defaultColor];
+    _autoScrollingSpeedLabel.textColor = [self.view tintColor];
     _autoScrollingPopupView.alpha = 0;
-    [_versionsButton configureFlatButtonWithColor:[UIColor whiteColor] highlightedColor:[UIColor whiteColor] cornerRadius:0];
-    [_bottomToolbar configureFlatToolbarWithColor:[UIColor whiteColor]];
-    [_autoScrollSlider configureFlatSliderWithTrackColor:[UIColor colorWithWhite:0.9 alpha:1] progressColor:[UIColor defaultColor] thumbColorNormal:[UIColor defaultColor] thumbColorHighlighted:[UIColor defaultColor]];
     [self autoScroll];
     _autoScrollSlider.value = 0;
     _autoScrollSlider.userInteractionEnabled = NO;
@@ -119,7 +115,8 @@
 }
 
 - (void)configureFavoritesButton {
-    [_favoritesButtonItem setImage:[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"estrelinha" : @"estrelinha_cinzinha"]];
+    _favoritesButtonItem.tintColor = _currentSong.isFavorite.boolValue ? self.view.tintColor : [UIColor lightGrayColor];
+//    [_favoritesButtonItem setImage:[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"estrelinha" : @"estrelinha_cinzinha"]];
 }
 
 - (IBAction)didPressFavoritesButton:(id)sender {
@@ -130,7 +127,7 @@
         [Favorites addToFavorites:_currentSong];
     }
     [self configureFavoritesButton];
-    [FavoritesAlertView showFavoritesAlertForSong:_currentSong inView:self.view];
+    [FavoritesAlertView showFavoritesAlertForSong:_currentSong inView:self.webView];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -197,7 +194,7 @@
 }
 
 -(void)presentCurrentSong {
-    [_webView loadHTMLString:_currentSong.tab baseURL:[NSURL URLWithString:_currentSong.version.integerValue == 0 ? nil : @"http://tabfinder.herokuapp.com"]];
+    [_webView loadHTMLString:_currentSong.tab baseURL:_currentSong.version.integerValue == 0 ? nil : BASE_URL];
     [self configureFavoritesButton];
 }
 

@@ -9,7 +9,6 @@
 #import "ChordsTableViewController.h"
 #import "ChordRequest.h"
 #import "ChordsPresentationViewController.h"
-#import "ChordCell.h"
 
 @interface ChordsTableViewController () <UISearchBarDelegate>
 
@@ -23,16 +22,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.contentSizeForViewInPopover = CGSizeMake(320, 480);
+    _searchBar = [[UISearchBar alloc] init];
     _searchBar.delegate = self;
-    [_searchBar makeItFlat];
+    _searchBar.placeholder = @"Tap to search";
+    self.navigationItem.titleView = _searchBar;
+    [_searchBar setSearchBarStyle:UISearchBarStyleDefault];
     _tapTheScreenToBeginEditing = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginSearch)];
     [self.tableView addGestureRecognizer:_tapTheScreenToBeginEditing];
 }
 
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [_searchBar makeItFlat];
-}
 
 - (void)viewDidUnload
 {
@@ -69,8 +67,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ChordCell";
-    ChordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.chordNameLabel.text = [_chords objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.textLabel.text = [_chords objectAtIndex:indexPath.row];
     if ([cell.textLabel.text hasPrefix:@"No chords"]) {
         [cell setUserInteractionEnabled:NO];
     } else {

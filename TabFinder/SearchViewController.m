@@ -27,9 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_searchBar makeItFlat];
     [self resetSearchResults];
-    [self.navigationItem.rightBarButtonItem removeTitleShadow];
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.delegate = self;
+    _searchBar.placeholder = @"Tap to search";
+    [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
+    self.navigationItem.titleView = _searchBar;
 }
 
 -(void)resetSearchResults {
@@ -38,10 +41,6 @@
     _totalSearchPages = 0;
     _searchResults = [NSMutableDictionary dictionary];
     _searchResultsDictionaryKeys = [NSMutableArray array];
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [_searchBar makeItFlat]; //layout fix
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

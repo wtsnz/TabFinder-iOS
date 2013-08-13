@@ -8,10 +8,11 @@
 
 #import "FavoritesAlertView.h"
 #import "SongCell.h"
+#import "UIView+Popup.h"
 
 @implementation FavoritesAlertView
 
-+(void)showFavoritesAlertForSong:(Song *)song inView:(UIView *)view {
++(void)showFavoritesAlertForSong:(Song *)song inView:(UIWebView *)view {
     FavoritesAlertView *alertView = [[FavoritesAlertView alloc] init];
     alertView.messageLabel.text =  song.isFavorite.boolValue ? @"Added to favorites" : @"Removed from favorites:";
     SongCell *cell = [[SongCell alloc] init];
@@ -19,7 +20,7 @@
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     cell.center = CGPointMake(cell.center.x, cell.center.y + 25);
     [alertView addSubview:cell];
-    alertView.center = CGPointMake(view.frame.size.width - alertView.frame.size.width/2 - 10, alertView.frame.size.height/2 + 10);
+    alertView.center = CGPointMake(view.frame.size.width - alertView.frame.size.width/2 - 10, alertView.frame.size.height/2 + 10 + view.scrollView.contentInset.top);
     [view addSubview:alertView];
     [UIView animateWithDuration:0.3 delay:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         alertView.alpha = 0;
@@ -31,7 +32,8 @@
 -(id)init {
     self = [[NSBundle mainBundle] loadNibNamed:@"FavoritesAlertView" owner:nil options:nil].lastObject;
     [self addShadows];
-    _messageLabel.textColor = [UIColor defaultColor];
+    [self setClipsToBounds:YES];
+    _messageLabel.textColor = [self tintColor];
     return self;
 }
 

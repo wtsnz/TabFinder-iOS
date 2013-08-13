@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SwipeView.h"
+#import "AMBlurView.h"
 
 @interface ChordsContainerView : UIView <SwipeViewDataSource, SwipeViewDelegate>
 
@@ -23,5 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *dragIconImageVIew;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet AMBlurView *blurView;
 
 @end

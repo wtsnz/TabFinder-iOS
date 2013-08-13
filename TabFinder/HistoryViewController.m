@@ -73,21 +73,24 @@
     return [sectionName substringFromIndex:1];
 }
 
+
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (tableView != self.tableView) return nil;
         UIView *header = [[UIView alloc] init];
         UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
-        label.textColor = [UIColor defaultColor];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+        label.textColor = [UIColor lightGrayColor];
         label.text = [self tableView:tableView titleForHeaderInSection:section];
         label.backgroundColor = [UIColor clearColor];
-        header.backgroundColor = tableView.backgroundColor;
+        header.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1];
         header.alpha = 0.95;
         [label sizeToFit];
         [header addSubview:label];
         [header sizeToFit];
-        label.center = CGPointMake(label.center.x + 10, label.center.y + 5);
+        label.center = CGPointMake(label.center.x + 10, label.center.y + 3);
         return header;
 }
+
 
 #pragma mark - Table view delegate
 
