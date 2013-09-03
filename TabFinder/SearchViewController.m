@@ -28,11 +28,10 @@
 {
     [super viewDidLoad];
     [self resetSearchResults];
-    _searchBar = [[UISearchBar alloc] init];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"Tap to search";
     [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
-    self.navigationItem.titleView = _searchBar;
+    [_searchBar setTintColor:[self.view tintColor]];
 }
 
 -(void)resetSearchResults {
@@ -140,6 +139,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([cell isMemberOfClass:[SongCell class]]) {
+        cell.backgroundColor = [UIColor colorWithWhite:indexPath.row % 2 == 1 ? 0.98 : 1 alpha:1];
         if (!((SongCell*)cell).artistImageView.image)
             [((SongCell *)cell).activityIndicator startAnimating];
         else
@@ -159,6 +159,10 @@
     else {
         [self performSegueWithIdentifier:@"SongSegue" sender:self];
     }
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [self.searchBar endEditing:YES];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

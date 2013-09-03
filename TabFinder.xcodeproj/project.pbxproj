@@ -84,10 +84,32 @@
 		25A1EA6B178B6A390051AB53 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6A178B6A390051AB53 /* searchbar.png */; };
 		25A1EA70178BA1B80051AB53 /* unknown_artist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */; };
 		25A1EA72178BA1E20051AB53 /* unknown_artist.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA71178BA1E10051AB53 /* unknown_artist.png */; };
+		25A5E2C217D54C480004C741 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A5E2C117D54C480004C741 /* Engine.m */; };
 		25A9410E179F931B00C0E790 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25A9410D179F931B00C0E790 /* StoreKit.framework */; };
 		25A94113179F933B00C0E790 /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A94110179F933B00C0E790 /* iRate.m */; };
 		25A94114179F933C00C0E790 /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25A94112179F933B00C0E790 /* iRate.bundle */; };
 		25AEE8DC17B63CA7004C6459 /* UIView+Popup.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AEE8DB17B63CA7004C6459 /* UIView+Popup.m */; };
+		25D09FB517D5241D00ADBACE /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D09FB017D5241D00ADBACE /* IISideController.m */; };
+		25D09FB617D5241D00ADBACE /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D09FB217D5241D00ADBACE /* IIViewDeckController.m */; };
+		25D09FB717D5241D00ADBACE /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D09FB417D5241D00ADBACE /* IIWrapController.m */; };
+		25D09FBA17D526D600ADBACE /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D09FB917D526D600ADBACE /* MenuViewController.m */; };
+		25D09FCE17D5309400ADBACE /* ProximaNova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FBE17D5309400ADBACE /* ProximaNova-Black.otf */; };
+		25D09FCF17D5309400ADBACE /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FBF17D5309400ADBACE /* ProximaNova-Bold.otf */; };
+		25D09FD017D5309400ADBACE /* ProximaNova-BoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC017D5309400ADBACE /* ProximaNova-BoldIt.otf */; };
+		25D09FD117D5309400ADBACE /* ProximaNova-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC117D5309400ADBACE /* ProximaNova-Extrabold.otf */; };
+		25D09FD217D5309400ADBACE /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC217D5309400ADBACE /* ProximaNova-Light.otf */; };
+		25D09FD317D5309400ADBACE /* ProximaNova-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC317D5309400ADBACE /* ProximaNova-LightItalic.otf */; };
+		25D09FD417D5309400ADBACE /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC417D5309400ADBACE /* ProximaNova-Regular.otf */; };
+		25D09FD517D5309400ADBACE /* ProximaNova-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC517D5309400ADBACE /* ProximaNova-RegularItalic.otf */; };
+		25D09FD617D5309400ADBACE /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC617D5309400ADBACE /* ProximaNova-Semibold.otf */; };
+		25D09FD717D5309400ADBACE /* ProximaNova-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC717D5309400ADBACE /* ProximaNova-SemiboldItalic.otf */; };
+		25D09FD817D5309400ADBACE /* ProximaNovaCond-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC817D5309400ADBACE /* ProximaNovaCond-Light.otf */; };
+		25D09FD917D5309400ADBACE /* ProximaNovaCond-LightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FC917D5309400ADBACE /* ProximaNovaCond-LightIt.otf */; };
+		25D09FDA17D5309400ADBACE /* ProximaNovaCond-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FCA17D5309400ADBACE /* ProximaNovaCond-Regular.otf */; };
+		25D09FDB17D5309400ADBACE /* ProximaNovaCond-RegularIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FCB17D5309400ADBACE /* ProximaNovaCond-RegularIt.otf */; };
+		25D09FDC17D5309400ADBACE /* ProximaNovaCond-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FCC17D5309400ADBACE /* ProximaNovaCond-Semibold.otf */; };
+		25D09FDD17D5309400ADBACE /* ProximaNovaCond-SemiboldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25D09FCD17D5309400ADBACE /* ProximaNovaCond-SemiboldIt.otf */; };
+		25D09FE017D5318F00ADBACE /* UIFont+ProximaNova.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D09FDF17D5318F00ADBACE /* UIFont+ProximaNova.m */; };
 		25D234EC178CF48B00D31114 /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D234EB178CF48B00D31114 /* iPad.storyboard */; };
 		25D234F4178D08E700D31114 /* ChordsContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F3178D08E700D31114 /* ChordsContainerView.xib */; };
 		25D234F6178D198B00D31114 /* drag.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D234F5178D198B00D31114 /* drag.png */; };
@@ -226,12 +248,40 @@
 		25A1EA6A178B6A390051AB53 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unknown_artist@2x.png"; sourceTree = "<group>"; };
 		25A1EA71178BA1E10051AB53 /* unknown_artist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_artist.png; sourceTree = "<group>"; };
+		25A5E2C017D54C480004C741 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Engine.h; sourceTree = "<group>"; };
+		25A5E2C117D54C480004C741 /* Engine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Engine.m; sourceTree = "<group>"; };
 		25A9410D179F931B00C0E790 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		25A94110179F933B00C0E790 /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		25A94111179F933B00C0E790 /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		25A94112179F933B00C0E790 /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		25AEE8DA17B63CA7004C6459 /* UIView+Popup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Popup.h"; sourceTree = "<group>"; };
 		25AEE8DB17B63CA7004C6459 /* UIView+Popup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Popup.m"; sourceTree = "<group>"; };
+		25D09FAF17D5241D00ADBACE /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
+		25D09FB017D5241D00ADBACE /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
+		25D09FB117D5241D00ADBACE /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		25D09FB217D5241D00ADBACE /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		25D09FB317D5241D00ADBACE /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		25D09FB417D5241D00ADBACE /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		25D09FB817D526D600ADBACE /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		25D09FB917D526D600ADBACE /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		25D09FBE17D5309400ADBACE /* ProximaNova-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Black.otf"; sourceTree = "<group>"; };
+		25D09FBF17D5309400ADBACE /* ProximaNova-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Bold.otf"; sourceTree = "<group>"; };
+		25D09FC017D5309400ADBACE /* ProximaNova-BoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-BoldIt.otf"; sourceTree = "<group>"; };
+		25D09FC117D5309400ADBACE /* ProximaNova-Extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Extrabold.otf"; sourceTree = "<group>"; };
+		25D09FC217D5309400ADBACE /* ProximaNova-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Light.otf"; sourceTree = "<group>"; };
+		25D09FC317D5309400ADBACE /* ProximaNova-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-LightItalic.otf"; sourceTree = "<group>"; };
+		25D09FC417D5309400ADBACE /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Regular.otf"; sourceTree = "<group>"; };
+		25D09FC517D5309400ADBACE /* ProximaNova-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-RegularItalic.otf"; sourceTree = "<group>"; };
+		25D09FC617D5309400ADBACE /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
+		25D09FC717D5309400ADBACE /* ProximaNova-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		25D09FC817D5309400ADBACE /* ProximaNovaCond-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Light.otf"; sourceTree = "<group>"; };
+		25D09FC917D5309400ADBACE /* ProximaNovaCond-LightIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-LightIt.otf"; sourceTree = "<group>"; };
+		25D09FCA17D5309400ADBACE /* ProximaNovaCond-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Regular.otf"; sourceTree = "<group>"; };
+		25D09FCB17D5309400ADBACE /* ProximaNovaCond-RegularIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-RegularIt.otf"; sourceTree = "<group>"; };
+		25D09FCC17D5309400ADBACE /* ProximaNovaCond-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-Semibold.otf"; sourceTree = "<group>"; };
+		25D09FCD17D5309400ADBACE /* ProximaNovaCond-SemiboldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNovaCond-SemiboldIt.otf"; sourceTree = "<group>"; };
+		25D09FDE17D5318F00ADBACE /* UIFont+ProximaNova.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+ProximaNova.h"; sourceTree = "<group>"; };
+		25D09FDF17D5318F00ADBACE /* UIFont+ProximaNova.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ProximaNova.m"; sourceTree = "<group>"; };
 		25D234EB178CF48B00D31114 /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		25D234F3178D08E700D31114 /* ChordsContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChordsContainerView.xib; sourceTree = "<group>"; };
 		25D234F5178D198B00D31114 /* drag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drag.png; sourceTree = "<group>"; };
@@ -368,6 +418,14 @@
 		251CE0401787FE1200433748 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				25D09FBD17D5307700ADBACE /* Fonts */,
+				25D09FAE17D523BB00ADBACE /* ViewDeck */,
+				25D09FAF17D5241D00ADBACE /* IISideController.h */,
+				25D09FB017D5241D00ADBACE /* IISideController.m */,
+				25D09FB117D5241D00ADBACE /* IIViewDeckController.h */,
+				25D09FB217D5241D00ADBACE /* IIViewDeckController.m */,
+				25D09FB317D5241D00ADBACE /* IIWrapController.h */,
+				25D09FB417D5241D00ADBACE /* IIWrapController.m */,
 				2511C02917B879B3007CC078 /* AMBlurView.h */,
 				2511C02A17B879B3007CC078 /* AMBlurView.m */,
 				25A9410F179F932D00C0E790 /* iRate */,
@@ -424,6 +482,38 @@
 				25A94112179F933B00C0E790 /* iRate.bundle */,
 			);
 			name = iRate;
+			sourceTree = "<group>";
+		};
+		25D09FAE17D523BB00ADBACE /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewDeck;
+			sourceTree = "<group>";
+		};
+		25D09FBD17D5307700ADBACE /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				25D09FBE17D5309400ADBACE /* ProximaNova-Black.otf */,
+				25D09FBF17D5309400ADBACE /* ProximaNova-Bold.otf */,
+				25D09FC017D5309400ADBACE /* ProximaNova-BoldIt.otf */,
+				25D09FC117D5309400ADBACE /* ProximaNova-Extrabold.otf */,
+				25D09FC217D5309400ADBACE /* ProximaNova-Light.otf */,
+				25D09FC317D5309400ADBACE /* ProximaNova-LightItalic.otf */,
+				25D09FC417D5309400ADBACE /* ProximaNova-Regular.otf */,
+				25D09FC517D5309400ADBACE /* ProximaNova-RegularItalic.otf */,
+				25D09FC617D5309400ADBACE /* ProximaNova-Semibold.otf */,
+				25D09FC717D5309400ADBACE /* ProximaNova-SemiboldItalic.otf */,
+				25D09FC817D5309400ADBACE /* ProximaNovaCond-Light.otf */,
+				25D09FC917D5309400ADBACE /* ProximaNovaCond-LightIt.otf */,
+				25D09FCA17D5309400ADBACE /* ProximaNovaCond-Regular.otf */,
+				25D09FCB17D5309400ADBACE /* ProximaNovaCond-RegularIt.otf */,
+				25D09FCC17D5309400ADBACE /* ProximaNovaCond-Semibold.otf */,
+				25D09FCD17D5309400ADBACE /* ProximaNovaCond-SemiboldIt.otf */,
+				25D09FDE17D5318F00ADBACE /* UIFont+ProximaNova.h */,
+				25D09FDF17D5318F00ADBACE /* UIFont+ProximaNova.m */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		25D234EF178CF90B00D31114 /* images */ = {
@@ -501,6 +591,10 @@
 				25EAB72E178EC81E00964ACB /* NoResultsCell.xib */,
 				25EAB77A178FDC8D00964ACB /* HistoryViewController.h */,
 				25EAB77B178FDC8D00964ACB /* HistoryViewController.m */,
+				25D09FB817D526D600ADBACE /* MenuViewController.h */,
+				25D09FB917D526D600ADBACE /* MenuViewController.m */,
+				25A5E2C017D54C480004C741 /* Engine.h */,
+				25A5E2C117D54C480004C741 /* Engine.m */,
 			);
 			name = TVCs;
 			sourceTree = "<group>";
@@ -592,6 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				251CE0441787FE1200433748 /* InfoPlist.strings in Resources */,
+				25D09FD117D5309400ADBACE /* ProximaNova-Extrabold.otf in Resources */,
 				251CE0531787FE1200433748 /* MainStoryboard.storyboard in Resources */,
 				251A3DE117880EE900B5275D /* searchbar@2x.png in Resources */,
 				25A1EA6B178B6A390051AB53 /* searchbar.png in Resources */,
@@ -599,12 +694,20 @@
 				25A1EA72178BA1E20051AB53 /* unknown_artist.png in Resources */,
 				2520A8D7178BDB240029FA35 /* ChordView.xib in Resources */,
 				2520A8DA178BDB7B0029FA35 /* fretboard.png in Resources */,
+				25D09FD017D5309400ADBACE /* ProximaNova-BoldIt.otf in Resources */,
+				25D09FDD17D5309400ADBACE /* ProximaNovaCond-SemiboldIt.otf in Resources */,
 				2520A8DB178BDB7B0029FA35 /* fretboard@2x.png in Resources */,
 				2520A8DD178BDF210029FA35 /* left_arrow@2x.png in Resources */,
 				25EDC22317B7A55A0031399B /* chords_icon@2x.png in Resources */,
+				25D09FDA17D5309400ADBACE /* ProximaNovaCond-Regular.otf in Resources */,
+				25D09FCF17D5309400ADBACE /* ProximaNova-Bold.otf in Resources */,
+				25D09FDC17D5309400ADBACE /* ProximaNovaCond-Semibold.otf in Resources */,
 				2520A8DF178BF1110029FA35 /* BackButton.xib in Resources */,
 				2520A8E1178BF1520029FA35 /* left_arrow.png in Resources */,
 				25D234EC178CF48B00D31114 /* iPad.storyboard in Resources */,
+				25D09FD917D5309400ADBACE /* ProximaNovaCond-LightIt.otf in Resources */,
+				25D09FD417D5309400ADBACE /* ProximaNova-Regular.otf in Resources */,
+				25D09FDB17D5309400ADBACE /* ProximaNovaCond-RegularIt.otf in Resources */,
 				25D234F4178D08E700D31114 /* ChordsContainerView.xib in Resources */,
 				25D234F6178D198B00D31114 /* drag.png in Resources */,
 				25D234FC178D728200D31114 /* Default.png in Resources */,
@@ -613,16 +716,22 @@
 				2511C02517B85132007CC078 /* SongCell.xib in Resources */,
 				25212570178D733300B83E46 /* Default-Portrait~ipad.png in Resources */,
 				25212572178D734500B83E46 /* Default-Portrait@2x~ipad.png in Resources */,
+				25D09FD517D5309400ADBACE /* ProximaNova-RegularItalic.otf in Resources */,
+				25D09FD617D5309400ADBACE /* ProximaNova-Semibold.otf in Resources */,
 				25212574178D73B000B83E46 /* Default-Landscape~ipad.png in Resources */,
+				25D09FD717D5309400ADBACE /* ProximaNova-SemiboldItalic.otf in Resources */,
 				25EDC22417B7A55A0031399B /* chords_icon.png in Resources */,
 				25212576178D73BA00B83E46 /* Default-Landscape@2x~ipad.png in Resources */,
 				255BB663178E0A7C00DDB024 /* 57.png in Resources */,
+				25D09FCE17D5309400ADBACE /* ProximaNova-Black.otf in Resources */,
 				255BB665178E0A8200DDB024 /* 114.png in Resources */,
+				25D09FD217D5309400ADBACE /* ProximaNova-Light.otf in Resources */,
 				255BB667178E0A8900DDB024 /* 72.png in Resources */,
 				255BB669178E0A8F00DDB024 /* 144.png in Resources */,
 				251130D6178E2B1800827921 /* FavoritesAlertView.xib in Resources */,
 				255677BF178E6BC50030B3E1 /* estrelinha@2x.png in Resources */,
 				255677C1178E6C0A0030B3E1 /* estrelinha.png in Resources */,
+				25D09FD817D5309400ADBACE /* ProximaNovaCond-Light.otf in Resources */,
 				255677C3178E6C630030B3E1 /* estrelinha_cinzinha@2x.png in Resources */,
 				255677C5178E6C870030B3E1 /* estrelinha_cinzinha.png in Resources */,
 				25EAB72F178EC81E00964ACB /* NoResultsCell.xib in Resources */,
@@ -630,6 +739,7 @@
 				25EAB776178FDB1100964ACB /* history_icon@2x.png in Resources */,
 				257B937E179F818000D9D3E7 /* share@2x.png in Resources */,
 				257B9380179F81BB00D9D3E7 /* share.png in Resources */,
+				25D09FD317D5309400ADBACE /* ProximaNova-LightItalic.otf in Resources */,
 				25A94114179F933C00C0E790 /* iRate.bundle in Resources */,
 				254266D117A1CF29001D2560 /* chord.html in Resources */,
 			);
@@ -649,11 +759,14 @@
 				251CE07A1787FE8100433748 /* ChordsContainerView.m in Sources */,
 				251CE07B1787FE8100433748 /* ChordView.m in Sources */,
 				251CE07D1787FE8100433748 /* CoreDataHelper.m in Sources */,
+				25D09FB617D5241D00ADBACE /* IIViewDeckController.m in Sources */,
+				25D09FB517D5241D00ADBACE /* IISideController.m in Sources */,
 				251CE0961787FE9300433748 /* Favorites.m in Sources */,
 				251CE0971787FE9300433748 /* Favorites.xcdatamodeld in Sources */,
 				251CE0981787FE9300433748 /* FavoritesViewController.m in Sources */,
 				251CE09A1787FE9300433748 /* MainViewController.m in Sources */,
 				251CE09B1787FE9300433748 /* NSDictionary+Chord.m in Sources */,
+				25D09FE017D5318F00ADBACE /* UIFont+ProximaNova.m in Sources */,
 				25AEE8DC17B63CA7004C6459 /* UIView+Popup.m in Sources */,
 				251CE09C1787FE9300433748 /* NSDictionary+Song.m in Sources */,
 				251CE09D1787FE9300433748 /* SongCell.m in Sources */,
@@ -683,13 +796,16 @@
 				255677CC178E6EB50030B3E1 /* iPhoneMainViewController.m in Sources */,
 				255677CF178E89320030B3E1 /* DataModel.xcdatamodeld in Sources */,
 				25EAB77C178FDC8D00964ACB /* HistoryViewController.m in Sources */,
+				25D09FBA17D526D600ADBACE /* MenuViewController.m in Sources */,
 				25A94113179F933B00C0E790 /* iRate.m in Sources */,
 				254266CF17A1CF29001D2560 /* Dedos.m in Sources */,
+				25A5E2C217D54C480004C741 /* Engine.m in Sources */,
 				254266D017A1CF29001D2560 /* Chord.m in Sources */,
 				254266D217A1CF29001D2560 /* ChordRequest.m in Sources */,
 				254266D317A1CF29001D2560 /* ChordsPresentationViewController.m in Sources */,
 				254266D417A1CF29001D2560 /* ChordsTableViewController.m in Sources */,
 				254266D517A1CF29001D2560 /* ChordTO.m in Sources */,
+				25D09FB717D5241D00ADBACE /* IIWrapController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

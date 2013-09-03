@@ -8,6 +8,7 @@
 
 #import "iPhoneMainViewController.h"
 #import "Favorites.h"
+#import "Engine.h"
 
 @interface iPhoneMainViewController ()
 
@@ -18,12 +19,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [Engine.instance disableLeftMenu];
     self.webView.scrollView.delegate = self;
     if (self.internetSong) {
         [self loadInternetSong];
     } else if (self.currentSong) {
         [self loadFavoritesSong];
     }
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [Engine.instance enableLeftMenu];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

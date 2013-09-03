@@ -26,7 +26,7 @@
     _searchBar.delegate = self;
     _searchBar.placeholder = @"Tap to search";
     self.navigationItem.titleView = _searchBar;
-    [_searchBar setSearchBarStyle:UISearchBarStyleDefault];
+    [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
     _tapTheScreenToBeginEditing = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginSearch)];
     [self.tableView addGestureRecognizer:_tapTheScreenToBeginEditing];
 }

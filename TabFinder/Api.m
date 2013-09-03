@@ -45,6 +45,33 @@
     [operation start];
 }
 
++(void)fetchTop50success:(void (^)(id))successCallback failure:(void (^)())failureCallback {
+    NSString *url = @"api/top50";
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:BASE_URL];
+    NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET" path:url parameters:nil];
+    [request setTimeoutInterval:20];
+    //set up operation
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+    //setup callbacks
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSError *error;
+        id parsedResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
+        if (error) {
+            NSLog(@"%@",error.localizedDescription);
+        } else {
+            if (successCallback) {
+                successCallback(parsedResponse);
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failureCallback) {
+            failureCallback();
+        }
+    }];
+    [operation start];
+}
+
 +(void)fetchTabContentForVersion:(NSDictionary *)version success:(void(^)(NSString *html))successCallback failure:(void (^)())failureCallback {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:version.url];
     [request setHTTPMethod:@"POST"];

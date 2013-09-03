@@ -97,25 +97,6 @@ static FavoritesViewController *_currentInstance;
     }
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (tableView != self.tableView) return nil;
-    if ([self showsSectionHeaders]) {
-        UIView *header = [[UIView alloc] init];
-        UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-        label.textColor = [UIColor lightGrayColor];
-        label.text = [self tableView:tableView titleForHeaderInSection:section];
-        label.backgroundColor = [UIColor clearColor];
-        header.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1];
-        header.alpha = 0.95;
-        [label sizeToFit];
-        [header addSubview:label];
-        [header sizeToFit];
-        label.center = CGPointMake(label.center.x + 10, label.center.y + 3);
-        return header;
-    } else return nil;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     return index;
 }
@@ -135,6 +116,10 @@ static FavoritesViewController *_currentInstance;
     } else {
         return _favorites.count;
     }
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = [UIColor colorWithWhite:indexPath.row % 2 == 1 ? 0.98 : 1 alpha:1];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

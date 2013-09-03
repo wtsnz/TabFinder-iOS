@@ -33,7 +33,7 @@
     _autoScrollSlider.value = 0;
     _autoScrollSlider.userInteractionEnabled = NO;
     _actionButton.enabled = NO;
-    _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
+//    _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 44+70, 0);
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
@@ -115,7 +115,7 @@
 }
 
 - (void)configureFavoritesButton {
-    _favoritesButtonItem.tintColor = _currentSong.isFavorite.boolValue ? self.view.tintColor : [UIColor lightGrayColor];
+    _favoritesButtonItem.tintColor = _currentSong.isFavorite.boolValue ? [UIColor yellowColor] : [UIColor whiteColor];
 //    [_favoritesButtonItem setImage:[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"estrelinha" : @"estrelinha_cinzinha"]];
 }
 

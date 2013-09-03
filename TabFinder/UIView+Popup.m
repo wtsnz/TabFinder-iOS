@@ -12,11 +12,11 @@
 @implementation UIView (Popup)
 
 -(void)addShadows {
-    self.layer.cornerRadius = 8;
+    self.layer.cornerRadius = 5;
     self.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.layer.shadowOffset = CGSizeMake(0, 2);
     self.layer.shadowOpacity = 0.6;
-    self.layer.shadowRadius = 3;
+    self.layer.shadowRadius = 2;
     self.layer.borderColor = [UIColor colorWithWhite:0.5 alpha:0.3].CGColor;
     self.layer.borderWidth = 1;
 }

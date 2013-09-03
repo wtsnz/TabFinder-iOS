@@ -14,12 +14,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont proximaNovaSemiBoldSize:17]}];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont proximaNovaSemiBoldSize:15]} forState:UIControlStateNormal];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitVC = (UISplitViewController *)self.window.rootViewController;
         _navigationControllerIpad = splitVC.viewControllers.lastObject;
         _mainViewControllerIpad = _navigationControllerIpad.viewControllers[0];
         splitVC.delegate = _mainViewControllerIpad;
         splitVC.presentsWithGesture = NO;
+    } else {
+        [Engine.instance attachToWindow:self.window];
     }
     application.idleTimerDisabled = YES;
     [Favorites convertOldFavorites];
