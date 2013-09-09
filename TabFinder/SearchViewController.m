@@ -30,7 +30,7 @@
     [self resetSearchResults];
     _searchBar.delegate = self;
     _searchBar.placeholder = @"Tap to search";
-    [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
+//    [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
     [_searchBar setTintColor:[self.view tintColor]];
 }
 

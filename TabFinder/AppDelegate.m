@@ -14,7 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont proximaNovaSemiBoldSize:17]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont proximaNovaSemiBoldSize:19]}];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{UITextAttributeFont: [UIFont proximaNovaSemiBoldSize:15]} forState:UIControlStateNormal];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         UISplitViewController *splitVC = (UISplitViewController *)self.window.rootViewController;

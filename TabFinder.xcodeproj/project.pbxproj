@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		250F388617DE4B9400962E38 /* search_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 250F388517DE4B9400962E38 /* search_bar@2x.png */; };
+		250F388A17DE4C2E00962E38 /* search_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 250F388917DE4C2E00962E38 /* search_bar.png */; };
+		250F388C17DE4E4100962E38 /* menu_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 250F388B17DE4E4100962E38 /* menu_icon@2x.png */; };
 		251130D6178E2B1800827921 /* FavoritesAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 251130D5178E2B1800827921 /* FavoritesAlertView.xib */; };
 		251130D9178E2CA100827921 /* FavoritesAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 251130D8178E2CA100827921 /* FavoritesAlertView.m */; };
 		2511C02517B85132007CC078 /* SongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2511C02417B85132007CC078 /* SongCell.xib */; };
@@ -135,6 +138,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		250F388517DE4B9400962E38 /* search_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_bar@2x.png"; sourceTree = "<group>"; };
+		250F388917DE4C2E00962E38 /* search_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_bar.png; sourceTree = "<group>"; };
+		250F388B17DE4E4100962E38 /* menu_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_icon@2x.png"; sourceTree = "<group>"; };
 		251130D5178E2B1800827921 /* FavoritesAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesAlertView.xib; sourceTree = "<group>"; };
 		251130D7178E2CA100827921 /* FavoritesAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesAlertView.h; sourceTree = "<group>"; };
 		251130D8178E2CA100827921 /* FavoritesAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesAlertView.m; sourceTree = "<group>"; };
@@ -340,6 +346,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		250F388417DE4B7C00962E38 /* SongCell */ = {
+			isa = PBXGroup;
+			children = (
+				251CE08D1787FE9300433748 /* SongCell.h */,
+				251CE08E1787FE9300433748 /* SongCell.m */,
+				2511C02417B85132007CC078 /* SongCell.xib */,
+			);
+			name = SongCell;
+			sourceTree = "<group>";
+		};
 		251A3D94178804AD00B5275D /* af */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +551,9 @@
 		25D234EF178CF90B00D31114 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				250F388B17DE4E4100962E38 /* menu_icon@2x.png */,
+				250F388917DE4C2E00962E38 /* search_bar.png */,
+				250F388517DE4B9400962E38 /* search_bar@2x.png */,
 				25EDC22117B7A55A0031399B /* chords_icon@2x.png */,
 				25EDC22217B7A55A0031399B /* chords_icon.png */,
 				257B937F179F81BB00D9D3E7 /* share.png */,
@@ -584,9 +603,6 @@
 				251CE0801787FE9300433748 /* Favorites.h */,
 				251CE0811787FE9300433748 /* Favorites.m */,
 				251CE0821787FE9300433748 /* Favorites.xcdatamodeld */,
-				251CE08D1787FE9300433748 /* SongCell.h */,
-				251CE08E1787FE9300433748 /* SongCell.m */,
-				2511C02417B85132007CC078 /* SongCell.xib */,
 				251CE0911787FE9300433748 /* Song.h */,
 				251CE0921787FE9300433748 /* Song.m */,
 				251CE06A1787FE8100433748 /* Api.h */,
@@ -600,6 +616,7 @@
 		25D234F2178CF93A00D31114 /* TVCs */ = {
 			isa = PBXGroup;
 			children = (
+				250F388417DE4B7C00962E38 /* SongCell */,
 				251CE0841787FE9300433748 /* FavoritesViewController.h */,
 				251CE0851787FE9300433748 /* FavoritesViewController.m */,
 				251CE08F1787FE9300433748 /* SearchViewController.h */,
@@ -712,6 +729,7 @@
 				251A3DE117880EE900B5275D /* searchbar@2x.png in Resources */,
 				25A1EA6B178B6A390051AB53 /* searchbar.png in Resources */,
 				25A1EA70178BA1B80051AB53 /* unknown_artist@2x.png in Resources */,
+				250F388C17DE4E4100962E38 /* menu_icon@2x.png in Resources */,
 				25A1EA72178BA1E20051AB53 /* unknown_artist.png in Resources */,
 				2520A8D7178BDB240029FA35 /* ChordView.xib in Resources */,
 				2520A8DA178BDB7B0029FA35 /* fretboard.png in Resources */,
@@ -757,8 +775,10 @@
 				255677C3178E6C630030B3E1 /* estrelinha_cinzinha@2x.png in Resources */,
 				255677C5178E6C870030B3E1 /* estrelinha_cinzinha.png in Resources */,
 				25EAB72F178EC81E00964ACB /* NoResultsCell.xib in Resources */,
+				250F388A17DE4C2E00962E38 /* search_bar.png in Resources */,
 				25EAB775178FDB1100964ACB /* history_icon.png in Resources */,
 				25EAB776178FDB1100964ACB /* history_icon@2x.png in Resources */,
+				250F388617DE4B9400962E38 /* search_bar@2x.png in Resources */,
 				257B937E179F818000D9D3E7 /* share@2x.png in Resources */,
 				257B9380179F81BB00D9D3E7 /* share.png in Resources */,
 				25D09FD317D5309400ADBACE /* ProximaNova-LightItalic.otf in Resources */,

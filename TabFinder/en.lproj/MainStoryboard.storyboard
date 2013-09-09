@@ -286,7 +286,7 @@
                                 <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <color key="backgroundColor" red="0.21568629149999999" green="0.21568629149999999" blue="0.21568629149999999" alpha="1" colorSpace="deviceRGB"/>
                                 <items>
-                                    <barButtonItem title="Item" id="KZa-yA-Kl5">
+                                    <barButtonItem title="Version" id="KZa-yA-Kl5">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <action selector="didPressVersionsButton:" destination="Vor-l4-9El" id="HcD-vj-dhq"/>
@@ -513,6 +513,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="YhB-Jb-uw7"/>
+        <segue reference="Krx-hZ-UKS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -44,7 +44,8 @@ static Engine *_instance;
     _navigationController.viewControllers = @[_searchViewController];
     _vcArray = @[_searchViewController, _favoritesViewController, _historyViewController, _chordsViewController];
     for (UIViewController *vc in _vcArray) {
-        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_icon"] landscapeImagePhone:[UIImage imageNamed:@"menu_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+//        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
     }
     return self;
 }

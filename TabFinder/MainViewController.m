@@ -158,7 +158,7 @@
     _internetSong = nil;
     _versionsSheet = nil;
     self.navigationItem.title = _currentSong.name;
-    _versionsButton.title = _currentSong.shortVersionTitle;
+    //_versionsButton.title = _currentSong.shortVersionTitle;
     [self presentCurrentSong];
 }
 
