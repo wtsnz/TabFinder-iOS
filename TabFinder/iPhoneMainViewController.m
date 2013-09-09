@@ -9,8 +9,11 @@
 #import "iPhoneMainViewController.h"
 #import "Favorites.h"
 #import "Engine.h"
+#import "TabHeaderView.h"
 
 @interface iPhoneMainViewController ()
+
+@property TabHeaderView *tabHeaderView;
 
 @end
 
@@ -19,6 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.webView setBackgroundColor:[UIColor clearColor]];
     [Engine.instance disableLeftMenu];
     self.webView.scrollView.delegate = self;
     if (self.internetSong) {
@@ -28,13 +33,31 @@
     }
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 - (void) viewDidDisappear:(BOOL)animated {
     [Engine.instance enableLeftMenu];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
+    [super webViewDidFinishLoad:webView];
+    _tabHeaderView = [[TabHeaderView alloc] initWithSong:self.currentSong];
+    [self.view insertSubview:_tabHeaderView belowSubview:self.webView];
+//    view.frame = CGRectMake(0, -165, view.frame.size.width, view.frame.size.height);
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height, 0, 0, 0)];
+    [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height)];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y <= 0 && scrollView.isDecelerating && self.navigationController.navigationBar.frame.origin.y < 0) {
         [self showControlBarsAnimated:YES];
+    }
+    if (scrollView.contentOffset.y > -_tabHeaderView.frame.size.height && scrollView.contentOffset.y < 0) {
+        CGFloat offset = _tabHeaderView.frame.size.height - fabsf(scrollView.contentOffset.y);
+        _tabHeaderView.frame = CGRectMake(0, 0 - offset*0.3, _tabHeaderView.frame.size.width, _tabHeaderView.frame.size.height);
+//        _tabHeaderView.blurredPhoto.alpha = offset / 165 * 1.2;
     }
     if (scrollView.isDragging) {
         for (UIView *view in self.view.subviews) {

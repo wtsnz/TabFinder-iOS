@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *favoritesButtonItem;
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButtonItem;
+@property (weak, nonatomic) IBOutlet UILabel *autoScrollingTitleLabel;
 
 - (IBAction)didPressActionButton:(id)sender;
 

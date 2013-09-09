@@ -8,12 +8,13 @@
 
 #import "AutoScrollingPopupView.h"
 #import "UIView+Popup.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation AutoScrollingPopupView
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    [self addShadows];
+    self.layer.cornerRadius = self.frame.size.height/2;
     return self;
 }
 

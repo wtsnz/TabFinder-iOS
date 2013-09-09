@@ -27,7 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _autoScrollingSpeedLabel.textColor = [self.view tintColor];
+    _autoScrollingTitleLabel.font = [UIFont proximaNovaSemiBoldSize:_autoScrollingTitleLabel.font.pointSize];
+    _autoScrollingSpeedLabel.font = [UIFont proximaNovaLightSize:_autoScrollingSpeedLabel.font.pointSize];
     _autoScrollingPopupView.alpha = 0;
     [self autoScroll];
     _autoScrollSlider.value = 0;

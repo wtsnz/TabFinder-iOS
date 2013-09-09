@@ -129,7 +129,7 @@ static NSMutableDictionary *_artistPhotos;
             } else {
                 NSDictionary *dict = [parsedResponse valueForKeyPath:@"artist"];
                 NSArray *images = [dict valueForKeyPath:@"image"];
-                NSString *photoURL = [[images objectAtIndex:2] valueForKeyPath:@"#text"];
+                NSString *photoURL = [[images objectAtIndex:3] valueForKeyPath:@"#text"];
                 if (photoURL != nil && photoURL.length > 10) {
                     NSURL *finalUrl = [NSURL URLWithString:photoURL];
                     [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:finalUrl] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {

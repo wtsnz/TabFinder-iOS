@@ -8,6 +8,8 @@
 
 #import "Engine.h"
 #import <QuartzCore/QuartzCore.h>
+#import "IIWrapController.h"
+#import "IISideController.h"
 
 @interface Engine () <UIGestureRecognizerDelegate, IIViewDeckControllerDelegate>
 
@@ -33,7 +35,7 @@ static Engine *_instance;
     _chordsViewController = [sb instantiateViewControllerWithIdentifier:@"ChordsViewController"];
     _favoritesViewController = [sb instantiateViewControllerWithIdentifier:@"FavoritesViewController"];
     _menuViewController = [sb instantiateViewControllerWithIdentifier:@"MenuViewController"];
-    _viewDeckController = [[IIViewDeckController alloc] initWithCenterViewController:_navigationController leftViewController:_menuViewController];
+    _viewDeckController = [[IIViewDeckController alloc] initWithCenterViewController:_navigationController leftViewController:[[IISideController alloc] initWithViewController:_menuViewController]];
     _viewDeckController.panningMode = IIViewDeckFullViewPanning;
     _viewDeckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
     _viewDeckController.parallaxAmount = 0.2;
@@ -56,10 +58,6 @@ static Engine *_instance;
     if ([touch locationInView:_navigationController.view].x > 150 && _navigationController.visibleViewController == _favoritesViewController) return NO;
     if (_navigationController.visibleViewController == _favoritesViewController && _favoritesViewController.tableView.isEditing) return NO;
     return YES;
-}
-
--(void)viewDeckController:(IIViewDeckController *)viewDeckController applyShadow:(CALayer *)shadowLayer withBounds:(CGRect)rect {
-    shadowLayer.shadowOffset = CGSizeMake(0, 0);
 }
 
 -(void)attachToWindow:(UIWindow *)window {

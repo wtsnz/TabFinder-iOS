@@ -81,6 +81,11 @@
 		257B937C179F7BF700D9D3E7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257B937B179F7BF700D9D3E7 /* Social.framework */; };
 		257B937E179F818000D9D3E7 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937D179F818000D9D3E7 /* share@2x.png */; };
 		257B9380179F81BB00D9D3E7 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937F179F81BB00D9D3E7 /* share.png */; };
+		25961FBB17D6F47700A658AB /* TabHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25961FBA17D6F47700A658AB /* TabHeaderView.xib */; };
+		25961FBE17D6F4D400A658AB /* TabHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 25961FBD17D6F4D400A658AB /* TabHeaderView.m */; };
+		25961FC117D6F69100A658AB /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 25961FC017D6F69100A658AB /* UIImage+Blur.m */; };
+		25961FC317D6F7B800A658AB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25961FC217D6F7B800A658AB /* Accelerate.framework */; };
+		25961FC517D7A0A100A658AB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25961FC417D7A0A100A658AB /* CoreImage.framework */; };
 		25A1EA6B178B6A390051AB53 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6A178B6A390051AB53 /* searchbar.png */; };
 		25A1EA70178BA1B80051AB53 /* unknown_artist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */; };
 		25A1EA72178BA1E20051AB53 /* unknown_artist.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A1EA71178BA1E10051AB53 /* unknown_artist.png */; };
@@ -245,6 +250,13 @@
 		257B937B179F7BF700D9D3E7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		257B937D179F818000D9D3E7 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		257B937F179F81BB00D9D3E7 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		25961FBA17D6F47700A658AB /* TabHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabHeaderView.xib; sourceTree = "<group>"; };
+		25961FBC17D6F4D400A658AB /* TabHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabHeaderView.h; sourceTree = "<group>"; };
+		25961FBD17D6F4D400A658AB /* TabHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabHeaderView.m; sourceTree = "<group>"; };
+		25961FBF17D6F69100A658AB /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
+		25961FC017D6F69100A658AB /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		25961FC217D6F7B800A658AB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		25961FC417D7A0A100A658AB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		25A1EA6A178B6A390051AB53 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		25A1EA6F178BA1B80051AB53 /* unknown_artist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unknown_artist@2x.png"; sourceTree = "<group>"; };
 		25A1EA71178BA1E10051AB53 /* unknown_artist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unknown_artist.png; sourceTree = "<group>"; };
@@ -311,6 +323,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25961FC517D7A0A100A658AB /* CoreImage.framework in Frameworks */,
+				25961FC317D6F7B800A658AB /* Accelerate.framework in Frameworks */,
 				25A9410E179F931B00C0E790 /* StoreKit.framework in Frameworks */,
 				257B937C179F7BF700D9D3E7 /* Social.framework in Frameworks */,
 				25FDCE24178D7D2D002DB7F7 /* MessageUI.framework in Frameworks */,
@@ -389,6 +403,8 @@
 		251CE0381787FE1200433748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25961FC417D7A0A100A658AB /* CoreImage.framework */,
+				25961FC217D6F7B800A658AB /* Accelerate.framework */,
 				251CE0391787FE1200433748 /* UIKit.framework */,
 				251CE03B1787FE1200433748 /* Foundation.framework */,
 				251CE03D1787FE1200433748 /* CoreGraphics.framework */,
@@ -614,6 +630,11 @@
 				251130D8178E2CA100827921 /* FavoritesAlertView.m */,
 				2511C02617B86703007CC078 /* SongTableView.h */,
 				2511C02717B86703007CC078 /* SongTableView.m */,
+				25961FBA17D6F47700A658AB /* TabHeaderView.xib */,
+				25961FBC17D6F4D400A658AB /* TabHeaderView.h */,
+				25961FBD17D6F4D400A658AB /* TabHeaderView.m */,
+				25961FBF17D6F69100A658AB /* UIImage+Blur.h */,
+				25961FC017D6F69100A658AB /* UIImage+Blur.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -716,6 +737,7 @@
 				2511C02517B85132007CC078 /* SongCell.xib in Resources */,
 				25212570178D733300B83E46 /* Default-Portrait~ipad.png in Resources */,
 				25212572178D734500B83E46 /* Default-Portrait@2x~ipad.png in Resources */,
+				25961FBB17D6F47700A658AB /* TabHeaderView.xib in Resources */,
 				25D09FD517D5309400ADBACE /* ProximaNova-RegularItalic.otf in Resources */,
 				25D09FD617D5309400ADBACE /* ProximaNova-Semibold.otf in Resources */,
 				25212574178D73B000B83E46 /* Default-Landscape~ipad.png in Resources */,
@@ -780,6 +802,7 @@
 				251A3D8E178804A700B5275D /* AFURLConnectionOperation.m in Sources */,
 				251A3D8F178804A700B5275D /* UIImageView+AFNetworking.m in Sources */,
 				251A3D90178804A700B5275D /* AFImageRequestOperation.m in Sources */,
+				25961FBE17D6F4D400A658AB /* TabHeaderView.m in Sources */,
 				251A3D91178804A700B5275D /* AFJSONRequestOperation.m in Sources */,
 				251A3D92178804A700B5275D /* AFPropertyListRequestOperation.m in Sources */,
 				251A3D93178804A700B5275D /* AFXMLRequestOperation.m in Sources */,
@@ -801,6 +824,7 @@
 				254266CF17A1CF29001D2560 /* Dedos.m in Sources */,
 				25A5E2C217D54C480004C741 /* Engine.m in Sources */,
 				254266D017A1CF29001D2560 /* Chord.m in Sources */,
+				25961FC117D6F69100A658AB /* UIImage+Blur.m in Sources */,
 				254266D217A1CF29001D2560 /* ChordRequest.m in Sources */,
 				254266D317A1CF29001D2560 /* ChordsPresentationViewController.m in Sources */,
 				254266D417A1CF29001D2560 /* ChordsTableViewController.m in Sources */,
