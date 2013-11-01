@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "NSDictionary+Song.h"
 #import "SearchViewController.h"
-#import "FavoritesViewController.h"
 #import "SwipeView.h"
 #import "Song.h"
 #import "FavoritesAlertView.h"
@@ -39,11 +38,11 @@
 -(void)loadInternetSong;
 
 //internet song attributes
-@property NSInteger currentVersionIndex;
-@property UIActionSheet *versionsSheet;
-@property UIActionSheet *shareSheet;
-@property NSDictionary *internetSong;
+@property (nonatomic) NSInteger currentVersionIndex;
+@property (strong, nonatomic) UIActionSheet *versionsSheet;
+@property (strong, nonatomic) UIActionSheet *shareSheet;
+@property (strong, nonatomic) NSDictionary *internetSong;
 
-@property Song *currentSong;
+@property (strong, nonatomic) Song *currentSong;
 
 @end

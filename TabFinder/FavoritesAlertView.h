@@ -10,7 +10,6 @@
 #import "Song.h"
 
 @interface FavoritesAlertView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 +(void)showFavoritesAlertForSong:(Song *)song inView:(UIWebView *)view;
 

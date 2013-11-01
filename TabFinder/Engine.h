@@ -10,10 +10,17 @@
 
 #import "IIViewDeckController.h"
 #import "SearchViewController.h"
-#import "FavoritesViewController.h"
-#import "HistoryViewController.h"
 #import "ChordsTableViewController.h"
 #import "MenuViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "IIWrapController.h"
+#import "IISideController.h"
+#import "RESideMenu.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import <MessageUI/MessageUI.h>
+#import <Social/Social.h>
+#import "CoreDataHelper.h"
 
 @class MenuViewController;
 
@@ -22,18 +29,20 @@
 @property IIViewDeckController *viewDeckController;
 @property UINavigationController *navigationController;
 @property SearchViewController *searchViewController;
-@property HistoryViewController *historyViewController;
-@property FavoritesViewController *favoritesViewController;
-@property ChordsTableViewController *chordsViewController;
 @property MenuViewController *menuViewController;
-@property NSArray *vcArray;
 
 -(void)attachToWindow:(UIWindow *)window;
+
 -(void)switchMenuToIndex:(NSInteger)index;
 -(void)disableLeftMenu;
 -(void)enableLeftMenu;
 
+-(void)tellFriends;
+-(void)likeOnFb;
+-(void)sendFeedback;
+
 +(Engine *)instance;
--(void)pushViewController:(UIViewController *)viewController;
+
++(void)enableiCloud:(BOOL)enable;
 
 @end

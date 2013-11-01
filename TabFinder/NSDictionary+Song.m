@@ -76,11 +76,10 @@
         }
     }
     if (versionsSheet.numberOfButtons == 0) {
-        versionsSheet = nil;
-    } else {
+        versionsSheet.title = @"There are no more versions of this song. If this is a new song, try again in a few days :)";
+    }
         [versionsSheet addButtonWithTitle:@"Cancel"];
         [versionsSheet setCancelButtonIndex:self.versions.count-1];
-    }
     return versionsSheet;
 }
 

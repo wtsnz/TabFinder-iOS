@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Song.h"
+#import "UIImageView+Blurry.h"
 
 @interface TabHeaderView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *songName;
@@ -17,4 +18,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *originalPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 -(id)initWithSong:(Song *)song;
+-(void)configureForSong:(Song *)song;
 @end

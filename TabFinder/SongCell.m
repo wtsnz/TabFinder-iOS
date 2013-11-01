@@ -23,6 +23,9 @@
     _songLabel.font = [UIFont proximaNovaSemiBoldSize:17];
     _artistLabel.font = [UIFont proximaNovaSemiBoldSize:13];
     _versionsLabel.font = [UIFont proximaNovaSemiBoldSize:12];
+    UIView *v = [[UIView alloc] initWithFrame:self.frame];
+    v.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+    self.selectedBackgroundView = v;
     return self;
 }
 
@@ -36,12 +39,15 @@
 -(void)configureWithInternetSong:(NSDictionary *)song {
     _artistName = song.artist;
     _songLabel.text = song.name;
-    _artistImageView.image = [Api artistPhotoForArtist:song.artist];
     _artistLabel.text = song.artist;
     _versionsLabel.text = [NSString stringWithFormat:@"%i version%@",song.versions.count,song.versions.count > 1 ? @"s" : @""];
-    if (_artistImageView.image == nil) {
-        [Api configureImageViewForCell:self];
-    }
+    _artistImageView.image = [Api cachedImageForArtist:song.artist];
+    if (_artistImageView.image) return;
+    [Api getPhotoForArtist:song.artist callback:^(UIImage *artistPhoto) {
+        if ([_artistLabel.text isEqualToString:song.artist]) {
+            _artistImageView.image = artistPhoto;
+        }
+    }];
 }
 
 @end

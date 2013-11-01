@@ -15,8 +15,8 @@
 +(void)tabSearch:(NSString *)title page:(NSInteger)page success:(void (^)(id))successCallback failure:(void (^)())failureCallback;
 +(void)fetchTabContentForVersion:(NSDictionary *)version success:(void(^)(NSString *html))successCallback failure:(void (^)())failureCallback;
 
-+(void)configureImageViewForCell:(SongCell *)cell;
-+(UIImage *)artistPhotoForArtist:(NSString *)artist;
-+(void)downloadArtistImageOnBackgroundForSong:(Song *)song;
++(void)getPhotoForArtist:(NSString *)artist callback:(void(^)(UIImage *artistPhoto))successCallback;
++(UIImage *)cachedImageForArtist:(NSString *)artist;
++(void)addArtistToCache:(Song *)song;
 
 @end

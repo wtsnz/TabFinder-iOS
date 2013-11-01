@@ -14,7 +14,7 @@
 
 -(id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    self.layer.cornerRadius = self.frame.size.height/2;
+    self.layer.cornerRadius = 5;
     return self;
 }
 

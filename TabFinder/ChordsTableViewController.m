@@ -22,11 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _searchBar = [[UISearchBar alloc] init];
-    _searchBar.delegate = self;
-    _searchBar.placeholder = @"Tap to search";
-    self.navigationItem.titleView = _searchBar;
-    [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
+    _searchBar.placeholder = @"Enter the chord's name";
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     _tapTheScreenToBeginEditing = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginSearch)];
     [self.tableView addGestureRecognizer:_tapTheScreenToBeginEditing];
 }
@@ -85,6 +82,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"See the chord diagrams an up to 20 variations of any chord, including fingerings!"]) return;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         _selectedChord = [ChordRequest chordRequest:[_chords objectAtIndex:indexPath.row]];

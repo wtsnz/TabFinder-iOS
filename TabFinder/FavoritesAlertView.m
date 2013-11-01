@@ -8,33 +8,23 @@
 
 #import "FavoritesAlertView.h"
 #import "SongCell.h"
-#import "UIView+Popup.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation FavoritesAlertView
 
 +(void)showFavoritesAlertForSong:(Song *)song inView:(UIWebView *)view {
-    FavoritesAlertView *alertView = [[FavoritesAlertView alloc] init];
-    alertView.messageLabel.text =  song.isFavorite.boolValue ? @"Added to favorites" : @"Removed from favorites:";
-    SongCell *cell = [[SongCell alloc] init];
-    [cell configureWithFavoriteSong:song];
-    [cell setAccessoryType:UITableViewCellAccessoryNone];
-    cell.center = CGPointMake(cell.center.x, cell.center.y + 25);
-    [alertView addSubview:cell];
-    alertView.center = CGPointMake(view.frame.size.width - alertView.frame.size.width/2 - 10, alertView.frame.size.height/2 + 10 + view.scrollView.contentInset.top);
-    [view addSubview:alertView];
+    UIView *alert = [[NSBundle mainBundle] loadNibNamed:song.isFavorite.boolValue ? @"AddedToFavorites": @"RemovedFromFavorites" owner:self options:nil].lastObject;
+    alert.layer.cornerRadius = 5;
+    CGFloat xCenter;
+    if (view.frame.size.width == 320) xCenter = 160;
+    else xCenter = view.frame.size.width - alert.frame.size.width/2 - 10;
+    alert.center = CGPointMake(xCenter, alert.frame.size.height/2 + 25);
+    [view addSubview:alert];
     [UIView animateWithDuration:0.3 delay:2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        alertView.alpha = 0;
+        alert.alpha = 0;
     } completion:^(BOOL finished) {
-        [alertView removeFromSuperview];
+        [alert removeFromSuperview];
     }];
-}
-
--(id)init {
-    self = [[NSBundle mainBundle] loadNibNamed:@"FavoritesAlertView" owner:nil options:nil].lastObject;
-    [self addShadows];
-    [self setClipsToBounds:YES];
-    _messageLabel.textColor = [self tintColor];
-    return self;
 }
 
 @end

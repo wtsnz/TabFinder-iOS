@@ -10,13 +10,14 @@
 #import "AppDelegate.h"
 #import "Engine.h"
 
-@class Engine;
-
 @interface MenuCell : UITableViewCell
 
 @end
 
-
 @interface MenuViewController : UITableViewController
+
++(MenuViewController *)instance;
+- (IBAction)iCloudSwitchChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *icloudSwitch;
 
 @end

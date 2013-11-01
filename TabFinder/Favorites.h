@@ -12,14 +12,18 @@
 
 @interface Favorites : NSObject
 
-+(Song *)addToDatabase:(NSDictionary *)version withContent:(NSString *)tab;
 +(Song *)findByUgid:(NSString *)ugid;
 +(void)addToFavorites:(Song *)song;
 +(void)removeFromFavorites:(Song *)song;
-+(NSArray *)favorites;
++(NSArray *)favoritesSortedBy:(NSString *)sorting;
 +(void)convertOldFavorites;
 +(NSArray *)history;
 +(void)performImageCheck;
 +(NSDictionary *)historyDictionary;
++(void)clearHistoryByDays:(NSInteger)numberOfDays;
++(NSInteger)tabCount;
++(NSInteger)favoritesCount;
++(NSString *)favoriteBand;
++(void)clearFavorites;
 
 @end

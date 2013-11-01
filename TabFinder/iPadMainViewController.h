@@ -7,7 +7,10 @@
 //
 
 #import "MainViewController.h"
+#import "TabHeaderView.h"
 
-@interface iPadMainViewController : MainViewController
+@interface iPadMainViewController : MainViewController <ADBannerViewDelegate>
+
+@property (weak, nonatomic) IBOutlet TabHeaderView *tabHeaderView;
 
 @end

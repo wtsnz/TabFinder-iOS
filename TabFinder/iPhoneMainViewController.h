@@ -7,7 +7,15 @@
 //
 
 #import "MainViewController.h"
+#import "TabHeaderView.h"
+#import <iAd/iAd.h>
+#import "Favorites.h"
+#import "Engine.h"
 
-@interface iPhoneMainViewController : MainViewController
+@interface iPhoneMainViewController : MainViewController <ADBannerViewDelegate>
+
+@property (weak, nonatomic) IBOutlet TabHeaderView *tabHeaderView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bannerHeight;
+@property (weak, nonatomic) IBOutlet ADBannerView *bannerView;
 
 @end

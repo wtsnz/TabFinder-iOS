@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ChordView.h"
 #import "UIView+Popup.h"
-#import "AMBlurView.h"
 
 @interface ChordsContainerView ()
 
@@ -22,7 +21,9 @@
 
 +(void)addChordViewWithName:(NSString *)name variations:(NSArray *)variations toView:(UIView *)view {
     ChordsContainerView *ccv = [[ChordsContainerView alloc] initWithChordName:name variations:variations];
-    ccv.center = view.center;
+    CGPoint center = view.center;
+    center.y -= 60;
+    ccv.center = center;
     [view addSubview:ccv];
 }
 
@@ -32,10 +33,11 @@
     _chordLabel.text = name;
     _pageControl.numberOfPages = _chords.count;
     _pageControl.currentPage = 0;
-    [_closeButton setTitleColor:[self tintColor] forState:UIControlStateNormal];
+    [_closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIPanGestureRecognizer* panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
     [self addGestureRecognizer:panGestureRecognizer];
-    [self addShadows];
+    self.backgroundColor = [UIColor defaultColor];
+    self.layer.cornerRadius = 10;
     return self;
 }
 

@@ -29,9 +29,12 @@
     [super viewDidLoad];
     [self resetSearchResults];
     _searchBar.delegate = self;
-    _searchBar.placeholder = @"Tap to search";
-//    [_searchBar setSearchBarStyle:UISearchBarStyleMinimal];
-    [_searchBar setTintColor:[self.view tintColor]];
+    _searchBar.placeholder = @"Enter song or artist name";
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.barTintColor = [UIColor colorWithWhite:0.98 alpha:1];
+    if ([_searchBar respondsToSelector:@selector(setTintColor:)]) {
+        [_searchBar setTintColor:[self.view tintColor]];
+    }
 }
 
 -(void)resetSearchResults {

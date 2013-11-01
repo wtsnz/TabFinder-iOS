@@ -7,13 +7,9 @@
 //
 
 #import "iPhoneMainViewController.h"
-#import "Favorites.h"
-#import "Engine.h"
-#import "TabHeaderView.h"
+
 
 @interface iPhoneMainViewController ()
-
-@property TabHeaderView *tabHeaderView;
 
 @end
 
@@ -31,6 +27,22 @@
     } else if (self.currentSong) {
         [self loadFavoritesSong];
     }
+    _tabHeaderView.hidden = YES;
+    _bannerView.delegate = self;
+    [self fixBannerHeightOrHideIt];
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    _bannerView.hidden = YES;
+}
+
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner {
+    _bannerView.hidden = [InAppPurchaseManager sharedInstance].userHasFullApp;
+}
+
+-(void)fixBannerHeightOrHideIt {
+    _bannerHeight.constant = UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? 50 : 32;
+    _bannerView.hidden = [InAppPurchaseManager sharedInstance].userHasFullApp;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -39,15 +51,18 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
     [Engine.instance enableLeftMenu];
+    [_bannerView cancelBannerViewAction];
+    [_bannerView removeFromSuperview];
+    _bannerView = nil;
+    [super viewDidDisappear:animated];
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [super webViewDidFinishLoad:webView];
-    _tabHeaderView = [[TabHeaderView alloc] initWithSong:self.currentSong];
-    [self.view insertSubview:_tabHeaderView belowSubview:self.webView];
-//    view.frame = CGRectMake(0, -165, view.frame.size.width, view.frame.size.height);
-    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height, 0, 0, 0)];
-    [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height)];
+    [_tabHeaderView configureForSong:self.currentSong];
+    _tabHeaderView.hidden = NO;
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 44, 0)];
+    [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height - 10)];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -57,7 +72,6 @@
     if (scrollView.contentOffset.y > -_tabHeaderView.frame.size.height && scrollView.contentOffset.y < 0) {
         CGFloat offset = _tabHeaderView.frame.size.height - fabsf(scrollView.contentOffset.y);
         _tabHeaderView.frame = CGRectMake(0, 0 - offset*0.3, _tabHeaderView.frame.size.width, _tabHeaderView.frame.size.height);
-//        _tabHeaderView.blurredPhoto.alpha = offset / 165 * 1.2;
     }
     if (scrollView.isDragging) {
         for (UIView *view in self.view.subviews) {
@@ -105,6 +119,7 @@
                 numberOfViews++;
             }
         }
+    [self fixBannerHeightOrHideIt];
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
