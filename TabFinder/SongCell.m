@@ -8,6 +8,7 @@
 
 #import "SongCell.h"
 #import "Api.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SongCell ()
 
@@ -15,58 +16,38 @@
 
 @implementation SongCell
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    for (NSLayoutConstraint *cellConstraint in self.constraints)
-    {
-        [self removeConstraint:cellConstraint];
-        
-        id firstItem = cellConstraint.firstItem == self ? self.contentView : cellConstraint.firstItem;
-        id seccondItem = cellConstraint.secondItem == self ? self.contentView : cellConstraint.secondItem;
-        
-        NSLayoutConstraint* contentViewConstraint = [NSLayoutConstraint constraintWithItem:firstItem
-                                                                                 attribute:cellConstraint.firstAttribute
-                                                                                 relatedBy:cellConstraint.relation
-                                                                                    toItem:seccondItem
-                                                                                 attribute:cellConstraint.secondAttribute
-                                                                                multiplier:cellConstraint.multiplier
-                                                                                  constant:cellConstraint.constant];
-        
-        [self.contentView addConstraint:contentViewConstraint];
-    }
-}
-
 -(id)init {
     self = [[NSBundle mainBundle] loadNibNamed:@"SongCell" owner:self options:nil].lastObject;
-    self.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1] cornerRadius:0]];
+    _artistImageView.layer.cornerRadius = 30;
+    _artistImageView.layer.masksToBounds = YES;
+    _songLabel.font = [UIFont proximaNovaSemiBoldSize:17];
+    _artistLabel.font = [UIFont proximaNovaSemiBoldSize:13];
+    _versionsLabel.font = [UIFont proximaNovaSemiBoldSize:12];
+    UIView *v = [[UIView alloc] initWithFrame:self.frame];
+    v.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+    self.selectedBackgroundView = v;
     return self;
 }
 
 -(void)configureWithFavoriteSong:(Song *)song {
     _artistImageView.image = [UIImage imageWithData:song.artistImage];
     _songLabel.text = song.name;
-    _songLabel.textColor = [UIColor colorWithWhite:0.3 alpha:1];
-    [self configureArtistLabelWithArtist:song.artist versionInfo:song.shortVersionTitle];
-}
-
--(void)configureArtistLabelWithArtist:(NSString *)artist versionInfo:(NSString *)versionInfo {
-    NSMutableAttributedString *artistName = [[NSMutableAttributedString alloc] initWithString:artist attributes:@{NSForegroundColorAttributeName: [UIColor colorFromHexCode:@"999999"], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:13]}];
-    NSAttributedString *version = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@",versionInfo] attributes:@{NSForegroundColorAttributeName:[UIColor defaultColor],NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:11]}];
-    [artistName appendAttributedString:version];
-    [_artistLabel setAttributedText:artistName];
+    _artistLabel.text = song.artist;
+    _versionsLabel.text = song.shortVersionTitle;
 }
 
 -(void)configureWithInternetSong:(NSDictionary *)song {
     _artistName = song.artist;
-    _artistImageView.clipsToBounds = YES;
     _songLabel.text = song.name;
-    _artistImageView.image = [Api artistPhotoForArtist:song.artist];
-    [self configureArtistLabelWithArtist:song.artist versionInfo:[NSString stringWithFormat:@"%i version%@",song.versions.count,song.versions.count > 1 ? @"s" : @""]];
-    if (_artistImageView.image == nil) {
-        [Api configureImageViewForCell:self];
-    }
+    _artistLabel.text = song.artist;
+    _versionsLabel.text = [NSString stringWithFormat:@"%i version%@",song.versions.count,song.versions.count > 1 ? @"s" : @""];
+    _artistImageView.image = [Api cachedImageForArtist:song.artist];
+    if (_artistImageView.image) return;
+    [Api getPhotoForArtist:song.artist callback:^(UIImage *artistPhoto) {
+        if ([_artistLabel.text isEqualToString:song.artist]) {
+            _artistImageView.image = artistPhoto;
+        }
+    }];
 }
 
 @end

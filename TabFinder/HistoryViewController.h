@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "SongTableViewController.h"
 
-@interface HistoryViewController : UITableViewController
+@interface HistoryViewController : SongTableViewController
+
++(HistoryViewController *)currentInstance;
+
 
 @end

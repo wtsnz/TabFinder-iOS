@@ -13,104 +13,112 @@
 #import "AppDelegate.h"
 #import "Favorites.h"
 #import "CoreDataHelper.h"
+#import "InAppPurchaseManager.h"
 
-@interface HistoryViewController ()
+@interface HistoryViewController () <UIActionSheetDelegate>
 
-@property NSDictionary *history;
-@property NSArray *historyDictKeys;
+@property (strong, nonatomic) Song *selectedSong;
 
 @end
 
 @implementation HistoryViewController
 
+static HistoryViewController *_instance;
+
++(HistoryViewController *)currentInstance {
+    return _instance;
+}
+
 - (void)viewDidLoad
 {
+    [NSFetchedResultsController deleteCacheWithName:@"HistoryCache"];
     [super viewDidLoad];
-    _history = [NSDictionary dictionary];
-    _historyDictKeys = [NSArray array];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"trash"] style:UIBarButtonItemStylePlain target:self action:@selector(changeSettings:)];
+    _instance = self;
+    self.tableView.sectionIndexMinimumDisplayRowCount = 9999;
+    self.searchDisplayController.searchResultsTableView.sectionIndexMinimumDisplayRowCount = 9999;
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [self loadHistory];
+-(NSFetchedResultsController *)fetchedResultsControllerGetter {
+    if (self.fetchedResultsController) {
+        return self.fetchedResultsController;
+    }
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.dateOfCreation != nil"]];
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateOfCreation" ascending:NO]]];
+    [fetchRequest setEntity:entity];
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:CoreDataHelper.get.managedObjectContext sectionNameKeyPath:@"historySectionTitle" cacheName:@"HistoryCache"];
+    self.fetchedResultsController.delegate = self;
+    return self.fetchedResultsController;
 }
 
--(void)loadHistory {
-    _history = [Favorites historyDictionary];
-    _historyDictKeys = [_history.allKeys sortedArrayUsingSelector:@selector(localizedStandardCompare:)];
-    [self.tableView reloadData];
-    [self performSelectorInBackground:@selector(performImageCheck) withObject:nil];
+-(NSFetchedResultsController *)searchFetchedResultsControllerGetter {
+    if (self.searchFetchedResultsController) {
+        return self.searchFetchedResultsController;
+    }
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
+    [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateOfCreation" ascending:NO]]];
+    [fetchRequest setEntity:entity];
+    self.searchFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:CoreDataHelper.get.managedObjectContext sectionNameKeyPath:@"historySectionTitle" cacheName:@"HistorySearchCache"];
+    self.searchFetchedResultsController.delegate = self;
+    return self.searchFetchedResultsController;
 }
 
--(void)performImageCheck {
-    [Favorites performImageCheck];
+-(void)changeSettings:(UIBarButtonItem *)sender {
+    [[[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete all" otherButtonTitles:@"Delete older than 2 days", @"Delete older than 7 days", @"Delete older than 30 days", nil] showFromBarButtonItem:sender animated:YES];
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return _history.allKeys.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSArray *songs = _history[_historyDictKeys[section]];
-    return songs.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"SongCell";
-    SongCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) cell = [[SongCell alloc] init];
-    NSArray *songs = _history[_historyDictKeys[indexPath.section]];
-    [cell configureWithFavoriteSong:songs[indexPath.row]];
-    return cell;
-}
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *sectionName = _historyDictKeys[section];
-    return [sectionName substringFromIndex:1];
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-        UIView *header = [[UIView alloc] init];
-        UILabel *label = [[UILabel alloc] init];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
-        label.textColor = [UIColor defaultColor];
-        label.text = [self tableView:tableView titleForHeaderInSection:section];
-        label.backgroundColor = [UIColor clearColor];
-        header.backgroundColor = tableView.backgroundColor;
-        header.alpha = 0.95;
-        [label sizeToFit];
-        [header addSubview:label];
-        [header sizeToFit];
-        label.center = CGPointMake(label.center.x + 10, label.center.y + 5);
-        return header;
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (actionSheet.cancelButtonIndex == buttonIndex) {
+        return;
+    };
+    NSInteger numberOfDays;
+    switch (buttonIndex) {
+        case 0:
+            numberOfDays = 0;
+            break;
+        case 1:
+            numberOfDays = 2;
+            break;
+        case 2:
+            numberOfDays = 7;
+            break;
+        default:
+            numberOfDays = 30;
+            break;
+    }
+    [Song removeOlderThanDays:numberOfDays];
 }
 
 #pragma mark - Table view delegate
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        MainViewController *mainVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad;
-        NSArray *songs = _history[_historyDictKeys[indexPath.section]];
-        mainVC.currentSong = songs[indexPath.row];
-        [mainVC loadFavoritesSong];
-    }
-    else {
-        [self performSegueWithIdentifier:@"ShowTabSegue" sender:self];
+    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"History shows all tabs you've searched and lets you access them offline!"]) return;
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Song *song = [[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath];
+        if (song.isFavorite.boolValue) {
+            song.dateOfCreation = nil;
+        } else {
+            [[CoreDataHelper.get managedObjectContext] deleteObject:song];
+        }
+        [CoreDataHelper.get saveContext];
     }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MainViewController *vc = segue.destinationViewController;
-    NSArray *songs = _history[_historyDictKeys[self.tableView.indexPathForSelectedRow.section]];
-    Song *song = songs[self.tableView.indexPathForSelectedRow.row];
-    vc.currentSong = song;
-}
+#pragma mark Search Display Controller
 
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.dateOfCreation != nil AND (self.name beginswith[c] %@ OR self.artist beginswith[c] %@)",searchString, searchString];
+    [NSFetchedResultsController deleteCacheWithName:@"HistorySearchCache"];
+    [[[self searchFetchedResultsControllerGetter] fetchRequest] setPredicate:predicate];
+    return [super searchDisplayController:controller shouldReloadTableForSearchString:searchString];
+}
 
 @end

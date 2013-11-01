@@ -10,14 +10,17 @@
 #import <CoreImage/CoreImage.h>
 #import "ChordView.h"
 #import "Favorites.h"
-#import "UIToolbar+FlatUI.h"
 #import "ChordsContainerView.h"
 #import "AppDelegate.h"
 #import "Api.h"
 #import <Social/Social.h>
 #import "iRate.h"
+#import <MessageUI/MessageUI.h>
+#import "InAppPurchaseManager.h"
+#import "CoreDataHelper.h"
+#import "UpgradePromptViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController () <MFMailComposeViewControllerDelegate>
 
 @property NSDictionary *chords;
 
@@ -28,16 +31,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _autoScrollingSpeedLabel.textColor = [UIColor defaultColor];
+    _autoScrollingTitleLabel.font = [UIFont proximaNovaSemiBoldSize:_autoScrollingTitleLabel.font.pointSize];
+    _autoScrollingSpeedLabel.font = [UIFont proximaNovaLightSize:_autoScrollingSpeedLabel.font.pointSize];
     _autoScrollingPopupView.alpha = 0;
-    [_versionsButton configureFlatButtonWithColor:[UIColor whiteColor] highlightedColor:[UIColor whiteColor] cornerRadius:0];
-    [_bottomToolbar configureFlatToolbarWithColor:[UIColor whiteColor]];
-    [_autoScrollSlider configureFlatSliderWithTrackColor:[UIColor colorWithWhite:0.9 alpha:1] progressColor:[UIColor defaultColor] thumbColorNormal:[UIColor defaultColor] thumbColorHighlighted:[UIColor defaultColor]];
+    _autoScrollingPopupView.backgroundColor = [UIColor defaultColor];
     [self autoScroll];
     _autoScrollSlider.value = 0;
     _autoScrollSlider.userInteractionEnabled = NO;
     _actionButton.enabled = NO;
-    _webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 44, 0);
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
@@ -46,6 +47,7 @@
     _autoScrollSlider.userInteractionEnabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     _actionButton.enabled = NO;
+    _chords = nil;
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -53,9 +55,9 @@
     _webView.scrollView.userInteractionEnabled = YES;
     _autoScrollSlider.userInteractionEnabled = YES;
     self.navigationItem.rightBarButtonItem.enabled = YES;
-    _versionsButton.enabled = _versionsSheet != nil;
+    _versionsButton.enabled = YES;
     _actionButton.enabled = YES;
-    [[iRate sharedInstance] logEvent:NO];
+    [self showPopupsIfNecessary];
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -111,6 +113,45 @@
 }
 
 - (IBAction)didPressVersionsButton:(id)sender {
+    if (!_versionsSheet) {
+        NSString *searchTerm = [NSString stringWithFormat:@"%@ %@",_currentSong.artist, _currentSong.name];
+        [_loadingIndicatorView startAnimating];
+        _versionsButton.enabled = NO;
+        [Api tabSearch:searchTerm page:1 success:^(id parsedResponse) {
+            id resultsObject = [parsedResponse objectForKey:@"result"];
+            NSMutableArray *allSongs;
+            if ([resultsObject respondsToSelector:@selector(objectAtIndex:)]) {
+                allSongs = [parsedResponse objectForKey:@"result"];
+            } else {
+                allSongs = [NSMutableArray arrayWithObject:resultsObject];
+            }
+            NSMutableDictionary *parsedSong;
+            for (NSDictionary *song in allSongs) {
+                if (!parsedSong) {
+                    parsedSong = [NSMutableDictionary dictionaryWithDictionary:
+                                           @{@"name": song.name,
+                                             @"artist": song.artist,
+                                             @"versions": [NSMutableArray array]}];
+                }
+                [parsedSong.versions addObject:song];
+                if (song.versionNumber.integerValue == _currentSong.version.integerValue && [song.type isEqualToString:_currentSong.type] && [song.type2 isEqualToString:_currentSong.type2]) {
+                    _currentVersionIndex = [parsedSong.versions indexOfObject:song];
+                }
+                _internetSong = parsedSong;
+            }
+            _versionsSheet = [parsedSong versionsActionSheetWithCurrentVersionIndex:_currentVersionIndex];
+            _versionsSheet.delegate = self;
+            [_versionsSheet showFromBarButtonItem:sender animated:YES];
+            [Api addArtistToCache:_currentSong];
+            [_loadingIndicatorView stopAnimating];
+            _versionsButton.enabled = YES;
+        } failure:^{
+            _versionsButton.enabled = YES;
+            [_loadingIndicatorView stopAnimating];
+                [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Unable to retrieve more versions for this song. Make sure you have internet access!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            }];
+        return;
+    }
     if ([_versionsSheet isVisible]) {
         [_versionsSheet dismissWithClickedButtonIndex:_versionsSheet.cancelButtonIndex animated:YES];
     } else {
@@ -119,21 +160,20 @@
 }
 
 - (void)configureFavoritesButton {
-    [_favoritesButtonItem setImage:[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"estrelinha" : @"estrelinha_cinzinha"]];
+    [_favoritesButtonItem setImage:[UIImage imageNamed:_currentSong.isFavorite.boolValue ? @"favorites" : @"not_favorites"]];
 }
 
 - (IBAction)didPressFavoritesButton:(id)sender {
     if (!_currentSong) return;
-    if (_currentSong.isFavorite.boolValue) {
-        [Favorites removeFromFavorites:_currentSong];
-    } else {
-        [Favorites addToFavorites:_currentSong];
-    }
+    _currentSong.isFavorite = @(!_currentSong.isFavorite.boolValue);
     [self configureFavoritesButton];
-    [FavoritesAlertView showFavoritesAlertForSong:_currentSong inView:self.view];
+    [FavoritesAlertView showFavoritesAlertForSong:_currentSong inView:self.webView];
+    [CoreDataHelper.get saveContext];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
+    if (self.navigationController) return; //don't do anything if we're still in the nav. stack!
+    //otherwise release everything
     _webView.delegate = nil;
     [_webView stopLoading];
     [_webView removeFromSuperview];
@@ -142,10 +182,6 @@
 }
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    for (UIScrollView *scroll in [_webView subviews]) {
-        if ([scroll respondsToSelector:@selector(setZoomScale:)])
-            [scroll setZoomScale:UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ? _webView.frame.size.height/_webView.frame.size.width : 1 animated:NO];
-    }
 }
 
 //////// internet tab
@@ -160,14 +196,14 @@
     _internetSong = nil;
     _versionsSheet = nil;
     self.navigationItem.title = _currentSong.name;
-    _versionsButton.title = _currentSong.shortVersionTitle;
+    _versionsButton.title = @"Change ver.";
     [self presentCurrentSong];
 }
 
 -(void)changeVersion:(NSInteger)versionIndex {
     _currentVersionIndex = versionIndex;
     NSDictionary *version = _internetSong.versions[_currentVersionIndex];
-    self.versionsButton.title = version.shortVersionTitle;
+    self.versionsButton.title = @"Change ver.";
     _versionsSheet = [_internetSong versionsActionSheetWithCurrentVersionIndex:_currentVersionIndex];
     _versionsSheet.delegate = self;
     if ([Favorites findByUgid:version[@"id"]]) {
@@ -177,9 +213,10 @@
     }
     [_loadingIndicatorView startAnimating];
     [Api fetchTabContentForVersion:version success:^(NSString *html) {
-        _currentSong = [Favorites addToDatabase:version withContent:html];
+        _currentSong = [Song addToDatabase:version withContent:html];
         [_loadingIndicatorView stopAnimating];
         [self presentCurrentSong];
+        [self showPopupsIfNecessary];
     } failure:^{
         [_loadingIndicatorView stopAnimating];
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Something went wrong!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
@@ -193,12 +230,32 @@
         [self changeVersion:buttonIndex < _currentVersionIndex ? buttonIndex : buttonIndex + 1];
         return;
     }
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Print"]) {
+        [self print];
+        return;
+    }
     [self shareThisTab:[actionSheet buttonTitleAtIndex:buttonIndex]];
 }
 
 -(void)presentCurrentSong {
-    [_webView loadHTMLString:_currentSong.tab baseURL:[NSURL URLWithString:_currentSong.version.integerValue == 0 ? nil : @"http://tabfinder.herokuapp.com"]];
+    [_webView loadHTMLString:_currentSong.tab baseURL:_currentSong.version.integerValue == 0 ? nil : BASE_URL];
     [self configureFavoritesButton];
+}
+
+-(void)showPopupsIfNecessary {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    if (![iRate sharedInstance].ratedThisVersion && [Favorites tabCount] % 25 == 0) {
+        UIViewController *ratingVC = [sb instantiateViewControllerWithIdentifier:@"RatingPromptViewController"];
+        [self presentViewController:ratingVC animated:YES completion:nil];
+        return;
+    }
+    if ([Favorites tabCount] % 11 == 0
+        && ![InAppPurchaseManager sharedInstance].userHasFullApp
+        && [InAppPurchaseManager sharedInstance].proUpgradeProduct
+        && [InAppPurchaseManager sharedInstance].proUpgradeProduct.localizedDescription) {
+        UIViewController *upgradeVC = [sb instantiateViewControllerWithIdentifier:@"UpgradePromptViewController"];
+        [self presentViewController:upgradeVC animated:YES completion:nil];
+    }
 }
 
 - (IBAction)didPressActionButton:(id)sender {
@@ -207,7 +264,7 @@
         _shareSheet = nil;
         return;
     }
-    _shareSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook",@"Twitter",@"Email", nil];
+    _shareSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook",@"Twitter",@"Email",@"Print", nil];
     [_shareSheet showFromBarButtonItem:_actionButtonItem animated:YES];
 }
 
@@ -219,11 +276,18 @@
         [self shareUsing:SLServiceTypeTwitter];
     }
     if ([via isEqualToString:@"Email"]) {
-        NSString *email = [@"mailto:?subject=" stringByAppendingFormat:@"%@ for song: %@ (by %@)",[_currentSong.type capitalizedString],_currentSong.name, _currentSong.artist];
-        email = [email stringByAppendingString:[@"&body=" stringByAppendingFormat:@"http://tabfinder.herokuapp.com/share/%@",_currentSong.ugid]];
-        email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:email]];
+        MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
+        vc.mailComposeDelegate = self;
+        vc.toRecipients = @[];
+        vc.subject = [NSString stringWithFormat:@"%@ for song: %@ (by %@)",[_currentSong.type capitalizedString],_currentSong.name, _currentSong.artist];
+        vc.navigationBar.translucent = NO;
+        [vc setMessageBody:[NSString stringWithFormat:@"http://tabfinder.herokuapp.com/share/%@",_currentSong.ugid] isHTML:NO];
+        [self presentViewController:vc animated:YES completion:nil];
     }
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)shareUsing:(NSString *)serviceType {
@@ -238,7 +302,29 @@
             [controller dismissViewControllerAnimated:YES completion:Nil];
         };
         controller.completionHandler = myBlock;
+    } else {
+        NSString *message = @"This service is not available! You can enable it on from your device settings.";
+        [[[UIAlertView alloc] initWithTitle:@"Oops!" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     }
+}
+
+-(void)print {
+    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"The print function allows you to easily print any guitar tab using your Air Printer!"]) return;
+    UIPrintInteractionController *pic = [UIPrintInteractionController sharedPrintController];
+    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+    printInfo.outputType = UIPrintInfoOutputGeneral;
+    pic.printInfo = printInfo;
+    pic.printFormatter = [_webView viewPrintFormatter];
+    pic.showsPageRange = YES;
+    void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) =
+    ^(UIPrintInteractionController *printController, BOOL completed, NSError *error)
+    {
+        if (!completed && error)
+        {
+            NSLog(@"Printing could not complete because of error: %@", error);
+        }
+    };
+    [pic presentAnimated:YES completionHandler:completionHandler];
 }
 
 @end

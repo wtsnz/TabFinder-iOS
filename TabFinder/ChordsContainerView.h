@@ -23,5 +23,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *dragIconImageVIew;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @end

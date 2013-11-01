@@ -7,7 +7,7 @@
 //
 
 #import "iPhoneMainViewController.h"
-#import "Favorites.h"
+
 
 @interface iPhoneMainViewController ()
 
@@ -18,17 +18,60 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.webView setBackgroundColor:[UIColor clearColor]];
+    [Engine.instance disableLeftMenu];
     self.webView.scrollView.delegate = self;
     if (self.internetSong) {
         [self loadInternetSong];
     } else if (self.currentSong) {
         [self loadFavoritesSong];
     }
+    _tabHeaderView.hidden = YES;
+    _bannerView.delegate = self;
+    [self fixBannerHeightOrHideIt];
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    _bannerView.hidden = YES;
+}
+
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner {
+    _bannerView.hidden = [InAppPurchaseManager sharedInstance].userHasFullApp;
+}
+
+-(void)fixBannerHeightOrHideIt {
+    _bannerHeight.constant = UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? 50 : 32;
+    _bannerView.hidden = [InAppPurchaseManager sharedInstance].userHasFullApp;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [Engine.instance enableLeftMenu];
+    [_bannerView cancelBannerViewAction];
+    [_bannerView removeFromSuperview];
+    _bannerView = nil;
+    [super viewDidDisappear:animated];
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
+    [super webViewDidFinishLoad:webView];
+    [_tabHeaderView configureForSong:self.currentSong];
+    _tabHeaderView.hidden = NO;
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 44, 0)];
+    [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height - 10)];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y <= 0 && scrollView.isDecelerating && self.navigationController.navigationBar.frame.origin.y < 0) {
         [self showControlBarsAnimated:YES];
+    }
+    if (scrollView.contentOffset.y > -_tabHeaderView.frame.size.height && scrollView.contentOffset.y < 0) {
+        CGFloat offset = _tabHeaderView.frame.size.height - fabsf(scrollView.contentOffset.y);
+        _tabHeaderView.frame = CGRectMake(0, 0 - offset*0.3, _tabHeaderView.frame.size.width, _tabHeaderView.frame.size.height);
     }
     if (scrollView.isDragging) {
         for (UIView *view in self.view.subviews) {
@@ -76,6 +119,7 @@
                 numberOfViews++;
             }
         }
+    [self fixBannerHeightOrHideIt];
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 

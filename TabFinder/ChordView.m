@@ -19,6 +19,9 @@ static const float FRET_0_Y = 10;
 
 -(id)init {
     self = [[NSBundle mainBundle] loadNibNamed:@"ChordView" owner:self options:nil].lastObject;
+    _fretboardImageView.image = [_fretboardImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    _fretboardImageView.tintColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor defaultColor];
     return self;
 }
 
@@ -26,15 +29,15 @@ static const float FRET_0_Y = 10;
     if ([finger isEqualToString:@"capo"]) {
         UIView *capoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 5)];
         capoView.layer.cornerRadius = 2.5;
-        capoView.backgroundColor = [UIColor defaultColor];
+        capoView.backgroundColor = [UIColor whiteColor];
         return capoView;
     }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     BOOL isFinger = !([finger isEqualToString:@"x"] || [finger isEqualToString:@"0"]);
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setFont:[UIFont fontWithName:@"HelveticaNeue-Regular" size:isFinger ? 13 : 8]];
-    [label setBackgroundColor:isFinger ? [UIColor defaultColor] : [UIColor clearColor]];
-    [label setTextColor:isFinger ? [UIColor whiteColor] : [UIColor defaultColor]];
+    [label setBackgroundColor:isFinger ? [UIColor whiteColor] : [UIColor clearColor]];
+    [label setTextColor:isFinger ? [UIColor defaultColor] : [UIColor whiteColor]];
     [label setText:[finger isEqualToString:@"0"] ? @"o" : finger];
     [label.layer setCornerRadius:10];
     [label.layer setMasksToBounds:YES];

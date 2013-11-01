@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "SongTableViewController.h"
+#import "Favorites.h"
+#import <QuartzCore/QuartzCore.h>
+#import "AlertPopupView.h"
+#import "CoreDataHelper.h"
 
-@interface FavoritesViewController : UITableViewController <UISearchDisplayDelegate>
+@interface FavoritesViewController : SongTableViewController
 
--(void)reloadFavorites;
 +(FavoritesViewController *)currentInstance;
+@property (nonatomic, strong) NSString *sorting;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 
 @end

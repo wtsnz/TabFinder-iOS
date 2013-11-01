@@ -9,7 +9,6 @@
 #import "ChordsTableViewController.h"
 #import "ChordRequest.h"
 #import "ChordsPresentationViewController.h"
-#import "ChordCell.h"
 
 @interface ChordsTableViewController () <UISearchBarDelegate>
 
@@ -23,16 +22,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.contentSizeForViewInPopover = CGSizeMake(320, 480);
-    _searchBar.delegate = self;
-    [_searchBar makeItFlat];
+    _searchBar.placeholder = @"Enter the chord's name";
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     _tapTheScreenToBeginEditing = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(beginSearch)];
     [self.tableView addGestureRecognizer:_tapTheScreenToBeginEditing];
 }
 
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [_searchBar makeItFlat];
-}
 
 - (void)viewDidUnload
 {
@@ -69,8 +64,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ChordCell";
-    ChordCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.chordNameLabel.text = [_chords objectAtIndex:indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.textLabel.text = [_chords objectAtIndex:indexPath.row];
     if ([cell.textLabel.text hasPrefix:@"No chords"]) {
         [cell setUserInteractionEnabled:NO];
     } else {
@@ -87,6 +82,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"See the chord diagrams an up to 20 variations of any chord, including fingerings!"]) return;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         _selectedChord = [ChordRequest chordRequest:[_chords objectAtIndex:indexPath.row]];

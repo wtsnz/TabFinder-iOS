@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *chordNameLabel;
 
 -(void)configureWithNotes:(NSString *)notes fingering:(NSString *)fingers baseFret:(NSInteger)baseFret;
+@property (weak, nonatomic) IBOutlet UIImageView *fretboardImageView;
 
 @end

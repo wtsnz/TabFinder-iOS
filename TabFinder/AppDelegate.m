@@ -7,27 +7,35 @@
 //
 
 #import "AppDelegate.h"
-#import "Favorites.h"
-#import "iRate.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:19], NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:15]} forState:UIControlStateNormal];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor defaultColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitVC = (UISplitViewController *)self.window.rootViewController;
-        _navigationControllerIpad = splitVC.viewControllers.lastObject;
+        _splitVC = (UISplitViewController *)self.window.rootViewController;
+        _navigationControllerIpad = _splitVC.viewControllers.lastObject;
         _mainViewControllerIpad = _navigationControllerIpad.viewControllers[0];
-        splitVC.delegate = _mainViewControllerIpad;
-        splitVC.presentsWithGesture = NO;
+        _splitVC.delegate = _mainViewControllerIpad;
+        _splitVC.presentsWithGesture = NO;
+    } else {
+        [Engine.instance attachToWindow:self.window];
     }
     application.idleTimerDisabled = YES;
     [Favorites convertOldFavorites];
     [iRate sharedInstance].promptAtLaunch = NO;
-    [iRate sharedInstance].daysUntilPrompt = 0;
-    [iRate sharedInstance].usesUntilPrompt = 5;
-    [iRate sharedInstance].eventsUntilPrompt = 50;
+    [iRate sharedInstance].appStoreID = 551889599;
+    [iRate sharedInstance].eventsUntilPrompt = 9999;
+    [[InAppPurchaseManager sharedInstance] loadStore];
     return YES;
+}
+
++(AppDelegate *)instance {
+    return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -49,7 +57,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if (![InAppPurchaseManager sharedInstance].userHasFullApp) {
+      [[InAppPurchaseManager sharedInstance] loadStore];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

@@ -14,26 +14,12 @@
 
 @implementation Favorites
 
-+(Song *)addToDatabase:(NSDictionary *)version withContent:(NSString *)tab {
-    Song *song = [NSEntityDescription insertNewObjectForEntityForName:@"Song" inManagedObjectContext:[CoreDataHelper.get managedObjectContext]];
-    song.name = version.name;
-    song.artist= version.artist;
-    song.type = version.type;
-    song.tab = tab;
-    song.version = @(version.versionNumber.integerValue);
-    song.ugid = version[@"id"];
-    song.type2 = version.type2;
-    song.isFavorite = @(NO);
-    song.dateOfCreation = [NSDate date];
-    if ([Api artistPhotoForArtist:song.artist]) {
-        song.artistImage = UIImagePNGRepresentation([Api artistPhotoForArtist:song.artist]);
-    } else {
-        [Api downloadArtistImageOnBackgroundForSong:song];
++(void)clearFavorites {
+    for (Song *song in [Favorites history]) {
+        [[CoreDataHelper get].managedObjectContext deleteObject:song];
+        [CoreDataHelper.get saveContext];
     }
-    [CoreDataHelper.get saveContext];
-    return song;
 }
-
 
 +(void)addToFavorites:(Song *)song {
     song.isFavorite = @(YES);
@@ -56,56 +42,42 @@
 
 +(void)performImageCheck {
     for (Song *song in [self history]) {
-        if (!song.artistImage) [Api downloadArtistImageOnBackgroundForSong:song];
+        if (!song.artistImage) [Api getPhotoForArtist:song.artist callback:^(UIImage *artistPhoto) {
+            song.artistImage = UIImagePNGRepresentation(artistPhoto);
+            [CoreDataHelper.get saveContext];
+        }];
     }
 }
 
-+(NSArray *)favorites {
++(NSInteger)tabCount {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:[NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext]];
+    NSError *err;
+    NSUInteger count = [CoreDataHelper.get.managedObjectContext countForFetchRequest:request error:&err];
+    return count;
+}
+
++(NSInteger)favoritesCount {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.isFavorite == %@",@(YES)]];
-    NSError *error;
-    return [[CoreDataHelper.get.managedObjectContext executeFetchRequest:fetchRequest error:&error] sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+    NSError *err;
+    NSUInteger count = [CoreDataHelper.get.managedObjectContext countForFetchRequest:fetchRequest error:&err];
+    return count;
 }
 
-+(NSDictionary *)historyDictionary {
-    NSMutableDictionary *historyDict = [NSMutableDictionary dictionary];
-    NSDate *today = [NSDate date];
-    NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-24*60*60];
-    for (Song *song in [self history]) {
-        NSDate *baseDate = song.dateOfCreation;
-        if (baseDate == nil) baseDate = [NSDate dateWithTimeIntervalSinceNow:-24*60*60*31];
-        NSCalendar* calendar = [NSCalendar currentCalendar];
-        NSDateComponents* comps = [calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:baseDate];
-        NSDate* theMidnightHour = [calendar dateFromComponents:comps];
-        NSTimeInterval intervalFromToday = [today timeIntervalSinceDate:theMidnightHour];
-        if (intervalFromToday >= 0 && intervalFromToday < 60*60*24) {
-            if (!historyDict[@"0Today"]) historyDict[@"0Today"] = [[NSMutableArray alloc] init];
-            [historyDict[@"0Today"] addObject:song];
-            continue;
-        }
-        NSTimeInterval intervalFromYesterday = [yesterday timeIntervalSinceDate:theMidnightHour];
-        if (intervalFromToday >= 0 && intervalFromYesterday < 60*60*24) {
-            if (!historyDict[@"1Yesterday"]) historyDict[@"1Yesterday"] = [[NSMutableArray alloc] init];
-            [historyDict[@"1Yesterday"] addObject:song];
-            continue;
-        }
-        if (abs([baseDate timeIntervalSinceNow]) < 60*60*24*7) {
-            if (!historyDict[@"2Last 7 days"]) historyDict[@"2Last 7 days"] = [[NSMutableArray alloc] init];
-            [historyDict[@"2Last 7 days"] addObject:song];
-            continue;
-        }
-        if (abs([baseDate timeIntervalSinceNow]) < 60*60*24*30) {
-            if (!historyDict[@"3Last 30 days"]) historyDict[@"3Last 30 days"] = [[NSMutableArray alloc] init];
-            [historyDict[@"3Last 30 days"] addObject:song];
-            continue;
-        }
-        if (!historyDict[@"4Older than 30 days"]) historyDict[@"4Older than 30 days"] = [[NSMutableArray alloc] init];
-        [historyDict[@"4Older than 30 days"] addObject:song];
-        continue;
++(NSString *)favoriteBand {
+    NSArray *history = [self history];
+    NSArray *unique = [history valueForKeyPath:@"artist"];
+    NSMutableArray *countsArray = [NSMutableArray arrayWithCapacity:unique.count];
+    for (NSString *artist in unique) {
+        NSArray *filtered = [history filteredArrayUsingPredicate:
+                             [NSPredicate predicateWithFormat:@"artist = %@", artist]];
+        [countsArray addObject:@{@"artist":artist, @"count":@(filtered.count)}];
     }
-    return historyDict;
+    NSArray *result = [countsArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"count" ascending:NO]]];
+    return [result.firstObject objectForKey:@"artist"];
 }
 
 +(NSArray *)history {

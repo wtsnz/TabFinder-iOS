@@ -27,11 +27,7 @@
 }
 
 -(NSURL *)url {
-//    return [NSURL URLWithString:[@"http://192.168.1.91:3000/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:[@"http://192.168.1.135:3000/show/" stringByAppendingString:self[@"id"]]];
-    return [NSURL URLWithString:[@"http://tabfinder.herokuapp.com/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:[@"http://localhost:3000/show/" stringByAppendingString:self[@"id"]]];
-//    return [NSURL URLWithString:self[@"url"]];
+    return [NSURL URLWithString:[@"/show/" stringByAppendingString:self[@"id"]] relativeToURL:BASE_URL];
 }
 
 -(NSString *)versionNumber {
@@ -80,11 +76,10 @@
         }
     }
     if (versionsSheet.numberOfButtons == 0) {
-        versionsSheet = nil;
-    } else {
+        versionsSheet.title = @"There are no more versions of this song. If this is a new song, try again in a few days :)";
+    }
         [versionsSheet addButtonWithTitle:@"Cancel"];
         [versionsSheet setCancelButtonIndex:self.versions.count-1];
-    }
     return versionsSheet;
 }
 

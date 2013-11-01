@@ -10,6 +10,7 @@
 #import "SongCell.h"
 
 @interface SearchViewController : UITableViewController <UISearchBarDelegate>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end

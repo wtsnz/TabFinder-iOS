@@ -27,9 +27,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_searchBar makeItFlat];
     [self resetSearchResults];
-    [self.navigationItem.rightBarButtonItem removeTitleShadow];
+    _searchBar.delegate = self;
+    _searchBar.placeholder = @"Enter song or artist name";
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    _searchBar.barTintColor = [UIColor colorWithWhite:0.98 alpha:1];
+    if ([_searchBar respondsToSelector:@selector(setTintColor:)]) {
+        [_searchBar setTintColor:[self.view tintColor]];
+    }
 }
 
 -(void)resetSearchResults {
@@ -38,10 +43,6 @@
     _totalSearchPages = 0;
     _searchResults = [NSMutableDictionary dictionary];
     _searchResultsDictionaryKeys = [NSMutableArray array];
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [_searchBar makeItFlat]; //layout fix
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -141,6 +142,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([cell isMemberOfClass:[SongCell class]]) {
+        cell.backgroundColor = [UIColor colorWithWhite:indexPath.row % 2 == 1 ? 0.98 : 1 alpha:1];
         if (!((SongCell*)cell).artistImageView.image)
             [((SongCell *)cell).activityIndicator startAnimating];
         else
@@ -160,6 +162,10 @@
     else {
         [self performSegueWithIdentifier:@"SongSegue" sender:self];
     }
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [self.searchBar endEditing:YES];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -22,9 +22,14 @@
 @property (nonatomic, retain) NSData * artistImage;
 @property (nonatomic, retain) NSNumber * isFavorite;
 @property (nonatomic, retain) NSDate * dateOfCreation;
+@property (nonatomic, retain) NSString * favoritesSectionTitle;
+@property (nonatomic, retain) NSString * historySectionTitle;
 
 
 -(NSString *)fullVersionTitle;
 -(NSString *)shortVersionTitle;
+
++(Song *)addToDatabase:(NSDictionary *)version withContent:(NSString *)tab;
++(void)removeOlderThanDays:(NSInteger)numberOfDays;
 
 @end
