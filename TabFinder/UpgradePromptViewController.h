@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
-@interface UpgradePromptViewController : UIViewController
+@interface UpgradePromptViewController : ModalViewController
+
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 - (IBAction)didPressBuyButton:(id)sender;

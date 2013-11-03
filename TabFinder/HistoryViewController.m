@@ -16,25 +16,14 @@
 #import "InAppPurchaseManager.h"
 
 @interface HistoryViewController () <UIActionSheetDelegate>
-
-@property (strong, nonatomic) Song *selectedSong;
-
 @end
 
 @implementation HistoryViewController
 
-static HistoryViewController *_instance;
-
-+(HistoryViewController *)currentInstance {
-    return _instance;
-}
-
 - (void)viewDidLoad
 {
-    [NSFetchedResultsController deleteCacheWithName:@"HistoryCache"];
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"trash"] style:UIBarButtonItemStylePlain target:self action:@selector(changeSettings:)];
-    _instance = self;
     self.tableView.sectionIndexMinimumDisplayRowCount = 9999;
     self.searchDisplayController.searchResultsTableView.sectionIndexMinimumDisplayRowCount = 9999;
 }
@@ -48,6 +37,7 @@ static HistoryViewController *_instance;
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.dateOfCreation != nil"]];
     [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateOfCreation" ascending:NO]]];
     [fetchRequest setEntity:entity];
+    [NSFetchedResultsController deleteCacheWithName:@"HistoryCache"];
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:CoreDataHelper.get.managedObjectContext sectionNameKeyPath:@"historySectionTitle" cacheName:@"HistoryCache"];
     self.fetchedResultsController.delegate = self;
     return self.fetchedResultsController;
@@ -95,8 +85,17 @@ static HistoryViewController *_instance;
 #pragma mark - Table view delegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"History shows all tabs you've searched and lets you access them offline!"]) return;
+    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"Launch tabs from your search history even when you're offline!"]) return;
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == tableView.indexPathForSelectedRow.row
+        && indexPath.section == tableView.indexPathForSelectedRow.section
+        && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        return NO;
+    }
+    return [super tableView:tableView canEditRowAtIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

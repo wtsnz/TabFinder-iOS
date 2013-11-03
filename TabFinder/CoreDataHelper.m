@@ -67,6 +67,7 @@ static CoreDataHelper *coreDataHelper;
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
     [self loadPersistentStores];
+    [_managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     return _managedObjectContext;
 }
 

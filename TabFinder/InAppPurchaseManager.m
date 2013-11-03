@@ -26,6 +26,25 @@ static InAppPurchaseManager *_instance;
     return [self.class userHasFullApp];
 }
 
+-(id)init {
+    self = [super init];
+    // register to observe notifications from the store
+    [[NSNotificationCenter defaultCenter]
+     addObserver: self
+     selector: @selector (storeDidChange:)
+     name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+     object: [NSUbiquitousKeyValueStore defaultStore]];
+    
+    // get changes that might have happened while this
+    // instance of your app wasn't running
+    [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+    return self;
+}
+
+-(void)storeDidChange:(NSNotification *)notification {
+    [[MenuViewController instance].tableView reloadData];
+}
+
 - (void)requestProUpgradeProductData
 {
     NSSet *productIdentifiers = [NSSet setWithObject:@"protabfinder" ];
@@ -80,9 +99,14 @@ static InAppPurchaseManager *_instance;
 //
 - (void)purchaseProUpgrade
 {
+#if TARGET_IPHONE_SIMULATOR
+    [[NSUbiquitousKeyValueStore defaultStore] setBool:YES forKey:@"has_full_app"];
+    [[MenuViewController instance].tableView reloadData];
+#else
     //SKPayment *payment = [SKPayment paymentWithProductIdentifier:kInAppPurchaseProUpgradeProductId];
     SKPayment *payment = [SKPayment paymentWithProduct:_proUpgradeProduct];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
+#endif
 }
 
 #pragma -
@@ -108,10 +132,11 @@ static InAppPurchaseManager *_instance;
 {
     if ([productId isEqualToString:kInAppPurchaseProUpgradeProductId])
     {
-        [self.class writeUserFile:YES];
+        [[NSUbiquitousKeyValueStore defaultStore] setBool:YES forKey:@"has_full_app"];
         [[MenuViewController instance].tableView reloadData];
     }
 }
+
 
 //
 // removes the transaction from the queue and posts a notification with the transaction result
@@ -216,22 +241,31 @@ static InAppPurchaseManager *_instance;
     [self purchaseProUpgrade];
 }
 
-+(void)writeUserFile:(BOOL)hasFullApp {
-  [@{@"has_full_app": @(hasFullApp)} writeToFile:[self userFilePath] atomically:YES];
-}
-
 +(NSString *)userFilePath {
     return [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"user.plist"];
 }
 
++(void)writeUserFile:(BOOL)hasFullApp {
+    [@{@"has_full_app": @(hasFullApp)} writeToFile:[self userFilePath] atomically:YES];
+}
+
 +(BOOL)userHasFullApp {
-    //if file exists, read from file
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[self userFilePath]]) {
-        return [[[[NSDictionary alloc] initWithContentsOfFile:[self userFilePath]] valueForKey:@"has_full_app"] boolValue];
+    if ([[NSUbiquitousKeyValueStore defaultStore] objectForKey:@"has_full_app"] == nil) {
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[self userFilePath]]) {
+            BOOL hasFullApp = [[[[NSDictionary alloc] initWithContentsOfFile:[self userFilePath]] valueForKey:@"has_full_app"] boolValue];
+            if (hasFullApp) {
+                [[NSUbiquitousKeyValueStore defaultStore] setBool:hasFullApp forKey:@"has_full_app"];
+                return YES;
+            } else {
+                [[NSUbiquitousKeyValueStore defaultStore] synchronize];
+                return NO;
+            }
+        } else {
+            [self writeUserFile:[Favorites tabCount] > 0];
+            return [self userHasFullApp];
+        }
     }
-    //otherwise check how many songs in history, if > 0 then grant access and write to file
-    [self writeUserFile:[Favorites history].count > 0];
-    return [self userHasFullApp];
+    return [[NSUbiquitousKeyValueStore defaultStore] boolForKey:@"has_full_app"];
 }
 
 

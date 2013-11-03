@@ -10,9 +10,9 @@
 
 @interface Engine () <UIGestureRecognizerDelegate, IIViewDeckControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate>
 
-@property RESideMenu *sideMenu;
-@property UIPanGestureRecognizer *panGesture;
-@property UIView *blackStatusBarBackground;
+@property (strong, nonatomic) UIPanGestureRecognizer *panGesture;
+@property (strong, nonatomic) UIView *blackStatusBarBackground;
+@property (strong, nonatomic) NSArray *viewControllers;
 
 @end
 
@@ -34,13 +34,12 @@ static Engine *_instance;
     if ([defaults objectForKey:@"enable_iCloud"] == nil) {
         [self.class enableiCloud:NO];
     }
-//    [[CoreDataHelper get] managedObjectContext]; //connects to database upon launch!
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         _navigationController = [sb instantiateViewControllerWithIdentifier:@"NavigationController"];
         _menuViewController = [sb instantiateViewControllerWithIdentifier:@"MenuViewController"];
-        _searchViewController = [sb instantiateViewControllerWithIdentifier:@"SearchViewController"];
         _viewDeckController = [[IIViewDeckController alloc] initWithCenterViewController:_navigationController leftViewController:[[IISideController alloc] initWithViewController:_menuViewController]];
+        [self loadViewControllers];
         _viewDeckController.panningMode = IIViewDeckFullViewPanning;
         _viewDeckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
         _viewDeckController.parallaxAmount = 0.2;
@@ -52,7 +51,7 @@ static Engine *_instance;
         [_viewDeckController.view bringSubviewToFront:_blackStatusBarBackground];
         _blackStatusBarBackground.alpha = 0;
         [_navigationController.navigationBar setBarTintColor:[UIColor defaultColor]];
-        [self switchMenuToIndex:0];
+        [_navigationController setViewControllers:@[_searchViewController]];
     }
     return self;
 }
@@ -61,17 +60,17 @@ static Engine *_instance;
     _blackStatusBarBackground.alpha = offset/276;
 }
 
--(void)swipeHandler:(id)sender {
-    [_sideMenu showFromPanGesture:sender];
-}
-
 -(void)viewDeckController:(IIViewDeckController *)viewDeckController didOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated {
     if (viewDeckSide == IIViewDeckLeftSide)
         [_navigationController.visibleViewController.view endEditing:YES];
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if ([touch locationInView:_navigationController.view].x > 180) return NO;
+//    if (![_navigationController.visibleViewController respondsToSelector:@selector(tableView:)]) return YES;
+    if (![_navigationController.visibleViewController respondsToSelector:@selector(tableView)]) return NO;
+    UITableViewController *tableViewController = (UITableViewController *)_navigationController.visibleViewController;
+    if (tableViewController.tableView.isEditing) return NO;
+    if ([touch locationInView:_navigationController.view].x > _navigationController.view.frame.size.width/2) return NO;
     return YES;
 }
 
@@ -79,30 +78,23 @@ static Engine *_instance;
     window.rootViewController = _viewDeckController;
 }
 
--(UIViewController *)viewControllerForMenuItem:(NSInteger)menuItemIndex {
+-(void)loadViewControllers {
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    switch (menuItemIndex) {
-        case 0:
-            return _searchViewController;
-        case 1:
-            return [sb instantiateViewControllerWithIdentifier:@"FavoritesViewController"];
-        case 2:
-            return [sb instantiateViewControllerWithIdentifier:@"HistoryViewController"];
-        case 3:
-            return [sb instantiateViewControllerWithIdentifier:@"ChordsViewController"];
-        default:
-            return nil;
+    _searchViewController = [sb instantiateViewControllerWithIdentifier:@"SearchViewController"];
+    _favoritesViewController = [sb instantiateViewControllerWithIdentifier:@"FavoritesViewController"];
+    _historyViewController = [sb instantiateViewControllerWithIdentifier:@"HistoryViewController"];
+    _chordsViewController = [sb instantiateViewControllerWithIdentifier:@"ChordsViewController"];
+    _viewControllers = @[_searchViewController, _favoritesViewController, _historyViewController, _chordsViewController];
+    for (UIViewController *vc in _viewControllers) {
+        vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_icon"] landscapeImagePhone:[UIImage imageNamed:@"menu_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+        vc.view.hidden = NO;
     }
 }
 
 -(void)switchMenuToIndex:(NSInteger)index {
-    UIViewController *vc = [self viewControllerForMenuItem:index];
-    [_navigationController setViewControllers:@[vc] animated:NO];
-    vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_icon"] landscapeImagePhone:[UIImage imageNamed:@"menu_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+    [_navigationController setViewControllers:@[_viewControllers[index]] animated:NO];
     [_viewDeckController toggleLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
-        if (index == 0) {
-            [_searchViewController.searchBar becomeFirstResponder];
-        }
+        [((UITableViewController *)_viewControllers[index]).tableView reloadData];
     }];
 }
 

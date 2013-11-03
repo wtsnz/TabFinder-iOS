@@ -129,9 +129,9 @@
             for (NSDictionary *song in allSongs) {
                 if (!parsedSong) {
                     parsedSong = [NSMutableDictionary dictionaryWithDictionary:
-                                           @{@"name": song.name,
-                                             @"artist": song.artist,
-                                             @"versions": [NSMutableArray array]}];
+                                  @{@"name": song.name,
+                                    @"artist": song.artist,
+                                    @"versions": [NSMutableArray array]}];
                 }
                 [parsedSong.versions addObject:song];
                 if (song.versionNumber.integerValue == _currentSong.version.integerValue && [song.type isEqualToString:_currentSong.type] && [song.type2 isEqualToString:_currentSong.type2]) {
@@ -148,8 +148,8 @@
         } failure:^{
             _versionsButton.enabled = YES;
             [_loadingIndicatorView stopAnimating];
-                [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Unable to retrieve more versions for this song. Make sure you have internet access!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-            }];
+            [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Unable to retrieve more versions for this song. Make sure you have internet access!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        }];
         return;
     }
     if ([_versionsSheet isVisible]) {
@@ -242,19 +242,27 @@
     [self configureFavoritesButton];
 }
 
+static int lastTabCount;
+
 -(void)showPopupsIfNecessary {
+    NSInteger tabsCount = [Favorites tabCount];
+    if (lastTabCount == tabsCount) return;
+    lastTabCount = tabsCount;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    if (![iRate sharedInstance].ratedThisVersion && [Favorites tabCount] % 25 == 0) {
-        UIViewController *ratingVC = [sb instantiateViewControllerWithIdentifier:@"RatingPromptViewController"];
-        [self presentViewController:ratingVC animated:YES completion:nil];
-        return;
-    }
-    if ([Favorites tabCount] % 11 == 0
+    UIViewController *vcToPresent;
+    if (![iRate sharedInstance].ratedThisVersion && tabsCount % 25 == 0) {
+        vcToPresent = [sb instantiateViewControllerWithIdentifier:@"RatingPromptViewController"];
+    } else if (tabsCount % 11 == 0
         && ![InAppPurchaseManager sharedInstance].userHasFullApp
         && [InAppPurchaseManager sharedInstance].proUpgradeProduct
         && [InAppPurchaseManager sharedInstance].proUpgradeProduct.localizedDescription) {
-        UIViewController *upgradeVC = [sb instantiateViewControllerWithIdentifier:@"UpgradePromptViewController"];
-        [self presentViewController:upgradeVC animated:YES completion:nil];
+        vcToPresent = [sb instantiateViewControllerWithIdentifier:@"UpgradePromptViewController"];
+    }
+    if (!vcToPresent) return;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self presentViewController:vcToPresent animated:YES completion:nil];
+    } else {
+        [[Engine.instance viewDeckController] presentViewController:vcToPresent animated:YES completion:nil];
     }
 }
 

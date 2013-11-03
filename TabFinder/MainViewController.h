@@ -36,6 +36,7 @@
 
 -(void)loadFavoritesSong;
 -(void)loadInternetSong;
+-(void)clear;
 
 //internet song attributes
 @property (nonatomic) NSInteger currentVersionIndex;

@@ -16,8 +16,6 @@
 
 @interface FavoritesViewController : SongTableViewController
 
-+(FavoritesViewController *)currentInstance;
-@property (nonatomic, strong) NSString *sorting;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 

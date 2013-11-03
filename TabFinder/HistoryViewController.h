@@ -12,7 +12,4 @@
 
 @interface HistoryViewController : SongTableViewController
 
-+(HistoryViewController *)currentInstance;
-
-
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModalViewController.h"
 
-@interface RatingPromptViewController : UIViewController
+@interface RatingPromptViewController : ModalViewController
 
 @end

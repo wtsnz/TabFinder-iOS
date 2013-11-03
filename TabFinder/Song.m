@@ -75,32 +75,26 @@
 }
 
 -(NSString *)historySectionTitle {
-    NSDate *today = [NSDate date];
-    NSDate *yesterday = [NSDate dateWithTimeIntervalSinceNow:-24*60*60];
     NSDate *baseDate = self.dateOfCreation;
+    NSTimeInterval timeIntervalSinceNow = abs([baseDate timeIntervalSinceNow]);
     if (baseDate == nil) baseDate = [NSDate dateWithTimeIntervalSinceNow:-24*60*60*31];
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* comps = [calendar components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:baseDate];
-    NSDate* theMidnightHour = [calendar dateFromComponents:comps];
-    NSTimeInterval intervalFromToday = [today timeIntervalSinceDate:theMidnightHour];
-    if (intervalFromToday >= 0 && intervalFromToday < 60*60*24) {
-        return @"Today";
+    if (timeIntervalSinceNow < 60*60*24) {
+        return @"Last 24 hours";
     }
-    NSTimeInterval intervalFromYesterday = [yesterday timeIntervalSinceDate:theMidnightHour];
-    if (intervalFromToday >= 0 && intervalFromYesterday < 60*60*24) {
-        return @"Yesterday";
+    if (timeIntervalSinceNow < 60*60*24*2) {
+        return @"Last 48 hours";
     }
-    if (abs([baseDate timeIntervalSinceNow]) < 60*60*24*7) {
+    if (timeIntervalSinceNow < 60*60*24*7) {
         return @"Last 7 days";
     }
-    if (abs([baseDate timeIntervalSinceNow]) < 60*60*24*30) {
+    if (timeIntervalSinceNow < 60*60*24*30) {
         return @"Last 30 days";
     }
     return @"Older than 30 days";
 }
 
 -(NSString *)favoritesSectionTitle {
-    if ([[FavoritesViewController currentInstance].sorting isEqualToString:@"artist"]) {
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"favorites_sorting"] isEqualToString:@"artist"]) {
         return [self.artist substringToIndex:1];
     } else {
         return [self.name substringToIndex:1];

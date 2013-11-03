@@ -26,22 +26,22 @@
     _bannerView.delegate = self;
 }
 
-
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
     _bannerView.hidden = YES;
 }
 
 -(void)bannerViewWillLoadAd:(ADBannerView *)banner {
-    _bannerView.hidden = YES;//[InAppPurchaseManager sharedInstance].userHasFullApp;
+    _bannerView.hidden = [InAppPurchaseManager sharedInstance].userHasFullApp;
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [super webViewDidFinishLoad:webView];
-    _bannerView.hidden = YES; //[InAppPurchaseManager sharedInstance].userHasFullApp;
     [_tabHeaderView configureForSong:self.currentSong];
     _tabHeaderView.hidden = NO;
     [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 44, 0)];
     [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height - 10)];
+    //in case the user has just purchased Pro
+    if (!_bannerView.hidden && [InAppPurchaseManager sharedInstance].userHasFullApp) _bannerView.hidden = YES;
 }
 
 -(void)loadFavoritesSong {

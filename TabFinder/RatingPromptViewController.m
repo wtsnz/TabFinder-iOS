@@ -29,7 +29,8 @@
 }
 
 - (IBAction)didPressRateButton:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/tabfinderguitartabssearchengine"]];
+    [[iRate sharedInstance] openRatingsPageInAppStore];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/tabfinderguitartabssearchengine"]];
 }
 
 - (IBAction)didPressRemindLaterButton:(id)sender {

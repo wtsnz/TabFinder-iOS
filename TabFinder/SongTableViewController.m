@@ -8,6 +8,10 @@
 
 #import "SongTableViewController.h"
 
+@interface SongTableViewController ()
+
+@end
+
 @implementation SongTableViewController
 
 -(void)viewDidLoad {
@@ -56,6 +60,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = [UIColor colorWithWhite:indexPath.row % 2 == 1 ? 0.98 : 1 alpha:1];
+    [(SongCell *)cell configureWithFavoriteSong:[[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath]];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -67,7 +72,6 @@
     static NSString *CellIdentifier = @"SongCell";
     SongCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) cell = [[SongCell alloc] init];
-    [cell configureWithFavoriteSong:[[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath]];
     return cell;
 }
 
@@ -187,10 +191,20 @@
     headerView.contentView.backgroundColor = [UIColor whiteColor];
     headerView.alpha = 0.95;
     headerView.textLabel.font = [UIFont fontWithName:@"ProximaNova-SemiBold" size:15];
-    headerView.textLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1];
+    headerView.textLabel.textColor = [UIColor blackColor];
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 12;
 }
 
 -(void)setupView {
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 9, 0, 0);
+    self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
     self.searchDisplayController.searchResultsTableView.separatorStyle = self.tableView.separatorStyle;

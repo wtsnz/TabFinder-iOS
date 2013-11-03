@@ -50,10 +50,12 @@
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
-    [Engine.instance enableLeftMenu];
-    [_bannerView cancelBannerViewAction];
-    [_bannerView removeFromSuperview];
-    _bannerView = nil;
+    if (!self.navigationController) {
+        [Engine.instance enableLeftMenu];
+        [_bannerView cancelBannerViewAction];
+        [_bannerView removeFromSuperview];
+        _bannerView = nil;
+    }
     [super viewDidDisappear:animated];
 }
 

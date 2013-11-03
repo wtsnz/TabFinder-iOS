@@ -9,13 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #import "IIViewDeckController.h"
-#import "SearchViewController.h"
-#import "ChordsTableViewController.h"
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "IIWrapController.h"
 #import "IISideController.h"
-#import "RESideMenu.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
@@ -28,8 +25,11 @@
 
 @property IIViewDeckController *viewDeckController;
 @property UINavigationController *navigationController;
-@property SearchViewController *searchViewController;
+@property UIViewController *searchViewController;
 @property MenuViewController *menuViewController;
+@property UIViewController *chordsViewController;
+@property UIViewController *favoritesViewController;
+@property UIViewController *historyViewController;
 
 -(void)attachToWindow:(UIWindow *)window;
 

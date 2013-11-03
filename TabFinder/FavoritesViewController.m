@@ -16,19 +16,15 @@
 
 @implementation FavoritesViewController
 
-static FavoritesViewController *_currentInstance;
-
-+(FavoritesViewController *)currentInstance {
-    return _currentInstance;
-}
-
 - (void)viewDidLoad
 {
-    _sorting = @"name";
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"favorites_sorting"]) {
+        [[NSUserDefaults standardUserDefaults] setValue:@"name" forKey:@"favorites_sorting"];
+    }
     [super viewDidLoad];
-    _currentInstance = self;
     self.tableView.sectionIndexMinimumDisplayRowCount = 25;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"sort_by_artist"] style:UIBarButtonItemStylePlain target:self action:@selector(changeSorting:)];
+    [self configSortingButton];
 }
 
 -(NSFetchedResultsController *)fetchedResultsControllerForTableView:(UITableView *)tableView {
@@ -41,10 +37,11 @@ static FavoritesViewController *_currentInstance;
     }
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:_sorting ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:[[NSUserDefaults standardUserDefaults] valueForKey:@"favorites_sorting"] ascending:YES];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.isFavorite == %@",@(YES)]];
+    [NSFetchedResultsController deleteCacheWithName:@"FavoritesCache"];
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:CoreDataHelper.get.managedObjectContext sectionNameKeyPath:@"favoritesSectionTitle" cacheName:@"FavoritesCache"];
     self.fetchedResultsController.delegate = self;
     return self.fetchedResultsController;
@@ -56,7 +53,7 @@ static FavoritesViewController *_currentInstance;
     }
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:CoreDataHelper.get.managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:_sorting ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:[[NSUserDefaults standardUserDefaults] valueForKey:@"favorites_sorting"] ascending:YES];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"self.isFavorite == %@",@(YES)]];
@@ -66,17 +63,23 @@ static FavoritesViewController *_currentInstance;
 }
 
 -(void)changeSorting:(UIBarButtonItem *)sender {
-    [self.navigationItem.rightBarButtonItem setImage:[UIImage imageNamed:[@"sort_by_" stringByAppendingString:_sorting]]];
-    _sorting = [_sorting isEqualToString:@"name"] ? @"artist" : @"name";
-    NSString *message = [@"Sorting tabs by " stringByAppendingString:[_sorting isEqualToString:@"artist"] ? @"artist name" : @"song title"];
+    NSString *currentSorting = [[NSUserDefaults standardUserDefaults] valueForKey:@"favorites_sorting"];
+    NSString *newSorting = [currentSorting isEqualToString:@"name"] ? @"artist" : @"name";
+    NSString *message = [@"Sorting tabs by " stringByAppendingString:[newSorting isEqualToString:@"artist"] ? @"artist name" : @"song title"];
+    [[NSUserDefaults standardUserDefaults] setValue:newSorting forKey:@"favorites_sorting"];
+    [self configSortingButton];
     [AlertPopupView showInView:self.navigationController.view withMessage:message];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:_sorting ascending:YES];
-    [self.fetchedResultsController.fetchRequest setSortDescriptors:@[sortDescriptor]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:newSorting ascending:YES];
+    [[[self fetchedResultsControllerGetter] fetchRequest] setSortDescriptors:@[sortDescriptor]];
     NSError *error;
     if (![[self fetchedResultsControllerGetter] performFetch:&error]) {
         NSLog(@"error!");
     }
     [self.tableView reloadData];
+}
+
+-(void)configSortingButton {
+    [self.navigationItem.rightBarButtonItem setImage:[UIImage imageNamed:[@"sort_by_" stringByAppendingString:[[NSUserDefaults standardUserDefaults] valueForKey:@"favorites_sorting"]]]];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,7 +96,7 @@ static FavoritesViewController *_currentInstance;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"Bookmark as many tabs as you want and get access to them when you're offline!"]) return;
+    if (![[InAppPurchaseManager sharedInstance] fullAppCheck:@"Take your favorites with you, all the time! They're available offline and synched on all your devices."]) return;
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     self.selectedSong.dateOfCreation = [NSDate date];
     [CoreDataHelper.get saveContext];
