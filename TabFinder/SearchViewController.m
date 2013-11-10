@@ -42,6 +42,10 @@
     _searchResultsDictionaryKeys = [NSMutableArray array];
 }
 
+-(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+    [_searchBar becomeFirstResponder];
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if ([_searchBar isFirstResponder]) [_searchBar resignFirstResponder];
 }

@@ -104,7 +104,6 @@
 		2564F0C617E770BE0025EB11 /* NavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2564F0C517E770BE0025EB11 /* NavController.m */; };
 		257B937C179F7BF700D9D3E7 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 257B937B179F7BF700D9D3E7 /* Social.framework */; };
 		257B937E179F818000D9D3E7 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937D179F818000D9D3E7 /* share@2x.png */; };
-		257B9380179F81BB00D9D3E7 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 257B937F179F81BB00D9D3E7 /* share.png */; };
 		2594E2C8181F65840047764F /* UpgradePromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2594E2C7181F65840047764F /* UpgradePromptViewController.m */; };
 		2594E2CF181FC18C0047764F /* 400@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2594E2CE181FC18C0047764F /* 400@2x.png */; };
 		2594E2D1181FCE620047764F /* favorites_icon_o@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2594E2D0181FCE620047764F /* favorites_icon_o@2x.png */; };
@@ -323,7 +322,6 @@
 		2564F0C517E770BE0025EB11 /* NavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavController.m; sourceTree = "<group>"; };
 		257B937B179F7BF700D9D3E7 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		257B937D179F818000D9D3E7 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
-		257B937F179F81BB00D9D3E7 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
 		2594E2C6181F65840047764F /* UpgradePromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradePromptViewController.h; sourceTree = "<group>"; };
 		2594E2C7181F65840047764F /* UpgradePromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradePromptViewController.m; sourceTree = "<group>"; };
 		2594E2CE181FC18C0047764F /* 400@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "400@2x.png"; sourceTree = "<group>"; };
@@ -696,7 +694,6 @@
 				250F388517DE4B9400962E38 /* search_bar@2x.png */,
 				25EDC22117B7A55A0031399B /* chords_icon@2x.png */,
 				25EDC22217B7A55A0031399B /* chords_icon.png */,
-				257B937F179F81BB00D9D3E7 /* share.png */,
 				257B937D179F818000D9D3E7 /* share@2x.png */,
 				2559513F17E1596E000E129D /* history_icon@2x.png */,
 				255677C2178E6C630030B3E1 /* not_favorites@2x.png */,
@@ -980,7 +977,6 @@
 				250F388617DE4B9400962E38 /* search_bar@2x.png in Resources */,
 				257B937E179F818000D9D3E7 /* share@2x.png in Resources */,
 				2594E2D1181FCE620047764F /* favorites_icon_o@2x.png in Resources */,
-				257B9380179F81BB00D9D3E7 /* share.png in Resources */,
 				25D09FD317D5309400ADBACE /* ProximaNova-LightItalic.otf in Resources */,
 				25A94114179F933C00C0E790 /* iRate.bundle in Resources */,
 				254266D117A1CF29001D2560 /* chord.html in Resources */,

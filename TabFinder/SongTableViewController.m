@@ -92,6 +92,9 @@
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
     UITableView *tableView = controller == [self fetchedResultsControllerGetter] ? self.tableView : self.searchDisplayController.searchResultsTableView;
+    if (!self.navigationController || self.navigationController.visibleViewController != self) {
+        return;
+    }
     [tableView beginUpdates];
 }
 
@@ -117,6 +120,7 @@
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    if (!self.navigationController || self.navigationController.visibleViewController != self) return;
     
     UITableView *tableView = controller == [self fetchedResultsControllerGetter] ? self.tableView : self.searchDisplayController.searchResultsTableView;
     
@@ -148,8 +152,8 @@
 
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    if (!self.navigationController || self.navigationController.visibleViewController != self) return;
     UITableView *tableView = controller == [self fetchedResultsControllerGetter] ? self.tableView : self.searchDisplayController.searchResultsTableView;
-    
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
@@ -165,6 +169,10 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     UITableView *tableView = controller == [self fetchedResultsController] ? self.tableView : self.searchDisplayController.searchResultsTableView;
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    if (!self.navigationController || self.navigationController.visibleViewController != self) {
+        [self.tableView reloadData];
+        return;
+    }
     [tableView endUpdates];
 }
 

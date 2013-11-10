@@ -172,7 +172,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
-    if (self.navigationController) return; //don't do anything if we're still in the nav. stack!
+    if (self.navigationController) return; //don't do anything if still in the nav stack!
     //otherwise release everything
     _webView.delegate = nil;
     [_webView stopLoading];

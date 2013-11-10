@@ -100,7 +100,7 @@ static NSMutableDictionary *_artistNameFixes;
     //setup callbacks
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error;
-        NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:&error];
+        NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:&error];
         if (error) {
             NSLog(@"%@",error.localizedDescription);
         } else {

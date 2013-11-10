@@ -98,6 +98,10 @@ static Engine *_instance;
     }];
 }
 
+-(void)changeKeyboardDismissMode {
+    ((SearchViewController *)_searchViewController).tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+}
+
 -(void)showMenu {
     [_viewDeckController toggleLeftViewAnimated:YES];
 }
