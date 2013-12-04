@@ -9,8 +9,9 @@
 #import "RatingPromptViewController.h"
 #import "iRate.h"
 #import "Favorites.h"
+#import "MainViewController.h"
 
-@interface RatingPromptViewController ()
+@interface RatingPromptViewController () <iRateDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *tabsCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
@@ -24,18 +25,25 @@
 {
     [super viewDidLoad];
     _rateButton.layer.cornerRadius = 6;
-    _messageLabel.text = [NSString stringWithFormat:@"This is your %ith tab! If you're enjoying TabFinder, would you take a few seconds to rate it?",Favorites.tabCount];
-    _tabsCountLabel.text = [NSString stringWithFormat:@"%i tabs!",Favorites.tabCount];
+    _messageLabel.text = [NSString stringWithFormat:@"This is your %ith tab! If you're enjoying TabFinder, would you take a few seconds to rate it?",[iRate sharedInstance].eventCount];
+    _tabsCountLabel.text = [NSString stringWithFormat:@"%i tabs!",[iRate sharedInstance].eventCount];
+    [iRate sharedInstance].delegate = self;
 }
 
 - (IBAction)didPressRateButton:(id)sender {
-    [[iRate sharedInstance] openRatingsPageInAppStore];
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/tabfinderguitartabssearchengine"]];
+    [[iRate sharedInstance] setRatedThisVersion:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[iRate sharedInstance] openRatingsPageInAppStore];
+    }];
 }
 
 - (IBAction)didPressRemindLaterButton:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+}
+
+-(void)iRateCouldNotConnectToAppStore:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Failed to connect to the app store. Try again later!" delegate:nil cancelButtonTitle:@"Ok"otherButtonTitles:nil] show];
+    [[iRate sharedInstance] setRatedThisVersion:NO];
 }
 
 @end

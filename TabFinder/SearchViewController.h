@@ -12,5 +12,6 @@
 @interface SearchViewController : UITableViewController <UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+-(void)scrollToTopAndSearch;
 
 @end

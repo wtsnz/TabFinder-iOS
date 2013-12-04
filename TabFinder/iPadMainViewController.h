@@ -8,9 +8,12 @@
 
 #import "MainViewController.h"
 #import "TabHeaderView.h"
+#import <iAd/iAd.h>
 
-@interface iPadMainViewController : MainViewController <ADBannerViewDelegate>
+@interface iPadMainViewController : MainViewController <ADBannerViewDelegate, UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet TabHeaderView *tabHeaderView;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+- (IBAction)didPressChordDictionary:(id)sender;
 
 @end

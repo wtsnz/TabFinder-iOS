@@ -20,9 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 - (IBAction)closeButtonPressed:(id)sender;
+-(void)configureForChord:(NSString *)name variations:(NSArray *)variations;
 
 @property (weak, nonatomic) IBOutlet UIImageView *dragIconImageVIew;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+
++(BOOL)isPanning;
 
 @end

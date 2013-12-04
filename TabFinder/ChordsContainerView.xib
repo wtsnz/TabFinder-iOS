@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3" customClass="ChordsContainerView">
+        <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3" customClass="ChordsContainerView">
             <rect key="frame" x="0.0" y="0.0" width="200" height="192"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15" customClass="SwipeView">
@@ -36,7 +36,7 @@
                     <color key="pageIndicatorTintColor" white="0.70902714416058399" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </pageControl>
-                <imageView userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="scaleToFill" image="drag.png" translatesAutoresizingMaskIntoConstraints="NO" id="152">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="drag.png" translatesAutoresizingMaskIntoConstraints="NO" id="152">
                     <rect key="frame" x="9" y="171" width="15" height="15"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,7 +66,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.1514903242" green="0.57458482040000003" blue="0.70621412630000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.1493784215" alpha="1" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="height" constant="192" id="4"/>

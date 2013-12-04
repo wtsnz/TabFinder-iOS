@@ -20,7 +20,7 @@
         _messageLabel.text = @"Purchase TabFinder Pro to disable ads and enable awesome features such as Favorites, History, Chords Dictionary and Printing.";
         [[InAppPurchaseManager sharedInstance] loadStore];
     } else {
-        _messageLabel.text = [NSString stringWithFormat:@"Purchase TabFinder Pro for only %@ to disable ads and enable awesome features such as Favorites, History, Chords Dictionary and Printing.",[InAppPurchaseManager sharedInstance].proUpgradeProduct.localizedPrice];
+        _messageLabel.text = [NSString stringWithFormat:@"✓ Enable all our awesome features!\n\n✓ Get rid of the ads, including this\n\n✓ It's only %@! That's 2 guitar picks or half a coffee.\n\n✓ It shows how much you love the app and helps improving it!",[InAppPurchaseManager sharedInstance].proUpgradeProduct.localizedPrice];
     }
 }
 

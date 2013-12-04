@@ -7,6 +7,7 @@
 //
 
 #import "SongTableViewController.h"
+#import "iPadMasterViewController.h"
 
 @interface SongTableViewController ()
 
@@ -79,7 +80,7 @@
     _selectedSong = [[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        MainViewController *mainVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad;
+        MainViewController *mainVC = [iPadMasterViewController instance].iPadMainViewController;
         mainVC.currentSong = [[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath];
         [mainVC loadFavoritesSong];
     }
@@ -202,22 +203,16 @@
     headerView.textLabel.textColor = [UIColor blackColor];
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    return [[UIView alloc] init];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 12;
-}
-
 -(void)setupView {
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 9, 0, 0);
+//    self.tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.tableHeaderView.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorColor = [UIColor colorWithWhite:0.9 alpha:1];
     self.searchDisplayController.searchResultsTableView.rowHeight = self.tableView.rowHeight;
     self.searchDisplayController.searchResultsTableView.separatorStyle = self.tableView.separatorStyle;
     self.searchDisplayController.searchBar.tintColor = [UIColor defaultColor];
     [self.searchDisplayController.searchBar setBackgroundImage:[UIImage imageNamed:@"white"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+    [self.searchDisplayController.searchBar setBackgroundImage:[UIImage imageNamed:@"white"] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefaultPrompt];
 }
 
 @end

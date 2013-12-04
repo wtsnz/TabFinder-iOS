@@ -34,7 +34,6 @@ static InAppPurchaseManager *_instance;
      selector: @selector (storeDidChange:)
      name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification
      object: [NSUbiquitousKeyValueStore defaultStore]];
-    
     // get changes that might have happened while this
     // instance of your app wasn't running
     [[NSUbiquitousKeyValueStore defaultStore] synchronize];
@@ -99,14 +98,8 @@ static InAppPurchaseManager *_instance;
 //
 - (void)purchaseProUpgrade
 {
-#if TARGET_IPHONE_SIMULATOR
-    [[NSUbiquitousKeyValueStore defaultStore] setBool:YES forKey:@"has_full_app"];
-    [[MenuViewController instance].tableView reloadData];
-#else
-    //SKPayment *payment = [SKPayment paymentWithProductIdentifier:kInAppPurchaseProUpgradeProductId];
     SKPayment *payment = [SKPayment paymentWithProduct:_proUpgradeProduct];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
-#endif
 }
 
 #pragma -
@@ -120,7 +113,7 @@ static InAppPurchaseManager *_instance;
     if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProUpgradeProductId])
     {
         // save the transaction receipt to disk
-        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionReceipt forKey:@"proUpgradeTransactionReceipt" ];
+        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionIdentifier forKey:@"proUpgradeTransactionReceipt" ];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -132,6 +125,7 @@ static InAppPurchaseManager *_instance;
 {
     if ([productId isEqualToString:kInAppPurchaseProUpgradeProductId])
     {
+        [Api reportPurchase];
         [[NSUbiquitousKeyValueStore defaultStore] setBool:YES forKey:@"has_full_app"];
         [[MenuViewController instance].tableView reloadData];
     }

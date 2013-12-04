@@ -11,14 +11,17 @@
 @implementation UIFont (ProximaNova)
 
 +(UIFont *)proximaNovaLightSize:(CGFloat)size {
+    //return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
     return [UIFont fontWithName:@"ProximaNova-Light" size:size];
 }
 
 +(UIFont *)proximaNovaSize:(CGFloat)size {
+    //return [self proximaNovaLightSize:size];
     return [UIFont fontWithName:@"ProximaNova-Regular" size:size];
 }
 
 +(UIFont *)proximaNovaSemiBoldSize:(CGFloat)size {
+//    return [UIFont systemFontOfSize:size];
     return [UIFont fontWithName:@"ProximaNova-Semibold" size:size];
 }
 

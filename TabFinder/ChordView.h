@@ -10,10 +10,11 @@
 
 @interface ChordView : UIView
 
+@property (nonatomic) BOOL isBackgroundWhite;
 @property (weak, nonatomic) IBOutlet UIView *fretZero;
 @property (weak, nonatomic) IBOutlet UILabel *fretIndicatorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *chordNameLabel;
-
+-(id)initWithWhiteBackground;
 -(void)configureWithNotes:(NSString *)notes fingering:(NSString *)fingers baseFret:(NSInteger)baseFret;
 @property (weak, nonatomic) IBOutlet UIImageView *fretboardImageView;
 

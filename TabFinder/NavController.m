@@ -19,6 +19,12 @@
     [super viewDidLoad];
 }
 
+-(id)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    self.navigationBar.translucent = NO;
+    return self;
+}
+
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }

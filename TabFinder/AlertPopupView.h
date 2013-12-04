@@ -11,6 +11,7 @@
 @interface AlertPopupView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *message;
 
-+(void)showInView:(UIView *)view withMessage:(NSString *)message;
++(AlertPopupView *)showInView:(UIView *)view withMessage:(NSString *)message autodismiss:(BOOL)autodismiss;
+-(void)dismiss;
 
 @end

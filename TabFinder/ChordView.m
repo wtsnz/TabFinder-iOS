@@ -21,7 +21,16 @@ static const float FRET_0_Y = 10;
     self = [[NSBundle mainBundle] loadNibNamed:@"ChordView" owner:self options:nil].lastObject;
     _fretboardImageView.image = [_fretboardImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     _fretboardImageView.tintColor = [UIColor whiteColor];
-    self.backgroundColor = [UIColor defaultColor];
+    self.backgroundColor = [UIColor clearColor];
+    return self;
+}
+
+-(id)initWithWhiteBackground {
+    self = [[NSBundle mainBundle] loadNibNamed:@"ChordView" owner:self options:nil].lastObject;
+    _fretboardImageView.image = [_fretboardImageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.backgroundColor = [UIColor clearColor];
+    _fretboardImageView.tintColor = [UIColor defaultColor];
+    self.isBackgroundWhite = YES;
     return self;
 }
 
@@ -29,15 +38,15 @@ static const float FRET_0_Y = 10;
     if ([finger isEqualToString:@"capo"]) {
         UIView *capoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 5)];
         capoView.layer.cornerRadius = 2.5;
-        capoView.backgroundColor = [UIColor whiteColor];
+        capoView.backgroundColor = _isBackgroundWhite ? [UIColor defaultColor] : [UIColor whiteColor];
         return capoView;
     }
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    BOOL isFinger = !([finger isEqualToString:@"x"] || [finger isEqualToString:@"0"]);
+    BOOL isFinger = !([finger isEqualToString:@"x"] || [finger isEqualToString:@"0"] || [finger isEqualToString:@"X"]);
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setFont:[UIFont fontWithName:@"HelveticaNeue-Regular" size:isFinger ? 13 : 8]];
-    [label setBackgroundColor:isFinger ? [UIColor whiteColor] : [UIColor clearColor]];
-    [label setTextColor:isFinger ? [UIColor defaultColor] : [UIColor whiteColor]];
+    [label setBackgroundColor:isFinger ? _isBackgroundWhite ? [UIColor defaultColor] : [UIColor whiteColor] : [UIColor clearColor]];
+    [label setTextColor:isFinger ? _isBackgroundWhite ? [UIColor whiteColor] : [UIColor blackColor] : _isBackgroundWhite ? [UIColor defaultColor] : [UIColor whiteColor]];
     [label setText:[finger isEqualToString:@"0"] ? @"o" : finger];
     [label.layer setCornerRadius:10];
     [label.layer setMasksToBounds:YES];
@@ -72,6 +81,9 @@ static const float FRET_0_Y = 10;
     }
     
     _fretIndicatorLabel.text = [NSString stringWithFormat:@"%i%@",baseFret,baseFretOrdinal];
+    if (_isBackgroundWhite) {
+        _fretIndicatorLabel.textColor = [UIColor defaultColor];
+    }
     
     NSArray *notesArray = [[notes componentsSeparatedByString:@" "] subarrayWithRange:NSMakeRange(1, 6)];
     NSArray *fingersArray = [[fingers componentsSeparatedByString:@" "] subarrayWithRange:NSMakeRange(1, 6)];
@@ -89,16 +101,23 @@ static const float FRET_0_Y = 10;
     for (int guitarString=0; guitarString<6; guitarString++) {
         NSString *note = notesArray[guitarString];
         NSString *finger = fingersArray[guitarString];
-        if ([note isEqualToString:@"x"]) finger = @"x";
-        UIView *fingerView = [self fretBoardSignForFinger:finger];
-        CGFloat frameXModifier = 0;
-        if (hasCapo && guitarString == firstCapo) {
-            frameXModifier = 7;
+        if ([note isEqualToString:@"x"] || [note isEqualToString:@"X"]) {
+            UIView *fingerView = [self fretBoardSignForFinger:@"x"];
+            fingerView.center = CGPointMake([self fretboardLabelXPositionForString:guitarString], [self fretboardLabelYPositionForNote:@"x" baseFret:0]);
+            [self addSubview:fingerView];
+        } else {
+            UIView *fingerView = [self fretBoardSignForFinger:finger];
+            CGFloat frameXModifier = 0;
+            if (hasCapo && guitarString == firstCapo) {
+                frameXModifier = 7;
+            }
+            if (hasCapo && guitarString == lastCapo) {
+                frameXModifier = -7;
+            }
+            fingerView.center = CGPointMake([self fretboardLabelXPositionForString:guitarString] + frameXModifier, [self fretboardLabelYPositionForNote:note baseFret:baseFret]);
+            [self addSubview:fingerView];
         }
-        if (hasCapo && guitarString == lastCapo) {
-            frameXModifier = -7;
-        }
-        fingerView.center = CGPointMake([self fretboardLabelXPositionForString:guitarString] + frameXModifier, [self fretboardLabelYPositionForNote:note baseFret:baseFret]);
+        
         if (![finger isEqualToString:@"capo"] && hasCapo) {
             if (guitarString > firstCapo && guitarString < lastCapo) {
                 UIView *capoView = [self fretBoardSignForFinger:@"capo"];
@@ -107,7 +126,6 @@ static const float FRET_0_Y = 10;
             }
 
         }
-        [self addSubview:fingerView];
     }
 }
 

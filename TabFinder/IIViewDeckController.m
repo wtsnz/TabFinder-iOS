@@ -176,7 +176,6 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
 @property (nonatomic, assign) CGSize originalShadowOffset;
 @property (nonatomic, retain) UIBezierPath* originalShadowPath;
 @property (nonatomic, retain) UIButton* centerTapper;
-@property (nonatomic, retain) UIView* centerView;
 @property (nonatomic, readonly) UIView* slidingControllerView;
 
 - (void)cleanup;
@@ -333,6 +332,14 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     return self;
 }
 
+-(UIViewController *)childViewControllerForStatusBarStyle {
+    return self.leftController;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
@@ -402,21 +409,6 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     return self;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
-}
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
-
-- (UIViewController *)childViewControllerForStatusBarHidden {
-        return self.centerController;
-    }
-
-- (UIViewController *)childViewControllerForStatusBarStyle {
-        return self.centerController;
-    }
-
-#endif
 
 
 
@@ -807,6 +799,7 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.centerView = II_AUTORELEASE([[UIView alloc] init]);
     self.centerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.centerView.autoresizesSubviews = YES;
@@ -2956,9 +2949,6 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
             }
             
             [self setSlidingAndReferenceViews];
-            CGRect centerViewFrame = self.centerView.frame;
-            self.centerView.frame = self.centerViewBounds;
-            
             controller.view.frame = currentFrame;
             controller.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             controller.view.hidden = NO;
@@ -2967,16 +2957,9 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
             if (barHidden) 
                 navController.navigationBarHidden = NO;
             
-            self.centerView.frame = centerViewFrame;
-            
             [self addPanners];
             [self applyShadowToSlidingViewAnimated:NO];
             if ([self safe_shouldManageAppearanceMethods]) [controller viewDidAppear:NO];
-            
-            if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-                                [self setNeedsStatusBarAppearanceUpdate];
-                            }
-            
         };
     }
     

@@ -13,11 +13,11 @@
 #import "Song.h"
 #import "FavoritesAlertView.h"
 #import "ChordsContainerView.h"
+#import "AlertPopupView.h"
 
 @interface MainViewController : UIViewController <UIActionSheetDelegate, UIScrollViewDelegate, UIWebViewDelegate, UISplitViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolBarBottomSpaceToContainer;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicatorView;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UISlider *autoScrollSlider;
@@ -28,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButtonItem;
 @property (weak, nonatomic) IBOutlet UILabel *autoScrollingTitleLabel;
+@property AlertPopupView *popupView;
+
+@property BOOL isPromptingUserWithUpgradeOrRating;
 
 - (IBAction)didPressActionButton:(id)sender;
 
@@ -36,7 +39,6 @@
 
 -(void)loadFavoritesSong;
 -(void)loadInternetSong;
--(void)clear;
 
 //internet song attributes
 @property (nonatomic) NSInteger currentVersionIndex;

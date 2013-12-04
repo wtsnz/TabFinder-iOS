@@ -16,9 +16,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) MainViewController *mainViewControllerIpad;
-@property (strong, nonatomic) UINavigationController *navigationControllerIpad;
-@property (strong, nonatomic) UISplitViewController *splitVC;
 
 +(AppDelegate *)instance;
 

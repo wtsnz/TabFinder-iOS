@@ -68,7 +68,7 @@
     NSString *message = [@"Sorting tabs by " stringByAppendingString:[newSorting isEqualToString:@"artist"] ? @"artist name" : @"song title"];
     [[NSUserDefaults standardUserDefaults] setValue:newSorting forKey:@"favorites_sorting"];
     [self configSortingButton];
-    [AlertPopupView showInView:self.navigationController.view withMessage:message];
+    [AlertPopupView showInView:self.navigationController.view withMessage:message autodismiss:YES];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:newSorting ascending:YES];
     [[[self fetchedResultsControllerGetter] fetchRequest] setSortDescriptors:@[sortDescriptor]];
     NSError *error;

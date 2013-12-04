@@ -19,6 +19,7 @@
 #import "InAppPurchaseManager.h"
 #import "CoreDataHelper.h"
 #import "UpgradePromptViewController.h"
+#import "AlertPopupView.h"
 
 @interface MainViewController () <MFMailComposeViewControllerDelegate>
 
@@ -34,16 +35,18 @@
     _autoScrollingTitleLabel.font = [UIFont proximaNovaSemiBoldSize:_autoScrollingTitleLabel.font.pointSize];
     _autoScrollingSpeedLabel.font = [UIFont proximaNovaLightSize:_autoScrollingSpeedLabel.font.pointSize];
     _autoScrollingPopupView.alpha = 0;
-    _autoScrollingPopupView.backgroundColor = [UIColor defaultColor];
+    _autoScrollingPopupView.backgroundColor = [UIColor blackColor];
     [self autoScroll];
     _autoScrollSlider.value = 0;
     _autoScrollSlider.userInteractionEnabled = NO;
     _actionButton.enabled = NO;
+    _versionsButton.enabled = NO;
+    _webView.hidden = YES;
+    _isPromptingUserWithUpgradeOrRating = NO;
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView {
     _webView.scrollView.userInteractionEnabled = NO;
-    [_loadingIndicatorView startAnimating];
     _autoScrollSlider.userInteractionEnabled = NO;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     _actionButton.enabled = NO;
@@ -51,7 +54,8 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
-    [_loadingIndicatorView stopAnimating];
+    _webView.hidden = NO;
+    [_popupView dismiss];
     _webView.scrollView.userInteractionEnabled = YES;
     _autoScrollSlider.userInteractionEnabled = YES;
     self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -77,7 +81,7 @@
 
 - (IBAction)didBeginChangingSlider:(id)sender {
     [UIView animateWithDuration:0.5 animations:^{
-        _autoScrollingPopupView.alpha = 1;
+        _autoScrollingPopupView.alpha = 0.9;
     }];
 }
 
@@ -115,8 +119,9 @@
 - (IBAction)didPressVersionsButton:(id)sender {
     if (!_versionsSheet) {
         NSString *searchTerm = [NSString stringWithFormat:@"%@ %@",_currentSong.artist, _currentSong.name];
-        [_loadingIndicatorView startAnimating];
         _versionsButton.enabled = NO;
+        if (_popupView && _popupView.superview) [_popupView dismiss];
+        _popupView = [AlertPopupView showInView:self.view withMessage:@"Loading..." autodismiss:NO];
         [Api tabSearch:searchTerm page:1 success:^(id parsedResponse) {
             id resultsObject = [parsedResponse objectForKey:@"result"];
             NSMutableArray *allSongs;
@@ -143,11 +148,11 @@
             _versionsSheet.delegate = self;
             [_versionsSheet showFromBarButtonItem:sender animated:YES];
             [Api addArtistToCache:_currentSong];
-            [_loadingIndicatorView stopAnimating];
             _versionsButton.enabled = YES;
+            [_popupView dismiss];
         } failure:^{
+            [_popupView dismiss];
             _versionsButton.enabled = YES;
-            [_loadingIndicatorView stopAnimating];
             [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Unable to retrieve more versions for this song. Make sure you have internet access!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         }];
         return;
@@ -165,6 +170,7 @@
 
 - (IBAction)didPressFavoritesButton:(id)sender {
     if (!_currentSong) return;
+    if (!_currentSong.managedObjectContext) return;
     _currentSong.isFavorite = @(!_currentSong.isFavorite.boolValue);
     [self configureFavoritesButton];
     [FavoritesAlertView showFavoritesAlertForSong:_currentSong inView:self.webView];
@@ -177,7 +183,6 @@
     _webView.delegate = nil;
     [_webView stopLoading];
     [_webView removeFromSuperview];
-    [_webView loadHTMLString:@"" baseURL:nil];
     _webView = nil;
 }
 
@@ -196,14 +201,12 @@
     _internetSong = nil;
     _versionsSheet = nil;
     self.navigationItem.title = _currentSong.name;
-    _versionsButton.title = @"Change ver.";
     [self presentCurrentSong];
 }
 
 -(void)changeVersion:(NSInteger)versionIndex {
     _currentVersionIndex = versionIndex;
     NSDictionary *version = _internetSong.versions[_currentVersionIndex];
-    self.versionsButton.title = @"Change ver.";
     _versionsSheet = [_internetSong versionsActionSheetWithCurrentVersionIndex:_currentVersionIndex];
     _versionsSheet.delegate = self;
     if ([Favorites findByUgid:version[@"id"]]) {
@@ -211,14 +214,16 @@
         [self presentCurrentSong];
         return;
     }
-    [_loadingIndicatorView startAnimating];
+    if (_popupView && _popupView.superview) {
+        [_popupView removeFromSuperview];
+    }
+    _popupView = [AlertPopupView showInView:self.view withMessage:@"Loading.." autodismiss:NO];
     [Api fetchTabContentForVersion:version success:^(NSString *html) {
         _currentSong = [Song addToDatabase:version withContent:html];
-        [_loadingIndicatorView stopAnimating];
         [self presentCurrentSong];
         [self showPopupsIfNecessary];
     } failure:^{
-        [_loadingIndicatorView stopAnimating];
+        [_popupView dismiss];
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Something went wrong!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     }];
 }
@@ -242,23 +247,20 @@
     [self configureFavoritesButton];
 }
 
-static int lastTabCount;
-
 -(void)showPopupsIfNecessary {
-    NSInteger tabsCount = [Favorites tabCount];
-    if (lastTabCount == tabsCount) return;
-    lastTabCount = tabsCount;
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     UIViewController *vcToPresent;
-    if (![iRate sharedInstance].ratedThisVersion && tabsCount % 25 == 0) {
+    [[iRate sharedInstance] logEvent:NO];
+    if (![iRate sharedInstance].ratedThisVersion && [iRate sharedInstance].eventCount % 25 == 0) {
         vcToPresent = [sb instantiateViewControllerWithIdentifier:@"RatingPromptViewController"];
-    } else if (tabsCount % 11 == 0
+    } else if ([iRate sharedInstance].eventCount % 11 == 0
         && ![InAppPurchaseManager sharedInstance].userHasFullApp
         && [InAppPurchaseManager sharedInstance].proUpgradeProduct
-        && [InAppPurchaseManager sharedInstance].proUpgradeProduct.localizedDescription) {
+               && [InAppPurchaseManager sharedInstance].proUpgradeProduct.localizedDescription) {
         vcToPresent = [sb instantiateViewControllerWithIdentifier:@"UpgradePromptViewController"];
     }
     if (!vcToPresent) return;
+    _isPromptingUserWithUpgradeOrRating = YES;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [self presentViewController:vcToPresent animated:YES completion:nil];
     } else {
@@ -321,6 +323,8 @@ static int lastTabCount;
     UIPrintInteractionController *pic = [UIPrintInteractionController sharedPrintController];
     UIPrintInfo *printInfo = [UIPrintInfo printInfo];
     printInfo.outputType = UIPrintInfoOutputGeneral;
+    printInfo.orientation = UIPrintInfoOrientationPortrait;
+    printInfo.jobName = _currentSong.name;
     pic.printInfo = printInfo;
     pic.printFormatter = [_webView viewPrintFormatter];
     pic.showsPageRange = YES;

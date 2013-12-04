@@ -8,11 +8,15 @@
 #import <iAd/iAd.h>
 
 #import "iPadMainViewController.h"
+#import "iPadMasterViewController.h"
+#import "ChordView.h"
 
 @interface iPadMainViewController () <UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet ADBannerView *bannerView;
-@property (strong, nonatomic) UIPopoverController *popoverReference;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *titleButtonItem;
+@property UIPopoverController *chordsPopover;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *dictButtonItem;
 
 @end
 
@@ -24,6 +28,20 @@
     self.webView.scrollView.delegate = self;
     _bannerView.hidden = YES;
     _bannerView.delegate = self;
+    _tabHeaderView.hidden = YES;
+    _titleButtonItem.title = @"";
+    [iPadMasterViewController instance].viewDeckController.panningGestureDelegate = self;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    UIView *hitTest = [self.view hitTest:[gestureRecognizer locationInView:self.view] withEvent:nil];
+    if ([hitTest isMemberOfClass:[ChordsContainerView class]] || [hitTest isMemberOfClass:[ChordView class]]) {
+        return NO;
+    }
+    if (self.webView.scrollView.contentOffset.x == 0) {
+        return YES;
+    }
+    return NO;
 }
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
@@ -35,23 +53,31 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
+    _logoImageView.hidden = YES;
     [super webViewDidFinishLoad:webView];
     [_tabHeaderView configureForSong:self.currentSong];
     _tabHeaderView.hidden = NO;
-    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 44, 0)];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"$('body').css('margin-left', 25);"];
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 0, 0)];
     [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height - 10)];
     //in case the user has just purchased Pro
     if (!_bannerView.hidden && [InAppPurchaseManager sharedInstance].userHasFullApp) _bannerView.hidden = YES;
 }
 
 -(void)loadFavoritesSong {
+    [self toggleLeftViewIfNeeded];
     [super loadFavoritesSong];
-    [_popoverReference dismissPopoverAnimated:YES];
 }
 
 -(void)loadInternetSong {
+    [self toggleLeftViewIfNeeded];
     [super loadInternetSong];
-    [_popoverReference dismissPopoverAnimated:YES];
+}
+
+-(void)toggleLeftViewIfNeeded {
+    if ([iPadMasterViewController instance].viewDeckController.isAnySideOpen) {
+        [[iPadMasterViewController instance].viewDeckController toggleLeftViewAnimated:YES];
+    }
 }
 
 -(IBAction)didPressFavoritesButton:(id)sender {
@@ -61,20 +87,18 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y > -_tabHeaderView.frame.size.height && scrollView.contentOffset.y < 0) {
         CGFloat offset = _tabHeaderView.frame.size.height - fabsf(scrollView.contentOffset.y);
-        _tabHeaderView.frame = CGRectMake(0, 0 - offset*0.3, _tabHeaderView.frame.size.width, _tabHeaderView.frame.size.height);
+        _tabHeaderView.frame = CGRectMake(0, 44 - offset*0.3, _tabHeaderView.frame.size.width, _tabHeaderView.frame.size.height);
     }
 }
 
--(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {
-    self.navigationItem.leftBarButtonItem = nil;
-    _popoverReference = nil;
+
+- (IBAction)didPressChordDictionary:(id)sender {
+    if (_chordsPopover && [_chordsPopover isPopoverVisible]) {
+        [_chordsPopover dismissPopoverAnimated:YES];
+        return;
+    }
+    _chordsPopover = [[UIPopoverController alloc] initWithContentViewController:[iPadMasterViewController instance].chordsViewController];
+    _chordsPopover.backgroundColor = [iPadMasterViewController instance].chordsViewController.view.backgroundColor;
+    [_chordsPopover presentPopoverFromBarButtonItem:_dictButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
-
--(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc {
-    barButtonItem.title = @"Menu";
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    _popoverReference = pc;
-}
-
-
 @end
