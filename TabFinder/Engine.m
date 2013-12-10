@@ -7,6 +7,7 @@
 //
 
 #import "Engine.h"
+#import "iPadMasterViewController.h"
 
 @interface Engine () <UIGestureRecognizerDelegate, IIViewDeckControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, ABPeoplePickerNavigationControllerDelegate, UIActionSheetDelegate>
 
@@ -29,11 +30,6 @@ static Engine *_instance;
 
 -(id)init {
     self = [super init];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
-    if ([defaults objectForKey:@"enable_iCloud"] == nil) {
-        [self.class enableiCloud:NO];
-    }
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
         _navigationController = [sb instantiateViewControllerWithIdentifier:@"NavigationController"];
@@ -45,7 +41,7 @@ static Engine *_instance;
         _viewDeckController.parallaxAmount = 0.2;
         _viewDeckController.panningGestureDelegate = self;
         _viewDeckController.delegate = self;
-        _blackStatusBarBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1136, 20)];
+        _blackStatusBarBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 20)];
         _blackStatusBarBackground.backgroundColor = [UIColor blackColor];
         [_viewDeckController.view addSubview:_blackStatusBarBackground];
         [_viewDeckController.view bringSubviewToFront:_blackStatusBarBackground];
@@ -58,6 +54,7 @@ static Engine *_instance;
 
 -(void)viewDeckController:(IIViewDeckController *)viewDeckController didChangeOffset:(CGFloat)offset orientation:(IIViewDeckOffsetOrientation)orientation panning:(BOOL)panning {
     _blackStatusBarBackground.alpha = offset/276;
+//    [viewDeckController setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)viewDeckController:(IIViewDeckController *)viewDeckController didOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated {
@@ -66,7 +63,6 @@ static Engine *_instance;
 }
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//    if (![_navigationController.visibleViewController respondsToSelector:@selector(tableView:)]) return YES;
     if (![_navigationController.visibleViewController respondsToSelector:@selector(tableView)]) return NO;
     UITableViewController *tableViewController = (UITableViewController *)_navigationController.visibleViewController;
     if (tableViewController.tableView.isEditing) return NO;
@@ -87,19 +83,21 @@ static Engine *_instance;
     _viewControllers = @[_searchViewController, _favoritesViewController, _historyViewController, _chordsViewController];
     for (UIViewController *vc in _viewControllers) {
         vc.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu_icon"] landscapeImagePhone:[UIImage imageNamed:@"menu_icon"] style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
-        vc.view.hidden = NO;
+        //vc.view.hidden = NO;
     }
 }
 
 -(void)switchMenuToIndex:(NSInteger)index {
+    if (index == 3) {
+        [self presentVC:_chordsViewController];
+        return;
+    }
     [_navigationController setViewControllers:@[_viewControllers[index]] animated:NO];
     [_viewDeckController toggleLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
-        [((UITableViewController *)_viewControllers[index]).tableView reloadData];
+        if ([_viewControllers[index] isMemberOfClass:[UITableViewController class]]) {
+            [((UITableViewController *)_viewControllers[index]).tableView reloadData];
+        }
     }];
-}
-
--(void)changeKeyboardDismissMode {
-    ((SearchViewController *)_searchViewController).tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 -(void)showMenu {
@@ -130,14 +128,17 @@ static Engine *_instance;
 -(void)presentVC:(UIViewController *)vc {
     if (_viewDeckController)
         [_viewDeckController presentViewController:vc animated:YES completion:nil];
-    else [((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad presentViewController:vc animated:YES completion:nil];
+    else {
+        vc.modalPresentationStyle = UIModalPresentationPageSheet;
+        [[iPadMasterViewController instance] presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 -(void)tellFriends {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Tell friends about TabFinder" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose from my contacts", @"Facebook", @"Twitter", nil];
     if (_viewDeckController)
         [sheet showInView:_viewDeckController.view];
-    else [sheet showInView:((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad.view];
+    else [sheet showInView:[iPadMasterViewController instance].view];
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -175,7 +176,6 @@ static Engine *_instance;
         [self presentVC:vc];
         return;
     }
-    
     NSString *serviceType = buttonIndex == 1 ? SLServiceTypeFacebook : SLServiceTypeTwitter;
     if([SLComposeViewController isAvailableForServiceType:serviceType]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:serviceType];
@@ -239,10 +239,10 @@ static Engine *_instance;
 }
 
 +(void)enableiCloud:(BOOL)enable {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
-    [defaults setBool:enable forKey:@"enable_iCloud"];
-    [CoreDataHelper reset];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults synchronize];
+        [defaults setBool:enable forKey:@"enable_iCloud"];
+        [CoreDataHelper reset];
 }
 
 

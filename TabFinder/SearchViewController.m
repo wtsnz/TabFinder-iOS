@@ -11,6 +11,7 @@
 #import "Api.h"
 #import "MainViewController.h"
 #import "AppDelegate.h"
+#import "iPadMasterViewController.h"
 
 @interface SearchViewController ()
 
@@ -32,6 +33,7 @@
     _searchBar.placeholder = @"Enter song or artist name";
     _searchBar.searchBarStyle = UISearchBarStyleMinimal;
     [_searchBar setTintColor:[self.view tintColor]];
+    [self showSearchButton];
 }
 
 -(void)resetSearchResults {
@@ -40,6 +42,23 @@
     _totalSearchPages = 0;
     _searchResults = [NSMutableDictionary dictionary];
     _searchResultsDictionaryKeys = [NSMutableArray array];
+}
+
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [self showSearchButton];
+}
+
+-(void)showSearchButton {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(scrollToTopAndSearch)];
+}
+
+-(void)scrollToTopAndSearch {
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    [self.searchBar becomeFirstResponder];
 }
 
 -(void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
@@ -52,7 +71,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSString *term = [searchBar.text stringByTrimmingCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]];
-    if (term.length < 3) {
+    if (term.length < 3 && ![term isEqualToString:@"U2"] && ![term isEqualToString:@"u2"]) {
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your search must be at least 3 characters long!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
         return;
     }
@@ -156,7 +175,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        MainViewController *mainVC = ((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewControllerIpad;
+        MainViewController *mainVC = [iPadMasterViewController instance].iPadMainViewController;
         mainVC.internetSong = _searchResults[_searchResultsDictionaryKeys[tableView.indexPathForSelectedRow.row]];
         [mainVC loadInternetSong];
     }

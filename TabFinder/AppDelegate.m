@@ -7,31 +7,37 @@
 //
 
 #import "AppDelegate.h"
+#import "NavController.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:19], NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:15]} forState:UIControlStateNormal];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor defaultColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [self configureAppearance];
+    [CoreDataHelper get];
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        _splitVC = (UISplitViewController *)self.window.rootViewController;
-        _navigationControllerIpad = _splitVC.viewControllers.lastObject;
-        _mainViewControllerIpad = _navigationControllerIpad.viewControllers[0];
-        _splitVC.delegate = _mainViewControllerIpad;
-        _splitVC.presentsWithGesture = NO;
+
     } else {
         [Engine.instance attachToWindow:self.window];
     }
     application.idleTimerDisabled = YES;
-    [Favorites convertOldFavorites];
     [iRate sharedInstance].promptAtLaunch = NO;
     [iRate sharedInstance].appStoreID = 551889599;
-    [iRate sharedInstance].eventsUntilPrompt = 9999;
+    [iRate sharedInstance].eventsUntilPrompt = 99999;
+    [iRate sharedInstance].daysUntilPrompt = 99999;
+//    if ([iRate sharedInstance].eventCount == 0) [[iRate sharedInstance] setEventCount:[Favorites tabCount]];
     [[InAppPurchaseManager sharedInstance] loadStore];
     return YES;
+}
+
+-(void)configureAppearance {
+    [[UIBarButtonItem appearanceWhenContainedIn:[NavController class], nil] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:15]} forState:UIControlStateNormal];
+    [[UINavigationBar appearanceWhenContainedIn:[NavController class], nil] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:19], NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [[UINavigationBar appearanceWhenContainedIn:[NavController class], nil] setBarTintColor:[UIColor defaultColor]];
+    [[UINavigationBar appearanceWhenContainedIn:[NavController class], nil] setTintColor:[UIColor whiteColor]];
+
+    
+    [[UIBarButtonItem appearanceWhenContainedIn:[UIToolbar class], nil] setTitleTextAttributes:@{NSFontAttributeName: [UIFont proximaNovaSemiBoldSize:15]} forState:UIControlStateNormal];
 }
 
 +(AppDelegate *)instance {

@@ -28,6 +28,10 @@
     return self;
 }
 
+-(UIViewController *)childViewControllerForStatusBarStyle {
+    return self.wrappedController;
+}
+
 - (id)initWithViewController:(UIViewController*)controller {
     if ((self = [super initWithViewController:controller])) {
         _constrainedSize = -1;

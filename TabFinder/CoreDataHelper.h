@@ -7,16 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Song.h"
 
 @interface CoreDataHelper : NSObject
 
 +(CoreDataHelper *)get;
-+(void)reset;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 - (NSManagedObjectContext *)managedObjectContext;
 - (id)disconnectedEntityForName:(NSString *)entityName;
++(void)reset;
 -(void)loadPersistentStores;
 
 @end

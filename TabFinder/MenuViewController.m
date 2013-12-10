@@ -72,21 +72,18 @@ static MenuViewController *_instance;
     }
 }
 
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 4) {
+    if (indexPath.row == 4) return;
+    if (indexPath.row == 5) {
         [Engine.instance likeOnFb];
         return;
     }
-    if (indexPath.row == 5) {
+    if (indexPath.row == 6) {
         [Engine.instance sendFeedback];
         return;
     }
-    if (indexPath.row == 6) {
-        [Engine.instance tellFriends];
-        return;
-    }
     if (indexPath.row == 7) {
+        [Engine.instance tellFriends];
         return;
     }
     if (indexPath.row == 8) {
@@ -97,7 +94,7 @@ static MenuViewController *_instance;
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 7) return NO;
+    if (indexPath.row == 4) return NO;
     return YES;
 }
 

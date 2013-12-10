@@ -22,14 +22,25 @@
     [self.webView setBackgroundColor:[UIColor clearColor]];
     [Engine.instance disableLeftMenu];
     self.webView.scrollView.delegate = self;
+    _tabHeaderView.hidden = YES;
+    _bannerView.delegate = self;
+    [self fixBannerHeightOrHideIt];
+}
+
+- (IBAction)didPressDictionary:(id)sender {
+    [Engine.instance switchMenuToIndex:3];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    if (self.isPromptingUserWithUpgradeOrRating) {
+        self.isPromptingUserWithUpgradeOrRating = NO;
+        return;
+    }
     if (self.internetSong) {
         [self loadInternetSong];
     } else if (self.currentSong) {
         [self loadFavoritesSong];
     }
-    _tabHeaderView.hidden = YES;
-    _bannerView.delegate = self;
-    [self fixBannerHeightOrHideIt];
 }
 
 -(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
@@ -63,7 +74,7 @@
     [super webViewDidFinishLoad:webView];
     [_tabHeaderView configureForSong:self.currentSong];
     _tabHeaderView.hidden = NO;
-    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 44, 0)];
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 44 + ([InAppPurchaseManager sharedInstance].userHasFullApp ? 0 : 44), 0)];
     [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height - 10)];
 }
 

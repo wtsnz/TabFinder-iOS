@@ -12,6 +12,12 @@
 #import "Engine.h"
 #import "AppDelegate.h"
 
+@interface InAppPurchaseManager ()
+
+@property AlertPopupView *popupView;
+
+@end
+
 @implementation InAppPurchaseManager
 
 static InAppPurchaseManager *_instance;
@@ -34,7 +40,6 @@ static InAppPurchaseManager *_instance;
      selector: @selector (storeDidChange:)
      name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification
      object: [NSUbiquitousKeyValueStore defaultStore]];
-    
     // get changes that might have happened while this
     // instance of your app wasn't running
     [[NSUbiquitousKeyValueStore defaultStore] synchronize];
@@ -99,14 +104,8 @@ static InAppPurchaseManager *_instance;
 //
 - (void)purchaseProUpgrade
 {
-#if TARGET_IPHONE_SIMULATOR
-    [[NSUbiquitousKeyValueStore defaultStore] setBool:YES forKey:@"has_full_app"];
-    [[MenuViewController instance].tableView reloadData];
-#else
-    //SKPayment *payment = [SKPayment paymentWithProductIdentifier:kInAppPurchaseProUpgradeProductId];
     SKPayment *payment = [SKPayment paymentWithProduct:_proUpgradeProduct];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
-#endif
 }
 
 #pragma -
@@ -120,7 +119,7 @@ static InAppPurchaseManager *_instance;
     if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProUpgradeProductId])
     {
         // save the transaction receipt to disk
-        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionReceipt forKey:@"proUpgradeTransactionReceipt" ];
+        [[NSUserDefaults standardUserDefaults] setValue:transaction.transactionIdentifier forKey:@"proUpgradeTransactionReceipt" ];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -132,6 +131,8 @@ static InAppPurchaseManager *_instance;
 {
     if ([productId isEqualToString:kInAppPurchaseProUpgradeProductId])
     {
+        [Api reportPurchase];
+        [self.class writeUserFile:YES];
         [[NSUbiquitousKeyValueStore defaultStore] setBool:YES forKey:@"has_full_app"];
         [[MenuViewController instance].tableView reloadData];
     }
@@ -208,13 +209,21 @@ static InAppPurchaseManager *_instance;
     {
         switch (transaction.transactionState)
         {
+            case SKPaymentTransactionStatePurchasing:
+                _popupView = [AlertPopupView showInView:[UIApplication sharedApplication].keyWindow withMessage:@"Upgrading to TabFinder Pro..." autodismiss:NO];
+                break;
             case SKPaymentTransactionStatePurchased:
+                if (_popupView) [_popupView dismiss];
+                [AlertPopupView showInView:[UIApplication sharedApplication].keyWindow withMessage:@"Thanks for purchasing TabFinder Pro!" autodismiss:YES];
                 [self completeTransaction:transaction];
                 break;
             case SKPaymentTransactionStateFailed:
+                if (_popupView) [_popupView dismiss];
                 [self failedTransaction:transaction];
                 break;
             case SKPaymentTransactionStateRestored:
+                if (_popupView) [_popupView dismiss];
+                [AlertPopupView showInView:[UIApplication sharedApplication].keyWindow withMessage:@"Thanks for reactivating TabFinder Pro!" autodismiss:YES];
                 [self restoreTransaction:transaction];
                 break;
             default:

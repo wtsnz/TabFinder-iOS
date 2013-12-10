@@ -18,6 +18,7 @@
 #import <MessageUI/MessageUI.h>
 #import <Social/Social.h>
 #import "CoreDataHelper.h"
+#import "SearchViewController.h"
 
 @class MenuViewController;
 
@@ -25,7 +26,7 @@
 
 @property IIViewDeckController *viewDeckController;
 @property UINavigationController *navigationController;
-@property UIViewController *searchViewController;
+@property SearchViewController *searchViewController;
 @property MenuViewController *menuViewController;
 @property UIViewController *chordsViewController;
 @property UIViewController *favoritesViewController;

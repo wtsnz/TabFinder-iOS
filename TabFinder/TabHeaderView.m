@@ -53,7 +53,7 @@ static const CGFloat kDNRRealTimeBlurTintColorAlpha = 0.1f;
 }
 
 -(void)configureForSong:(Song *)song {
-    self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    self.frame = CGRectMake(0, UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 44 : 0, self.frame.size.width, self.frame.size.height);
     self.clipsToBounds = YES;
     UIImage *originalImage = [UIImage imageWithData:song.artistImage];
     originalImage = originalImage ? originalImage : [UIImage imageNamed:@"unknown_artist"];

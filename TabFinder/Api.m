@@ -15,6 +15,7 @@
 @implementation Api
 
 #define BASEURL [NSURL URLWithString:@"http://app.ultimate-guitar.com"]
+#define TABFINDER_URL [NSURL URLWithString:@"http://tabfinder.herokuapp.com"]
 
 +(void)tabSearch:(NSString *)title page:(NSInteger)page success:(void (^)(id))successCallback failure:(void (^)())failureCallback {
     NSString *searchTerm = [title stringByReplacingOccurrencesOfString:@" " withString:@"+"];
@@ -73,6 +74,12 @@
     }];
     [operation start];
 
+}
+
++(void)reportPurchase {
+    NSString *device = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? @"iPad" : @"iPhone";
+    NSString *location = [[NSLocale currentLocale] objectForKey: NSLocaleCountryCode];
+    [self requestWithURL:@"/purchases.json" method:@"POST" args:@{@"purchase":@{@"device": device, @"location": location}} successCallback:nil failure:nil];
 }
 
 static NSMutableDictionary *_artistPhotosCache;
@@ -143,8 +150,8 @@ static NSMutableDictionary *_artistNameFixes;
     return operation;
 }
 
--(void)requestWithURL:(NSString *)relativeURL method:(NSString *)method args:(NSDictionary *)args successCallback:(void(^)(id parsedResponse))successCallback failure:(void(^)())failureCallback {
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:BASEURL];
++(void)requestWithURL:(NSString *)relativeURL method:(NSString *)method args:(NSDictionary *)args successCallback:(void(^)(id parsedResponse))successCallback failure:(void(^)())failureCallback {
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:TABFINDER_URL];
     NSMutableURLRequest *request = [httpClient requestWithMethod:method path:relativeURL parameters:args];
     [request setTimeoutInterval:8];
     //set up operation

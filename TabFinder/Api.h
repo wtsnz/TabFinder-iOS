@@ -18,5 +18,6 @@
 +(void)getPhotoForArtist:(NSString *)artist callback:(void(^)(UIImage *artistPhoto))successCallback;
 +(UIImage *)cachedImageForArtist:(NSString *)artist;
 +(void)addArtistToCache:(Song *)song;
++(void)reportPurchase;
 
 @end
