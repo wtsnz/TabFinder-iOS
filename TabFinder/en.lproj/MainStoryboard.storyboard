@@ -458,7 +458,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="EXk-jG-xjX"/>
                                     <barButtonItem style="plain" id="Id6-Mg-LFl">
                                         <slider key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="1v0-I5-eC5">
-                                            <rect key="frame" x="126" y="5" width="136" height="34"/>
+                                            <rect key="frame" x="127" y="5" width="136" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="didBeginChangingSlider:" destination="Vor-l4-9El" eventType="touchDown" id="8QR-e4-8UA"/>
@@ -900,7 +900,7 @@
         <image name="icloud.png" width="19" height="19"/>
         <image name="like_icon.png" width="19" height="19"/>
         <image name="search_icon.png" width="19" height="19"/>
-        <image name="share.png" width="20" height="20"/>
+        <image name="share.png" width="19" height="19"/>
         <image name="tell_icon.png" width="19" height="19"/>
     </resources>
     <color key="tintColor" red="0.14751442461046924" green="0.55950470519460416" blue="0.68767936862244894" alpha="1" colorSpace="calibratedRGB"/>

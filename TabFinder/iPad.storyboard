@@ -770,7 +770,7 @@
         <image name="icloud.png" width="19" height="19"/>
         <image name="like_icon.png" width="19" height="19"/>
         <image name="search_icon.png" width="19" height="19"/>
-        <image name="share.png" width="20" height="20"/>
+        <image name="share.png" width="19" height="19"/>
         <image name="tell_icon.png" width="19" height="19"/>
     </resources>
     <color key="tintColor" red="0.1514903242" green="0.57458482040000003" blue="0.70621412630000002" alpha="1" colorSpace="calibratedRGB"/>
