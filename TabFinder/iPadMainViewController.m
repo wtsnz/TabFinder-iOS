@@ -58,7 +58,7 @@
     [_tabHeaderView configureForSong:self.currentSong];
     _tabHeaderView.hidden = NO;
     [self.webView stringByEvaluatingJavaScriptFromString:@"$('body').css('margin-left', 25);"];
-    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, 0, 0)];
+    [self.webView.scrollView setContentInset:UIEdgeInsetsMake(_tabHeaderView.frame.size.height + 10, 0, [InAppPurchaseManager sharedInstance].userHasFullApp ? 0 : 60, 0)];
     [self.webView.scrollView setContentOffset:CGPointMake(0, -_tabHeaderView.frame.size.height - 10)];
     //in case the user has just purchased Pro
     if (!_bannerView.hidden && [InAppPurchaseManager sharedInstance].userHasFullApp) _bannerView.hidden = YES;
